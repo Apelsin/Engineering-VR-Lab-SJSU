@@ -62,6 +62,7 @@ public class LeverPressed : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.gameObject.tag == "leftHand" || other.gameObject.tag == "rightHand")
         {
             Debug.Log("Button Pressed!");
@@ -83,6 +84,27 @@ public class LeverPressed : MonoBehaviour
 
                 Countdown((int)respawnTime);
             }
+        }
+        */
+    }
+
+    public void Press()
+    {
+        pressLeverAnimation.pressLever();
+
+        if (grabberInputReady)
+        {
+            //Move Grabber Up
+            if (grabberMovingUp)
+            {
+                grabberMovingUp = false;
+            }
+            else
+            {
+                grabberMovingUp = true;
+            }
+
+            Countdown((int)respawnTime);
         }
     }
 

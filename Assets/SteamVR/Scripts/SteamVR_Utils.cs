@@ -11,10 +11,8 @@ using Valve.VR;
 
 public static class SteamVR_Utils
 {
-    internal static readonly object Event;
-
-    // this version does not clamp [0..1]
-    public static Quaternion Slerp(Quaternion A, Quaternion B, float t)
+	// this version does not clamp [0..1]
+	public static Quaternion Slerp(Quaternion A, Quaternion B, float t)
 	{
 		var cosom = Mathf.Clamp(A.x * B.x + A.y * B.y + A.z * B.z + A.w * B.w, -1.0f, 1.0f);
 		if (cosom < 0.0f)
@@ -359,7 +357,7 @@ public static class SteamVR_Utils
 		if (initOpenVR)
 		{
 			var error = EVRInitError.None;
-			OpenVR.Init(ref error, EVRApplicationType.VRApplication_Other);
+			OpenVR.Init(ref error, EVRApplicationType.VRApplication_Utility);
 		}
 
 		var system = OpenVR.System;

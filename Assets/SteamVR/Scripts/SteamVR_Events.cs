@@ -17,7 +17,6 @@
 //
 //=============================================================================
 
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR;
@@ -133,12 +132,7 @@ public static class SteamVR_Events
 		public void Listen(UnityAction<T0, T1> action) { this.AddListener(action); }
 		public void Remove(UnityAction<T0, T1> action) { this.RemoveListener(action); }
 		public void Send(T0 arg0, T1 arg1) { this.Invoke(arg0, arg1); }
-
-        internal void Listen(int v, System.Action onEnable)
-        {
-            throw new NotImplementedException();
-        }
-    }
+	}
 
 	public class Event<T0, T1, T2> : UnityEvent<T0, T1, T2>
 	{

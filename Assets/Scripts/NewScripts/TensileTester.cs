@@ -37,12 +37,12 @@ public class TensileTester : MonoBehaviour {
         }
 
         //check if lever has been pressed and if so what direction
-        if (lever.GetComponent<LeverPressed>().grabberMovingUp)
-        {
-            StartCoroutine(ScaleOverTime(10.0f));
-            //start graphing
-            GameObject graph = Instantiate(Resources.Load("LineGraph", typeof(GameObject))) as GameObject;
-        }
+        //if (lever.GetComponent<LeverPressed>().grabberMovingUp)
+        //{
+        //    StartCoroutine(ScaleOverTime(10.0f));
+        //    //start graphing
+        //    StartCoroutine(CreateGraphOverTime().GetEnumerator());
+        //}
 	}
 
     private void SetCollidingObject(Collider col)
