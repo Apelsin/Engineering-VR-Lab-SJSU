@@ -109,12 +109,14 @@ public class LaserPointer : MonoBehaviour
     void Start()
     {
         // 1
-        laser = Instantiate(laserPrefab);
+        laser = Instantiate(laserPrefab, transform, true);
+        laser.transform.SetParent(null, true);
         // 2
         laserTransform = laser.transform;
 
         // 1
-        reticle = Instantiate(teleportReticlePrefab);
+        reticle = Instantiate(teleportReticlePrefab, transform, true);
+        reticle.transform.SetParent(null, true);
         // 2
         teleportReticleTransform = reticle.transform;
     }
