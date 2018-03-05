@@ -9,7 +9,7 @@ public class PanelManagerUI : MonoBehaviour {
     [Serializable]
     public class NavigateChapterEvent : UnityEvent<string> { }
 
-    public NavigateChapterEvent NaviageChapter;
+    public NavigateChapterEvent NavigateChapter;
 
     public GameObject chaptersPanel;
 
@@ -39,7 +39,7 @@ public class PanelManagerUI : MonoBehaviour {
 
     public void OnNavigateChapter(string chapter_name)
     {
-        NaviageChapter.Invoke(chapter_name);
+        NavigateChapter.Invoke(chapter_name);
     }
 }
 

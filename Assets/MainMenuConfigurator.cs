@@ -9,7 +9,7 @@ public class MainMenuConfigurator : MonoBehaviour
         var game_controller_object = GameObject.FindGameObjectWithTag("GameController");
         var manager = game_controller_object?.GetComponent<SceneStateManager>();
         var main_manu = FindObjectOfType<PanelManagerUI>();
-        main_manu.NaviageChapter.AddListener((chapter_name) =>
+        main_manu.NavigateChapter.AddListener((chapter_name) =>
         {
             manager.SetAnimatorTrigger("Exit Main Menu");
             manager.SetAnimatorTrigger("To " + chapter_name);
