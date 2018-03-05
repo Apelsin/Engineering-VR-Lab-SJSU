@@ -304,29 +304,42 @@ namespace RoaringFangs.ASM
         public override void Initialize(ControlledStateManager manager)
         {
             base.Initialize(manager);
-            // Replace configuration objects with instances (don't work directly on prefabs!)
-            var instances = new List<ConfigurationObjectDirective>();
-            foreach (var directive in ConfigurationObjects)
+            // Precondition: manager is a SceneStateManager
+            var scene_state_manager = manager as SceneStateManager;
+            if (scene_state_manager)
             {
-                var configuration_object = directive.Object;
-                if (configuration_object == null)
+                // Replace configuration objects with instances (don't work directly on prefabs!)
+                var instances = new List<ConfigurationObjectDirective>();
+                foreach (var directive in ConfigurationObjects)
                 {
-                    Debug.LogWarning("Configuration object is null");
-                    continue;
+                    var configuration_object = directive.Object;
+                    if (configuration_object == null)
+                    {
+                        Debug.LogWarning("Configuration object is null");
+                        continue;
+                    }
+                    // Parent the instance to the Configuration Object Cache
+                    var cache = scene_state_manager.ConfigurationObjectCache;
+                    var instance = Instantiate(configuration_object, cache);
+                    // Remove "(Clone)" suffix
+                    instance.name = configuration_object.name;
+                    // Add it to the list
+                    var directive_but_stronger = new ConfigurationObjectDirective()
+                    {
+                        Object = instance,
+                        ConditionParameter = directive.ConditionParameter
+                    };
+                    instances.Add(directive_but_stronger);
                 }
-                // Parent the instance to the Configuration Object Cache
-                var instance = Instantiate(configuration_object, manager.ConfigurationObjectCache);
-                // Remove "(Clone)" suffix
-                instance.name = configuration_object.name;
-                // Add it to the list
-                var directive_but_stronger = new ConfigurationObjectDirective()
-                {
-                    Object = instance,
-                    ConditionParameter = directive.ConditionParameter
-                };
-                instances.Add(directive_but_stronger);
+                ConfigurationObjects = instances;
             }
-            ConfigurationObjects = instances;
+            else
+            {
+                Debug.LogError(
+                    "SceneState controller must be managed by a SceneStateManager component.\n" +
+                    "Please use a SceneStateManager for this Animator State Machine");
+                ConfigurationObjects.Clear();
+            }
         }
 
         public override void OnManagedStateVerifyEnter(

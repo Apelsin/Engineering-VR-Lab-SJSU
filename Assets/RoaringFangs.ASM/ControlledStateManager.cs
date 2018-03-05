@@ -94,8 +94,6 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("References")]
 #endif
-        [SerializeField]
-        private Transform _ConfigurationObjectCache;
 
         private Queue<IEnumerator> _CoroutineQueue = new Queue<IEnumerator>();
 
@@ -116,17 +114,6 @@ namespace RoaringFangs.ASM
         }
 
         /// <summary>
-        /// Game object to store runtime instances of prefabs so that they
-        /// may be mutated without affecting the project's asset prefabs
-        /// (It's a Unity editor thing, seriously)
-        /// </summary>
-        public Transform ConfigurationObjectCache
-        {
-            get { return _ConfigurationObjectCache; }
-            set { _ConfigurationObjectCache = value; }
-        }
-
-        /// <summary>
         /// Path hash of the last animator state this manager was able to successfully enter.
         /// </summary>
         protected int LastGoodStatePathHash
@@ -141,7 +128,7 @@ namespace RoaringFangs.ASM
         [PropertyOrder(100)]
 #endif
         [SerializeField]
-        private ParameterEntry[] _ParameterEntries;
+        private ParameterEntry[] _ParameterEntries = new ParameterEntry[] { };
 
         private ILookup<string, string> _ParameterEntriesLookup;
 

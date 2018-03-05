@@ -40,6 +40,20 @@ namespace RoaringFangs.ASM
     [RequireComponent(typeof(Animator))]
     public class SceneStateManager : ControlledStateManager
     {
+        [SerializeField]
+        private Transform _ConfigurationObjectCache;
+
+        /// <summary>
+        /// Game object to store runtime instances of prefabs so that they
+        /// may be mutated without affecting the project's asset prefabs
+        /// (It's a Unity editor thing, seriously)
+        /// </summary>
+        public Transform ConfigurationObjectCache
+        {
+            get { return _ConfigurationObjectCache; }
+            set { _ConfigurationObjectCache = value; }
+        }
+
         private enum EInitializationState
         {
             Setup,

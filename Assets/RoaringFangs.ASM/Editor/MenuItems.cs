@@ -40,12 +40,28 @@ namespace RoaringFangs.Editor
             var selected_game_object = Selection.activeObject as GameObject;
             if (selected_game_object)
                 created_game_object.transform.SetParent(selected_game_object.transform);
+            var self = created_game_object.AddComponent<ControlledStateManager>();
+            Selection.activeObject = created_game_object;
+            Undo.RegisterCreatedObjectUndo(created_game_object, created_game_object.name);
+            return self;
+        }
+
+        [MenuItem("Roaring Fangs/ASM/Scene State Manager")]
+        [MenuItem("GameObject/Roaring Fangs/ASM/Scene State Manager")]
+        //[UnityEditor.MenuItem("CONTEXT/Animator/Scene State Manager")]
+        public static ControlledStateManager CreateSceneStateManager()
+        {
+            var created_game_object = new GameObject("New Scene State Manager");
+            var selected_game_object = Selection.activeObject as GameObject;
+            if (selected_game_object)
+                created_game_object.transform.SetParent(selected_game_object.transform);
             var configurator_cache = new GameObject("Configuration Object Cache");
             configurator_cache.transform.SetParent(created_game_object.transform);
-            var self = created_game_object.AddComponent<ControlledStateManager>();
+            var self = created_game_object.AddComponent<SceneStateManager>();
             self.ConfigurationObjectCache = configurator_cache.transform;
+            configurator_cache.SetActive(false);
             Selection.activeObject = created_game_object;
-            Undo.RegisterCreatedObjectUndo(created_game_object, "New Controlled State Manager");
+            Undo.RegisterCreatedObjectUndo(created_game_object, created_game_object.name);
             return self;
         }
     }
