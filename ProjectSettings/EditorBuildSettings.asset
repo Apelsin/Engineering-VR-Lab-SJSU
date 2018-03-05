@@ -4,4 +4,58 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/New Scenes/Chapter Select Add-in.unity
+    guid: b0502e14b9a2343489e6a06277286863
+  - enabled: 1
+    path: Assets/Scenes/chapter6.unity
+    guid: 61829dd6740d14341a99546355fda4e7
+  - enabled: 1
+    path: Assets/New Scenes/Development Main.unity
+    guid: 2e2cd1c2e08671442a566480ff36bf44
+  - enabled: 1
+    path: Assets/QuickRopes/_Example/Scenes/Edit Rope Renderer.unity
+    guid: f6c3324f791fa0040883f9de9abd6111
+  - enabled: 1
+    path: Assets/SteamVR/Scenes/example.unity
+    guid: 274ae687a94e2444b85ce2bcf56c1df3
+  - enabled: 1
+    path: Assets/FIRE.unity
+    guid: 40906cb5e3be981449f041ec9f55917d
+  - enabled: 1
+    path: Assets/Fluid Testing.unity
+    guid: 389317d646f5ce44da11b7ae6c2f17cb
+  - enabled: 1
+    path: Assets/SteamVR/InteractionSystem/Samples/Scenes/Interactions_Example.unity
+    guid: e3b77830391f10343929883b18f4d5ae
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 7b4710cbc14741142aefca244e5e1291
+  - enabled: 1
+    path: Assets/Scenes/MainMenuUI.unity
+    guid: f5778428d49f9f74eafa0babadbc61f9
+  - enabled: 1
+    path: Assets/MainScene.unity
+    guid: 5f03a24bf465ec64ba01f69c1786b214
+  - enabled: 1
+    path: Assets/New Scenes/Release Main.unity
+    guid: 2cdfd4348384e2543ab19d383661ea40
+  - enabled: 1
+    path: Assets/QuickRopes/_Example/Scenes/Sandbox.unity
+    guid: 5a33cb386b834254ea55748200d3f6ea
+  - enabled: 1
+    path: Assets/Pro_Western_Starter_Pack/scene/scene.unity
+    guid: 8e11431feea658845899f79b2365f57a
+  - enabled: 1
+    path: Assets/Ball Pack/Showcase.unity
+    guid: b0fafae756170fc4da9b2c0583673d75
+  - enabled: 1
+    path: Assets/QuickRopes/_Example/Scenes/Static Rope Renderer.unity
+    guid: ec9620d3fadab964f8e644353e587c19
+  - enabled: 1
+    path: Assets/TheLab.unity
+    guid: 18f217476882a46ae8bf1f5385b47233
+  - enabled: 1
+    path: Assets/Scenes/TheLab 1.unity
+    guid: ea5471e429abe644cae7243e99e6f4eb
