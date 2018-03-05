@@ -191,6 +191,10 @@ namespace VRTK
         private void DrawPlayAreaCursorBoundary(int index, float left, float right, float top, float bottom, float thickness, Vector3 localPosition)
         {
             var playAreaCursorBoundary = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            // Hack to keep VRTK in its own scene
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(playAreaCursorBoundary, gameObject.scene);
+
             playAreaCursorBoundary.name = string.Format("[{0}]PlayAreaCursorBoundary_" + index, gameObject.name);
             VRTK_PlayerObject.SetPlayerObject(playAreaCursorBoundary, VRTK_PlayerObject.ObjectTypes.Pointer);
 

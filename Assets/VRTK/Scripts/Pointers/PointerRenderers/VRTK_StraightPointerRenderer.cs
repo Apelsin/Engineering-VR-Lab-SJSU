@@ -63,6 +63,10 @@ namespace VRTK
         protected override void CreatePointerObjects()
         {
             actualContainer = new GameObject(string.Format("[{0}]StraightPointerRenderer_Container", gameObject.name));
+
+            // Hack to keep VRTK in its own scene
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(actualContainer, gameObject.scene);
+
             actualContainer.transform.localPosition = Vector3.zero;
             VRTK_PlayerObject.SetPlayerObject(actualContainer, VRTK_PlayerObject.ObjectTypes.Pointer);
 

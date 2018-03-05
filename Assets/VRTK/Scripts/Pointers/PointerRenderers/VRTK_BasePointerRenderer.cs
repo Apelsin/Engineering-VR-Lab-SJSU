@@ -472,6 +472,10 @@ namespace VRTK
         protected virtual void CreatePointerOriginTransformFollow()
         {
             pointerOriginTransformFollowGameObject = new GameObject(string.Format("[{0}]BasePointerRenderer_Origin_Smoothed", gameObject.name));
+
+            // Hack to keep VRTK in its own scene
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(pointerOriginTransformFollowGameObject, gameObject.scene);
+
             pointerOriginTransformFollow = pointerOriginTransformFollowGameObject.AddComponent<VRTK_TransformFollow>();
             pointerOriginTransformFollow.enabled = false;
             pointerOriginTransformFollow.followsScale = false;

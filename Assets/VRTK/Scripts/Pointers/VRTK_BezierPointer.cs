@@ -101,10 +101,25 @@ namespace VRTK
 
         protected override void InitPointer()
         {
-            pointerCursor = (customPointerCursor ? Instantiate(customPointerCursor) : CreateCursor());
+            // Hack to keep VRTK in its own scene (and some extra logic)
+            if (customPointerCursor)
+            {
+                pointerCursor = Instantiate(customPointerCursor);
+                // Hack to keep VRTK in its own scene
+                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(pointerCursor, gameObject.scene);
+            }
+            else
+            {
+                pointerCursor = CreateCursor();
+            }
+
             if (validTeleportLocationObject != null)
             {
                 validTeleportLocationInstance = Instantiate(validTeleportLocationObject);
+
+                // Hack to keep VRTK in its own scene
+                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(validTeleportLocationInstance, gameObject.scene);
+
                 validTeleportLocationInstance.name = string.Format("[{0}]BasePointer_BezierPointer_TeleportBeam", gameObject.name);
                 validTeleportLocationInstance.transform.SetParent(pointerCursor.transform);
                 validTeleportLocationInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -161,6 +176,10 @@ namespace VRTK
         {
             var cursorYOffset = 0.02f;
             var cursor = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+
+            // Hack to keep VRTK in its own scene
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(cursor, gameObject.scene);
+
             var cursorRenderer = cursor.GetComponent<MeshRenderer>();
 
             cursor.transform.localScale = new Vector3(pointerCursorRadius, cursorYOffset, pointerCursorRadius);

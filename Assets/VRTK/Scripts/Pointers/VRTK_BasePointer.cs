@@ -5,6 +5,7 @@ namespace VRTK
     using System;
 #if UNITY_5_5_OR_NEWER
     using UnityEngine.AI;
+    using UnityEngine.SceneManagement;
 #endif
 
     /// <summary>
@@ -457,6 +458,10 @@ namespace VRTK
         protected virtual void CreatePointerOriginTransformFollow()
         {
             pointerOriginTransformFollowGameObject = new GameObject(string.Format("[{0}]BasePointer_Origin_Smoothed", gameObject.name));
+
+            // Hack to keep VRTK in its own scene
+            SceneManager.MoveGameObjectToScene(pointerOriginTransformFollowGameObject, gameObject.scene);
+
             pointerOriginTransformFollowGameObject.SetActive(false);
             pointerOriginTransformFollow = pointerOriginTransformFollowGameObject.AddComponent<VRTK_TransformFollow>();
             pointerOriginTransformFollow.followsScale = false;

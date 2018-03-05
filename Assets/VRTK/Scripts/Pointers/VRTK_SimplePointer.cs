@@ -115,10 +115,18 @@ namespace VRTK
         protected override void InitPointer()
         {
             pointerHolder = new GameObject(string.Format("[{0}]BasePointer_SimplePointer_Holder", gameObject.name));
+
+            // Hack to keep VRTK in its own scene
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(pointerHolder, gameObject.scene);
+
             pointerHolder.transform.localPosition = Vector3.zero;
             VRTK_PlayerObject.SetPlayerObject(pointerHolder, VRTK_PlayerObject.ObjectTypes.Pointer);
 
             pointerBeam = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            // Hack to keep VRTK in its own scene
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(pointerBeam, gameObject.scene);
+
             pointerBeam.transform.name = string.Format("[{0}]BasePointer_SimplePointer_Pointer", gameObject.name);
             pointerBeam.transform.SetParent(pointerHolder.transform);
             pointerBeam.GetComponent<BoxCollider>().isTrigger = true;
@@ -135,10 +143,17 @@ namespace VRTK
             if (customPointerCursor)
             {
                 pointerTip = Instantiate(customPointerCursor);
+
+                // Hack to keep VRTK in its own scene
+                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(pointerTip, gameObject.scene);
             }
             else
             {
                 pointerTip = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+                // Hack to keep VRTK in its own scene
+                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(pointerTip, gameObject.scene);
+
                 pointerTip.transform.localScale = pointerTipScale;
 
                 var pointerTipRenderer = pointerTip.GetComponent<MeshRenderer>();
