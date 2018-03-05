@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PanelManagerUI : MonoBehaviour {
 
+    [Serializable]
+    public class NavigateChapterEvent : UnityEvent<string> { }
+
+    public NavigateChapterEvent NaviageChapter;
 
     public GameObject chaptersPanel;
 
@@ -32,10 +37,9 @@ public class PanelManagerUI : MonoBehaviour {
         chaptersPanel.SetActive(false);
     }
 
-    public void LoadScene(string sceneToLoad)
+    public void OnNavigateChapter(string chapter_name)
     {
-        Debug.Log(sceneToLoad);
-        SceneManager.LoadScene(sceneToLoad);
+        NaviageChapter.Invoke(chapter_name);
     }
 }
 
