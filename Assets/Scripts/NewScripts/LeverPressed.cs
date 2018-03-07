@@ -1,127 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LeverPressed : MonoBehaviour
 {
+    //public AudioSource buttonSound;
+    //public LeverAnimation pressLeverAnimation;
 
-    //public GameObject button;
-    public AudioSource buttonSound;
-    public LeverAnimation pressLeverAnimation;
+    [SerializeField]
+    private UnityEvent _Pressed;
 
-    //Molecule to spawmn
-    public GameObject grabber;
-    public bool grabberMovingUp = false;
-    private bool grabberInputReady = true;
-    private float respawnTime = 3f;
-
-    public Vector3 grabberBasePosition;
-
-    // 1
-    private SteamVR_TrackedObject trackedObj;
-    // 2
-    private SteamVR_Controller.Device Controller
+    public UnityEvent Pressed
     {
-        get { return SteamVR_Controller.Input((int)trackedObj.index); }
+        get { return _Pressed; }
     }
 
-    void Awake()
+    private void Start()
     {
-        trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
-    // Use this for initialization
-    void Start()
+    private void Update()
     {
-        grabberBasePosition = grabber.transform.position;
-        buttonSound = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPress()
     {
-        if (grabberMovingUp)
-        {
-            //Move Grabber up
-            if (grabberBasePosition.y + 10 > grabber.transform.position.y)
-            {
-                grabber.transform.Translate(Vector3.up * Time.deltaTime);
-            }
-        }
-        else
-        {
-            //Move grabber to base position
-            if (grabberBasePosition.y <= grabber.transform.position.y)
-            {
-                //move the object down
-                grabber.transform.Translate(Vector3.down * Time.deltaTime);
-            }
-        }
-           
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        /*
-        if (other.gameObject.tag == "leftHand" || other.gameObject.tag == "rightHand")
-        {
-            Debug.Log("Button Pressed!");
-            buttonSound.Play();
-            buttonSound.Play(44100);
-            pressLeverAnimation.pressLever();
-
-            if (grabberInputReady)
-            {
-                //Move Grabber Up
-                if (grabberMovingUp)
-                {
-                    grabberMovingUp = false;
-                }
-                else
-                {
-                    grabberMovingUp = true;
-                }
-
-                Countdown((int)respawnTime);
-            }
-        }
-        */
-    }
-
-    public void Press()
-    {
-        pressLeverAnimation.pressLever();
-
-        if (grabberInputReady)
-        {
-            //Move Grabber Up
-            if (grabberMovingUp)
-            {
-                grabberMovingUp = false;
-            }
-            else
-            {
-                grabberMovingUp = true;
-            }
-
-            Countdown((int)respawnTime);
-        }
-    }
-
-
-    //Allow Element to spawn after countdown
-    private IEnumerator Countdown(int time)
-    {
-        while (time >= 0)
-        {
-            Debug.Log(time--);
-            yield return new WaitForSeconds(1);
-            grabberInputReady = false;
-            
-        }
-        //grabberMoving = false;
-        grabberInputReady = true;
-        Debug.Log("CountDown Complete: Can Spawn Element again");
+        Pressed.Invoke();
     }
 }
-

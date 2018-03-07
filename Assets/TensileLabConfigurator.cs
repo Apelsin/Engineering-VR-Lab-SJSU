@@ -39,7 +39,7 @@ public class TensileLabConfigurator : MonoBehaviour
                 {
                     GameObject graph = Instantiate(Resources.Load("LineGraph", typeof(GameObject))) as GameObject;
                     Debug.Log("Instantiated LineGraph");
-                    lever.Press();
+                    lever.OnPress();
                 }
             });
         else
