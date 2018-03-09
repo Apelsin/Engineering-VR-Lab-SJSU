@@ -1,19 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RotateObject : MonoBehaviour {
+public class RotateObject : MonoBehaviour
+{
+    // Use this for initialization
+    private void Start()
+    {
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+    // Update is called once per frame
+    private void Update()
+    {
         // ...also rotate around the World's Y axis
-        transform.Rotate(new Vector3(0,16,0) * Time.deltaTime, Space.World);
-
+        transform.Rotate(new Vector3(0, 16, 0) * Time.deltaTime, Space.World);
     }
 }

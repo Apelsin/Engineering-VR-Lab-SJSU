@@ -1,35 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Teleport : MonoBehaviour {
-
+public class Teleport : MonoBehaviour
+{
     public GameObject ui;
     public GameObject objToTP;
     public Transform tpLoc;
 
     // 1
     private SteamVR_TrackedObject trackedObj;
+
     // 2
     private SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
     }
 
-    void Awake()
+    private void Awake()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
     // Use this for initialization
-    void Start () {
+    private void Start()
+    {
         ui.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -61,7 +61,6 @@ public class Teleport : MonoBehaviour {
         {
             objToTP.transform.position = tpLoc.transform.position;
         }
-
     }
 
     private void OnTriggerExit(Collider other)

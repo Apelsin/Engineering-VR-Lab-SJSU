@@ -1,50 +1,47 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public class WaterFill : MonoBehaviour {
+public class WaterFill : MonoBehaviour
+{
+    public Object waterSource;
+    public ParticleSystem waterSystem;
 
-  public Object waterSource;
-  public ParticleSystem waterSystem;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         StartCoroutine(fill());
-
     }
 
     // Update is called once per frame
-    void Update () {
-	
-	}
-
-  void OnTriggerEnter(Collider other) {
-
-    if (other.GetComponent<FluidHolderScript>()) {
-      if(waterSystem.emissionRate >= 5)
-      StartCoroutine(fill());
-
+    private void Update()
+    {
     }
-  }
 
-  void OnTriggerExit(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<FluidHolderScript>())
+        {
+            if (waterSystem.emissionRate >= 5)
+                StartCoroutine(fill());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
         if (other.GetComponent<FluidHolderScript>())
         {
             StopAllCoroutines();
-
-
         }
-
     }
 
-  IEnumerator fill() {
+    private IEnumerator fill()
+    {
+        while (true)
+        {
+            //Debug.Log("COROUTINE");
+            GameObject.Instantiate(waterSource, this.transform.position, Quaternion.identity);
 
-    while(true) {
-
-      //Debug.Log("COROUTINE");
-      GameObject.Instantiate(waterSource, this.transform.position, Quaternion.identity);
-
-      yield return new WaitForSeconds(0.5f / waterSystem.emissionRate);
+            yield return new WaitForSeconds(0.5f / waterSystem.emissionRate);
+        }
     }
-
-  }
 }

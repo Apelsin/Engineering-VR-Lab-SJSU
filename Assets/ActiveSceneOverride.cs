@@ -5,11 +5,13 @@ public class ActiveSceneOverride : MonoBehaviour
 {
     [SerializeField]
     public GameObject[] GameObjectsToActivate = new GameObject[] { };
+
     private void Awake()
     {
         foreach (var game_object in GameObjectsToActivate)
             game_object.SetActive(false);
     }
+
     private void Start()
     {
         var active_scene = SceneManager.GetActiveScene();

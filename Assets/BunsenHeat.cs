@@ -1,119 +1,110 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public class BunsenHeat : MonoBehaviour {
+public class BunsenHeat : MonoBehaviour
+{
+    public ParticleSystem bunsen;
+    public Object fireBurn;
+    public Object smoke;
+    public float heatRate = 0.1f;
 
-  public ParticleSystem bunsen;
-  public Object fireBurn;
-  public Object smoke;
-  public float heatRate = 0.1f;
+    private AudioSource audio;
+    public AudioClip steelAudio;
+    public AudioClip paperAudio;
 
+    private bool audioPlayed = false;
+    private bool paperCoroutine = false;
+    private bool boilCoroutine = false;
 
-  private AudioSource audio;
-  public AudioClip steelAudio;
-  public AudioClip paperAudio;
-
-  bool audioPlayed = false;
-  bool paperCoroutine = false;
-  bool boilCoroutine = false;
-
-
-  // Use this for initialization
-  void Start () {
-
-    audio = GetComponent<AudioSource>();
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-  void OnTriggerStay(Collider other) {
-
-    if(other.gameObject.GetComponent<FluidHolderScript>()) {
-
-      FluidHolderScript fluid = other.gameObject.GetComponent<FluidHolderScript>();
-      fluid.solution.temperature += (bunsen.startSpeed * heatRate);
-
-      if(fluid.solution.temperature > 200) {
-
-        fluid.solution.temperature = 200;
-
-      }
-
-      if(fluid.solution.getAmount() >= fluid.maxAmount / 4 && fluid.solution.temperature > 100) {
-
-        Debug.Log("BOILING");
-        if (!boilCoroutine)
-        StartCoroutine(BoilWater(other));
-
-      }
+    // Use this for initialization
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
     }
 
-    else if(other.gameObject.GetComponent<SteelFire>()) {
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 
-      if(bunsen.startSpeed >= 5) {
-        if(!audioPlayed) {
-          audio.clip = steelAudio;
-          audio.Play();
-          audioPlayed = true;
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.GetComponent<FluidHolderScript>())
+        {
+            FluidHolderScript fluid = other.gameObject.GetComponent<FluidHolderScript>();
+            fluid.solution.temperature += (bunsen.startSpeed * heatRate);
+
+            if (fluid.solution.temperature > 200)
+            {
+                fluid.solution.temperature = 200;
+            }
+
+            if (fluid.solution.getAmount() >= fluid.maxAmount / 4 && fluid.solution.temperature > 100)
+            {
+                Debug.Log("BOILING");
+                if (!boilCoroutine)
+                    StartCoroutine(BoilWater(other));
+            }
         }
-        other.gameObject.GetComponent<SteelFire>().Explode();
-      }
+        else if (other.gameObject.GetComponent<SteelFire>())
+        {
+            if (bunsen.startSpeed >= 5)
+            {
+                if (!audioPlayed)
+                {
+                    audio.clip = steelAudio;
+                    audio.Play();
+                    audioPlayed = true;
+                }
+                other.gameObject.GetComponent<SteelFire>().Explode();
+            }
+        }
+        else if (other.tag == "Paper")
+        {
+            if (!paperCoroutine)
+                StartCoroutine(BurnPaper(other));
+        }
     }
 
-    else if (other.tag == "Paper") {
+    private IEnumerator BurnPaper(Collider other)
+    {
+        paperCoroutine = true;
 
-      if (!paperCoroutine)
-        StartCoroutine(BurnPaper(other));
+        audio.clip = paperAudio;
+        audio.Play();
 
-    }
-  }
+        ((GameObject)(GameObject.Instantiate(fireBurn, other.transform.position, Quaternion.identity))).transform.parent = other.transform;
 
-  IEnumerator BurnPaper(Collider other) {
+        yield return new WaitForSeconds(3.0f);
 
-    paperCoroutine = true;
+        if (other.GetComponent<Joint>())
+        {
+            other.GetComponent<Joint>().connectedBody.GetComponent<GrabScriptVive>().Disconnect();
+        }
 
-    audio.clip = paperAudio;
-    audio.Play();
+        GameObject.Destroy(other.gameObject);
 
-    ((GameObject)(GameObject.Instantiate(fireBurn, other.transform.position, Quaternion.identity))).transform.parent = other.transform;
-
-    yield return new WaitForSeconds(3.0f);
-
-    if(other.GetComponent<Joint>()) {
-      other.GetComponent<Joint>().connectedBody.GetComponent<GrabScriptVive>().Disconnect();
+        paperCoroutine = false;
     }
 
-    GameObject.Destroy(other.gameObject);
+    private IEnumerator BoilWater(Collider other)
+    {
+        boilCoroutine = true;
 
-    paperCoroutine = false;
+        Vector3 spawnPos = other.transform.position + new Vector3(0, 2, 0);
 
-  }
+        GameObject smokeObj = (GameObject)(GameObject.Instantiate(smoke, spawnPos, Quaternion.identity));
 
-  IEnumerator BoilWater(Collider other) {
+        smokeObj.transform.parent = other.transform;
 
-    boilCoroutine = true;
+        while (other.GetComponent<FluidHolderScript>().solution.getAmount() > 0)
+        {
+            other.GetComponent<FluidHolderScript>().changeLevel(-1f);
+            yield return new WaitForSeconds(0.1f);
+        }
 
-    Vector3 spawnPos = other.transform.position + new Vector3(0,2,0);
+        GameObject.Destroy(smokeObj);
 
-
-    GameObject smokeObj = (GameObject)(GameObject.Instantiate(smoke, spawnPos, Quaternion.identity));
-      
-    smokeObj.transform.parent = other.transform;
-
-    while (other.GetComponent<FluidHolderScript>().solution.getAmount() > 0) {
-
-      other.GetComponent<FluidHolderScript>().changeLevel(-1f);
-      yield return new WaitForSeconds(0.1f);
-
+        boilCoroutine = false;
     }
-
-    GameObject.Destroy(smokeObj);
-
-    boilCoroutine = false;
-
-  }
 }

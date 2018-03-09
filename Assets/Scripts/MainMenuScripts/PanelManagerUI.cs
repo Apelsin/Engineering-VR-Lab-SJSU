@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PanelManagerUI : MonoBehaviour {
-
+public class PanelManagerUI : MonoBehaviour
+{
     [Serializable]
     public class NavigateChapterEvent : UnityEvent<string> { }
 
@@ -13,20 +11,19 @@ public class PanelManagerUI : MonoBehaviour {
 
     public GameObject chaptersPanel;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         chaptersPanel.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 
     public void ToggleSettingsPanel()
     {
-
         bool active;
         active = chaptersPanel.activeSelf == true ? false : true;
         chaptersPanel.SetActive(active);
@@ -42,4 +39,3 @@ public class PanelManagerUI : MonoBehaviour {
         NavigateChapter.Invoke(chapter_name);
     }
 }
-

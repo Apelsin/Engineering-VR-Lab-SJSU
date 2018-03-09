@@ -1,16 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Element : MonoBehaviour {
-
-
+public class Element : MonoBehaviour
+{
     public GameObject element;
     private bool elementSpawned = false;
     private float respawnTime = 30.0f;
-    
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "leftHand" || other.gameObject.tag == "rightHand")
             // 2
@@ -25,7 +22,7 @@ public class Element : MonoBehaviour {
     //Allow Element to spawn after countdown
     private IEnumerator Countdown(int time)
     {
-        while(time>=0)
+        while (time >= 0)
         {
             Debug.Log(time--);
             yield return new WaitForSeconds(1);

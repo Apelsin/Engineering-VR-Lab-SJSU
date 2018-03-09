@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LaserPointer : MonoBehaviour
 {
-
     // 1
     public Transform cameraRigTransform;
+
     // 2
     public GameObject teleportReticlePrefab;
+
     // 3
     private GameObject reticle;
+
     // 4
     private Transform teleportReticleTransform;
+
     // 5
     public Transform headTransform;
+
     // 6
     public Vector3 teleportReticleOffset;
+
     // 7
     public LayerMask teleportMask;
+
     // 8
     private bool shouldTeleport;
 
@@ -29,17 +33,20 @@ public class LaserPointer : MonoBehaviour
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
     }
 
-    void Awake()
+    private void Awake()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
     // 1
     public GameObject laserPrefab;
+
     // 2
     private GameObject laser;
+
     // 3
     private Transform laserTransform;
+
     // 4
     private Vector3 hitPoint;
 
@@ -57,9 +64,8 @@ public class LaserPointer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
         // 1
         if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
         {
@@ -88,7 +94,6 @@ public class LaserPointer : MonoBehaviour
         {
             Teleport();
         }
-
     }
 
     private void Teleport()
@@ -106,7 +111,7 @@ public class LaserPointer : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         // 1
         laser = Instantiate(laserPrefab, transform, true);

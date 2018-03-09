@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class Liquid : ScriptableObject
-{ 
+{
     public float amount = 0;
     public Color color = new Color();
     public LiquidType type = LiquidType.Water;
@@ -12,7 +10,7 @@ public class Liquid : ScriptableObject
     /// Copy ctor for Liquid
     /// </summary>
     /// <param name="other"></param>
-    public Liquid (Liquid other)
+    public Liquid(Liquid other)
     {
         amount = other.amount;
         color = other.color;
@@ -24,7 +22,6 @@ public class Liquid : ScriptableObject
         color = inputColor;
         type = inputType;
     }
-
 
     /// <summary>
     /// Run after creating the instance
@@ -43,11 +40,11 @@ public class Liquid : ScriptableObject
     /// Copy ctor for Liquid
     /// </summary>
     /// <param name="other"></param>
-    public void init (Liquid other)
+    public void init(Liquid other)
     {
         amount = other.amount;
         color = other.color;
     }
 }
 
-public enum LiquidType {Water, Sodium };
+public enum LiquidType { Water, Sodium };

@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class FluidHolderScript : MonoBehaviour {
-
-    
+public class FluidHolderScript : MonoBehaviour
+{
     public float maxAmount;
     //public float currentAmount;
 
@@ -20,17 +18,17 @@ public class FluidHolderScript : MonoBehaviour {
     public Vector3 start = new Vector3(0.0f, 0.0f, 0.0f);
     public Vector3 end = new Vector3(0.0f, 1.0f, 0.0f);
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         solution = ScriptableObject.CreateInstance<Solution>();
 
         updateWaterImage();
-
-
     }
 
     // Update is called once per frame
-    void Update () {
+    private void Update()
+    {
         //If tilted, then pour portion of liquid out based on percentage.
 
         float xAngle = transform.rotation.eulerAngles.x;
@@ -58,19 +56,19 @@ public class FluidHolderScript : MonoBehaviour {
         {
             float previousAmount = solution.getAmount();
 
-      float newAmount = solution.getAmount();
-            
+            float newAmount = solution.getAmount();
+
             //Clamp the actual amount to be between 0 and the rotated amount
             newAmount = Mathf.Clamp(solution.getAmount(), 0f, holdPercent * maxAmount);
 
-      float newProportion = newAmount / maxAmount;
+            float newProportion = newAmount / maxAmount;
 
-      Debug.Log(newAmount);
+            Debug.Log(newAmount);
 
             //The proportion lost.
             //float differenceProportion = (previousAmount -newAmount) / maxAmount;
 
-      //Debug.Log(differenceProportion); 
+            //Debug.Log(differenceProportion);
 
             //If went to infinity, make zero.
             /*if (differenceProportion > 1f)
@@ -83,11 +81,11 @@ public class FluidHolderScript : MonoBehaviour {
 
             Vector3 spawnPos = sourceSpawnObject.GetComponent<Collider>().bounds.min;//transform.position + new Vector3(0,3 ,0);
 
-           // Debug.Log(spawnPos);
+            // Debug.Log(spawnPos);
 
             //Vector3 spawnPos = transform.position + new Vector3(0,3 ,0);
 
-            //This source adds the liquid to containers below. Note, can add more accurate positioning, i.e. corner of container. 
+            //This source adds the liquid to containers below. Note, can add more accurate positioning, i.e. corner of container.
 
             GameObject source = (GameObject)Instantiate(liquidSourcePrefab, spawnPos, Quaternion.identity);
 
@@ -101,25 +99,21 @@ public class FluidHolderScript : MonoBehaviour {
 
             //Finally, for this container, decrease the amount of solution available.
             solution.multiplyByFactor(newProportion);
-      Debug.Log(solution.getAmount());
+            Debug.Log(solution.getAmount());
             updateWaterImage();
 
-
             /*waterObject.transform.localPosition = Vector3.Lerp(start, end, (solution.currentAmount / maxAmount));
-            
+
             if (solution.currentAmount == 0)
             {
                 waterObject.SetActive(false);
             }
-
             else
             {
                 waterObject.SetActive(true);
-
             }*/
             // Debug.Log(holdPercent);
         }
-
     }
 
     public void addToSolution(Solution other)
@@ -136,17 +130,18 @@ public class FluidHolderScript : MonoBehaviour {
         rend.material.SetColor("_RefrColor", solution.getColor());
     }
 
-  public void changeLevel(float deltaLevel) {
-    float differenceProportion = 1 / maxAmount;
+    public void changeLevel(float deltaLevel)
+    {
+        float differenceProportion = 1 / maxAmount;
 
-    solution.multiplyByFactor(1 - differenceProportion);
+        solution.multiplyByFactor(1 - differenceProportion);
 
-    //solution.currentAmount += deltaLevel;
+        //solution.currentAmount += deltaLevel;
 
-    //Debug.Log("rota" + (solution.currentAmount / maxAmount));
-    //waterObject.transform.localPosition = Vector3.Lerp(start, end, (solution.currentAmount / maxAmount));
-    updateWaterImage();
-  }
+        //Debug.Log("rota" + (solution.currentAmount / maxAmount));
+        //waterObject.transform.localPosition = Vector3.Lerp(start, end, (solution.currentAmount / maxAmount));
+        updateWaterImage();
+    }
 
     private void updateWaterImage()
     {
@@ -156,11 +151,9 @@ public class FluidHolderScript : MonoBehaviour {
         {
             waterObject.SetActive(false);
         }
-
         else
         {
             waterObject.SetActive(true);
-
         }
     }
 }

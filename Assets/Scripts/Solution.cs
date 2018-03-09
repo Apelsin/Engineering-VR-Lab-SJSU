@@ -1,14 +1,13 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Solutions are a collection of liquids that cause interesting properties.
 /// </summary>
-public class Solution : ScriptableObject{
+public class Solution : ScriptableObject
+{
     public List<Liquid> liquidComponents = new List<Liquid>();
     private float currentAmount = 0;
-
 
     //Temp in Celcius because fahrenheit is for nubs
     public float temperature = 0;
@@ -29,7 +28,7 @@ public class Solution : ScriptableObject{
         }
         return finalColor;
     }
-    
+
     /// <summary>
     /// Get the total amount of liquid including components.
     /// </summary>
@@ -51,19 +50,21 @@ public class Solution : ScriptableObject{
     /// <param name="factor">The amount to multiply by.</param>
     public void multiplyByFactor(float factor)
     {
-    //If factor is about 0, then empty the beaker.
-    if(factor <= .01) {
-      liquidComponents.Clear();
-      currentAmount = 0;
-    }
-
-    else {
-      for(int i = 0; i < liquidComponents.Count; i++) {
-        liquidComponents[i].amount *= factor;
-        currentAmount = getAmount();
-        //Debug.Log(liquidComponents[i].amount);
-      }
-    }
+        //If factor is about 0, then empty the beaker.
+        if (factor <= .01)
+        {
+            liquidComponents.Clear();
+            currentAmount = 0;
+        }
+        else
+        {
+            for (int i = 0; i < liquidComponents.Count; i++)
+            {
+                liquidComponents[i].amount *= factor;
+                currentAmount = getAmount();
+                //Debug.Log(liquidComponents[i].amount);
+            }
+        }
         //currentAmount *= factor;
     }
 
@@ -76,18 +77,16 @@ public class Solution : ScriptableObject{
         //Set temperature.
         this.temperature = temperature * currentAmount + other.temperature * other.currentAmount;
 
-    Debug.Log("pre" + currentAmount);
+        Debug.Log("pre" + currentAmount);
 
-    for(int i = 0; i < other.liquidComponents.Count; i++)
+        for (int i = 0; i < other.liquidComponents.Count; i++)
         {
-      addToSolution(other.liquidComponents[i]);
+            addToSolution(other.liquidComponents[i]);
             //liquidComponents.Add(other.liquidComponents[i]);
-      Debug.Log("adding" + other.liquidComponents[i].amount);
-
-    }
-    Debug.Log("post" + currentAmount);
+            Debug.Log("adding" + other.liquidComponents[i].amount);
+        }
+        Debug.Log("post" + currentAmount);
         currentAmount = getAmount();
-
     }
 
     /// <summary>
@@ -127,7 +126,7 @@ public class Solution : ScriptableObject{
     /// Solution empty ctor. Basically nothing, everything is already initialized.
     /// </summary>
     /// <param name="other"></param>
-    public Solution(){}
+    public Solution() { }
 
     /// <summary>
     /// Solution copy ctor.

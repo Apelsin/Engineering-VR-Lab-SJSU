@@ -1,43 +1,38 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Weight : MonoBehaviour {
+public class Weight : MonoBehaviour
+{
+    public TextMesh weightText;
+    private string displayString;
+    private float weight;
 
-  public TextMesh weightText;
-  private string displayString;
-  private float weight;
+    // Use this for initialization
+    private void Start()
+    {
+    }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 
-  void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
+        float objWeight = other.GetComponent<ObjWeight>().weight;
+        weight += objWeight;
+        UpdateString();
+    }
 
-    float objWeight = other.GetComponent<ObjWeight>().weight;
-    weight += objWeight;
-    UpdateString();
+    private void OnTriggerExit(Collider other)
+    {
+        float objWeight = other.GetComponent<ObjWeight>().weight;
+        weight -= objWeight;
+        UpdateString();
+    }
 
-  }
-
-  void OnTriggerExit(Collider other) {
-
-    float objWeight = other.GetComponent<ObjWeight>().weight;
-    weight -= objWeight;
-    UpdateString();
-
-  }
-
-  void UpdateString() {
-
-    displayString = "" + weight;
-    weightText.text = displayString;
-
-
-  }
+    private void UpdateString()
+    {
+        displayString = "" + weight;
+        weightText.text = displayString;
+    }
 }

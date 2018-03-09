@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class InstronTester : MonoBehaviour
@@ -12,7 +10,6 @@ public class InstronTester : MonoBehaviour
     public Transform TopClampPoint;
     public Transform BaseClampPoint;
     public GameObject Subject;
-    
 
     [Range(0f, 1f)]
     public float ClampCenterBalance = 0.5f;
@@ -37,13 +34,12 @@ public class InstronTester : MonoBehaviour
     {
     }
 
-    static void StretchSubject(Transform @base, Transform @top, Transform subject_xform, float subject_size_x, float center_balance)
+    private static void StretchSubject(Transform @base, Transform @top, Transform subject_xform, float subject_size_x, float center_balance)
     {
         var base_pos = @base.position;
         var top_pos = top.position;
         float length = Vector3.Distance(base_pos, top_pos);
         Vector3 subject_center = Vector3.Lerp(base_pos, top_pos, center_balance);
-
 
         // Assuming length is along X axis!
         var subject_length = Vector3.Distance(base_pos, top_pos);
@@ -60,9 +56,9 @@ public class InstronTester : MonoBehaviour
         subject_xform.localScale = subject_scale;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if(TopClampPoint && BaseClampPoint && Subject)
+        if (TopClampPoint && BaseClampPoint && Subject)
         {
             //var base_pos = BaseClampPoint.position;
             //var top_pos = TopClampPoint.position;

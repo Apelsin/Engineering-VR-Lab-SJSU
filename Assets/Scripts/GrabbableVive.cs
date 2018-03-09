@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 //All objects that can be grabbed need to have this.
 [RequireComponent(typeof(HighlightChildrenScript), typeof(Rigidbody), typeof(Collider))]
-public class GrabbableVive: MonoBehaviour {
-
+public class GrabbableVive : MonoBehaviour
+{
     public bool createDialogue;
     private int numTimesPickedUp = 0;
     public string firstTouchDialogue;
@@ -14,7 +13,7 @@ public class GrabbableVive: MonoBehaviour {
 
     public float soundThreshold = .5f;
 
-	public void onHover()
+    public void onHover()
     {
         GetComponent<HighlightChildrenScript>().makeTransparent();
     }
@@ -22,7 +21,6 @@ public class GrabbableVive: MonoBehaviour {
     public void onHoverLeave()
     {
         GetComponent<HighlightChildrenScript>().makeOpaque();
-
     }
 
     public void onGrab()
@@ -43,6 +41,5 @@ public class GrabbableVive: MonoBehaviour {
 
     public void onRelease()
     {
-
     }
 }

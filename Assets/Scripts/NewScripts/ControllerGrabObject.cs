@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ControllerGrabObject : MonoBehaviour {
-
+public class ControllerGrabObject : MonoBehaviour
+{
     private SteamVR_TrackedObject trackedObj;
 
     private SteamVR_Controller.Device Controller
@@ -11,14 +9,14 @@ public class ControllerGrabObject : MonoBehaviour {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
     }
 
-
-    void Awake()
+    private void Awake()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
     // 1
     private GameObject collidingObject;
+
     // 2
     private GameObject objectInHand;
 
@@ -92,7 +90,8 @@ public class ControllerGrabObject : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    private void Update()
+    {
         // 1 When the player squeezes the trigger and there’s a potential grab target, this grabs it.
         if (Controller.GetHairTriggerDown())
         {

@@ -71,6 +71,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("Settings")]
 #endif
+
         [SerializeField]
         private EStartMode _StartMode = EStartMode.UnloadUnusedScenes;
 

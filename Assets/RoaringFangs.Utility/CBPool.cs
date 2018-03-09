@@ -54,6 +54,7 @@ namespace RoaringFangs.Utility
 
         [DisableInPlayMode]
 #endif
+
         [SerializeField]
         private Transform _PoolTransform;
 
@@ -154,7 +155,7 @@ namespace RoaringFangs.Utility
             {
                 int index = (_AvailableObjectIndex + i) % number_of_available_objects;
                 var @object = _AvailableObjects[index];
-                if(@object != null)
+                if (@object != null)
                 {
                     @object.SetActive(true);
                     PoolData[@object] = new ElementInfo()
@@ -166,7 +167,7 @@ namespace RoaringFangs.Utility
                     //_ActiveObjects[index] = @object;
                     _AvailableObjectIndex = (index + 1) % number_of_available_objects;
                     _CycleCounter++;
-                    return @object; 
+                    return @object;
                 }
             }
             throw new Exception("No available objects in pool");

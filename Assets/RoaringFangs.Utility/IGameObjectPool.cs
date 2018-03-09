@@ -29,6 +29,7 @@ namespace RoaringFangs.Utility
     public interface IGameObjectPool
     {
         GameObject Cycle();
+
         void Return(GameObject @object);
     }
 }

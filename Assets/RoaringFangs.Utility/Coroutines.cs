@@ -80,7 +80,7 @@ namespace RoaringFangs.Utility
         /// <returns>The wrapped coroutine.</returns>
         public static IEnumerator GetSafeCoroutine(this IEnumerator coroutine)
         {
-            for (;;)
+            for (; ; )
             {
                 try
                 {

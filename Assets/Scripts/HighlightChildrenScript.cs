@@ -1,20 +1,19 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 //Blatantly stolen from, including shaders:
 //http://nihilistdev.blogspot.com/2013/05/outline-in-unity-with-mesh-transparency.html
 //Also shader here: http://answers.unity3d.com/questions/60155/is-there-a-shader-to-only-add-an-outline.html
 public class HighlightChildrenScript : MonoBehaviour
 {
-
-  public bool highlightChildren = true;
+    public bool highlightChildren = true;
 
     public Color meshColor = new Color(1f, 1f, 1f, 0.5f);
     public Color outlineColor = new Color(1f, 1f, 0f, 1f);
 
     //A list containing arrays of materials. Index of list refers to the gameObject.
     private List<Material[]> normalMaterials;
+
     private List<GameObject> outlineObjects;
     private List<GameObject> normalObjects;
 
@@ -25,20 +24,17 @@ public class HighlightChildrenScript : MonoBehaviour
         outlineObjects = new List<GameObject>();
         normalObjects = new List<GameObject>();
 
-    // Set all the original materials into normalMaterials.
-    MeshRenderer[] meshRenderers = new MeshRenderer[1];
+        // Set all the original materials into normalMaterials.
+        MeshRenderer[] meshRenderers = new MeshRenderer[1];
 
-    if (highlightChildren) {
-
-      meshRenderers = GetComponentsInChildren<MeshRenderer>();
-
-    }
-
-    else {
-
-      meshRenderers[0] = this.GetComponent<MeshRenderer>();
-
-    }
+        if (highlightChildren)
+        {
+            meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        }
+        else
+        {
+            meshRenderers[0] = this.GetComponent<MeshRenderer>();
+        }
 
         for (int i = 0; i < meshRenderers.Length; i++)
         {
@@ -104,7 +100,6 @@ public class HighlightChildrenScript : MonoBehaviour
         }
     }
 
-
     public void makeOpaque()
     {
         // Set the transparent material to this object
@@ -126,5 +121,3 @@ public class HighlightChildrenScript : MonoBehaviour
         }
     }
 }
-
-

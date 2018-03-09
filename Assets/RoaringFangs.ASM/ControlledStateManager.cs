@@ -22,13 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+using RoaringFangs.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using RoaringFangs.Utility;
 
 #if ODIN_INSPECTOR
 
@@ -87,6 +87,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("References", indent: false, order: -1)]
 #endif
+
         [SerializeField]
         private Animator _Animator;
 
@@ -127,6 +128,7 @@ namespace RoaringFangs.ASM
         [TitleGroup("Settings", indent: false)]
         [PropertyOrder(100)]
 #endif
+
         [SerializeField]
         private ParameterEntry[] _ParameterEntries = new ParameterEntry[] { };
 
@@ -183,6 +185,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("Events", indent: false, order: 100)]
 #endif
+
         [SerializeField]
         private ManagedStateEvent _AnyStateEntry;
 
@@ -190,6 +193,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("Events")]
 #endif
+
         [SerializeField]
         private ManagedStateEvent _AnyStateExit;
 
@@ -197,6 +201,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("Events")]
 #endif
+
         [SerializeField]
         private ManagedStateEvent _AnyStateUpdate;
 
@@ -204,6 +209,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("Events")]
 #endif
+
         [SerializeField]
         private ManagedStateMachineEvent _AnyStateMachineEntry;
 
@@ -211,6 +217,7 @@ namespace RoaringFangs.ASM
 
         [TitleGroup("Events")]
 #endif
+
         [SerializeField]
         private ManagedStateMachineEvent _AnyStateMachineExit;
 
@@ -444,7 +451,7 @@ namespace RoaringFangs.ASM
 
         private IEnumerable ProcessCoroutineQueue()
         {
-            for (;;)
+            for (; ; )
             {
                 // TODO: don't assume layer 0?
                 if (CoroutineQueue.Count > 0)
