@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 95241398776380490}
   - component: {fileID: 114002714184453414}
   m_Layer: 0
-  m_Name: Instron Tester 1
+  m_Name: Instron Tester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
