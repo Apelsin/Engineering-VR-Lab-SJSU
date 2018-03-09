@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 33641129577778210}
   - component: {fileID: 23971248853053596}
   - component: {fileID: 65797733378602480}
-  - component: {fileID: 114147383218948512}
   m_Layer: 0
   m_Name: baseclamp
   m_TagString: Untagged
@@ -74,6 +73,21 @@ GameObject:
   - component: {fileID: 23776985798789814}
   m_Layer: 0
   m_Name: Assem2 - emergency dial bottom-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1072350878529656
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4501439715645248}
+  m_Layer: 0
+  m_Name: Base Clamp Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +313,6 @@ GameObject:
   - component: {fileID: 33212648423340630}
   - component: {fileID: 23820275179583100}
   - component: {fileID: 65098794822916602}
-  - component: {fileID: 114987160108753200}
   m_Layer: 0
   m_Name: BaseClamp
   m_TagString: Untagged
@@ -422,6 +435,7 @@ GameObject:
   - component: {fileID: 65600949497956938}
   - component: {fileID: 114648270088356594}
   - component: {fileID: 95241398776380490}
+  - component: {fileID: 114002714184453414}
   m_Layer: 0
   m_Name: Instron Tester 1
   m_TagString: Untagged
@@ -558,6 +572,21 @@ GameObject:
   - component: {fileID: 23741268799321890}
   m_Layer: 0
   m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1658768545230922
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4546719430604254}
+  m_Layer: 0
+  m_Name: Top Clamp Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1228,6 +1257,19 @@ Transform:
   m_Father: {fileID: 4262280140010198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4501439715645248
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072350878529656}
+  m_LocalRotation: {x: 1.4210855e-14, y: 0.70710665, z: -2.842171e-14, w: 0.70710695}
+  m_LocalPosition: {x: 0, y: -0.010799994, z: -0.004762561}
+  m_LocalScale: {x: 0.12320458, y: 0.12320465, z: 0.10762344}
+  m_Children: []
+  m_Father: {fileID: 4621172283223874}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
 --- !u!4 &4537687041852620
 Transform:
   m_ObjectHideFlags: 1
@@ -1241,6 +1283,19 @@ Transform:
   m_Father: {fileID: 4138037635954926}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4546719430604254
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658768545230922}
+  m_LocalRotation: {x: 1.9895197e-13, y: 0.7071067, z: 1.4210855e-14, w: 0.7071069}
+  m_LocalPosition: {x: 0, y: -0.010800017, z: -0.004767732}
+  m_LocalScale: {x: 0.12320459, y: 0.12320465, z: 0.10762345}
+  m_Children: []
+  m_Father: {fileID: 4640671607307000}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
 --- !u!4 &4571339870194950
 Transform:
   m_ObjectHideFlags: 1
@@ -1302,7 +1357,8 @@ Transform:
   m_LocalRotation: {x: 1, y: -0, z: 0, w: -0.00000031391647}
   m_LocalPosition: {x: 0.010843058, y: 2.2295055, z: -0.48050588}
   m_LocalScale: {x: 38.25412, y: 38.25412, z: 43.792362}
-  m_Children: []
+  m_Children:
+  - {fileID: 4501439715645248}
   m_Father: {fileID: 4138037635954926}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1328,7 +1384,8 @@ Transform:
   m_LocalRotation: {x: 0.00000016888312, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0.010843058, y: 4.1990767, z: -0.061737802}
   m_LocalScale: {x: 38.25412, y: 38.25412, z: 43.792362}
-  m_Children: []
+  m_Children:
+  - {fileID: 4546719430604254}
   m_Father: {fileID: 4723640633652930}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3509,19 +3566,43 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114147383218948512
+--- !u!114 &114002714184453414
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1040996938813574}
+  m_GameObject: {fileID: 1456191027357714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33e692926807454a9a0723c2262565c, type: 3}
+  m_Script: {fileID: 11500000, guid: e9c84492402c974429945b5018ac0732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever: {fileID: 1272032100347370}
-  graph: {fileID: 0}
+  CollisionEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114648270088356594}
+        m_MethodName: MyDebug
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hey!
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  CollisionExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  CollisionStay:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114339543179418536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3612,16 +3693,7 @@ MonoBehaviour:
   TestMaterialTypes:
   - Metal
   GrabberAnimator: {fileID: 95487299920878180}
---- !u!114 &114987160108753200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1298165221405518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33e692926807454a9a0723c2262565c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lever: {fileID: 0}
-  graph: {fileID: 0}
+  TopClampPoint: {fileID: 4546719430604254}
+  BaseClampPoint: {fileID: 4501439715645248}
+  Subject: {fileID: 0}
+  ClampCenterBalance: 0

@@ -2,32 +2,6 @@
 
 public class TensileLabConfigurator : MonoBehaviour
 {
-
-    //private void HandleStartButtonTriggerEnter(Collider other)
-    //{
-        
-
-    //        //Debug.Log("Button Pressed!");
-    //        //buttonSound.Play();
-    //        //buttonSound.Play(44100);
-    //        //pressLeverAnimation.pressLever();
-
-    //        //if (grabberInputReady)
-    //        //{
-    //        //    //Move Grabber Up
-    //        //    if (grabberMovingUp)
-    //        //    {
-    //        //        grabberMovingUp = false;
-    //        //    }
-    //        //    else
-    //        //    {
-    //        //        grabberMovingUp = true;
-    //        //    }
-
-    //        //    Countdown((int)respawnTime);
-    //        //}
-    //    }
-    //}
     private void Start()
     {
         var lever = FindObjectOfType<LeverPressed>();
@@ -44,5 +18,19 @@ public class TensileLabConfigurator : MonoBehaviour
             });
         else
             Debug.LogError("Could not find lever trigger events component");
+
+        var tester = FindObjectOfType<InstronTester>();
+        var tester_collision_events = tester?.GetComponent<CollisionEvents>();
+        if (tester_collision_events)
+            tester_collision_events.AddCollisionEnterHandler((collision) =>
+            {
+                if (collision.gameObject.tag == "material")
+                {
+                    // Assign the tester's subject to the other collider's GameObject
+                    tester.Subject = collision.gameObject;
+                }
+            });
+        else
+            Debug.LogError("Could not find tensile tester collision events component");
     }
 }
