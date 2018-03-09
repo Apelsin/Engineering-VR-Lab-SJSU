@@ -477,6 +477,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4425877612188646, guid: 87989fa23de08c548998a05b839e71d3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.0333338
@@ -513,9 +518,45 @@ Prefab:
       propertyPath: m_Name
       value: Instron Tester
       objectReference: {fileID: 0}
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 307530250}
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MyDebug
+      objectReference: {fileID: 0}
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: hey!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114002714184453414, guid: 87989fa23de08c548998a05b839e71d3,
+        type: 2}
+      propertyPath: CollisionEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87989fa23de08c548998a05b839e71d3, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &307530250 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114648270088356594, guid: 87989fa23de08c548998a05b839e71d3,
+    type: 2}
+  m_PrefabInternal: {fileID: 307530249}
+  m_Script: {fileID: 11500000, guid: 23905fb2793feb74cad109516684ec77, type: 3}
 --- !u!1001 &412861934
 Prefab:
   m_ObjectHideFlags: 0

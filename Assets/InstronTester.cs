@@ -37,11 +37,6 @@ public class InstronTester : MonoBehaviour
     {
     }
 
-
-    public void MyDebug(string msg)
-    {
-        Debug.Log(msg);
-    }
     static void StretchSubject(Transform @base, Transform @top, Transform subject_xform, float subject_size_x, float center_balance)
     {
         var base_pos = @base.position;
