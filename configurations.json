@@ -1,0 +1,26 @@
+{
+    "Release":
+    {
+        "MainScene": "Scenes/Release Main.unity",
+        "Scenes": 
+        [
+            "Scenes"
+        ]
+    },
+    "DevRelease":
+    {
+        "MainScene": "Scenes/Release Main.unity",
+        "Scenes": 
+        [
+            "Scenes"
+        ]
+    },
+    "Development":
+    {
+        "MainScene": "Scenes/Development Main.unity",
+        "Scenes": 
+        [
+            "Scenes"
+        ]
+    }
+}
