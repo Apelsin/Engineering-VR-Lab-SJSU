@@ -86,9 +86,11 @@ namespace RoaringFangs.Utility
         /// </summary>
         public float ElementTTL = 2.0f;
 
+        public bool AllowOverlap = false;
+
         private GameObject[] _AvailableObjects;
 
-        //private GameObject[] _ActiveObjects;
+        private GameObject[] _BusyObjects;
 
         private int _AvailableObjectIndex = 0;
 
@@ -121,7 +123,7 @@ namespace RoaringFangs.Utility
                 .Cast<Transform>()
                 .Select(t => t.gameObject);
             _AvailableObjects = objects.ToArray();
-            //_ActiveObjects = new GameObject[_AvailableObjects.Length];
+            _BusyObjects = new GameObject[_AvailableObjects.Length];
         }
 
         protected virtual void Awake()
@@ -140,9 +142,11 @@ namespace RoaringFangs.Utility
                     Return(key);
                 }
             }
-            //Debug.Log(
-            //    "Cycles:  " + _CycleCounter + "\n" +
-            //    "Returns: " + _ReturnCounter);
+        }
+
+        private void Take(GameObject @object)
+        {
+
         }
 
         /// <summary>
@@ -164,13 +168,33 @@ namespace RoaringFangs.Utility
                         BufferIndex = index
                     };
                     _AvailableObjects[index] = null;
-                    //_ActiveObjects[index] = @object;
                     _AvailableObjectIndex = (index + 1) % number_of_available_objects;
+                    _BusyObjects[index] = @object;
                     _CycleCounter++;
                     return @object;
                 }
             }
-            throw new Exception("No available objects in pool");
+            // No available objects
+            if(AllowOverlap)
+            {
+                // Renew the last busy object
+                var @object = _BusyObjects[_AvailableObjectIndex];
+                Return(@object);
+
+                PoolData[@object] = new ElementInfo()
+                {
+                    Expiry = Time.time + ElementTTL,
+                    BufferIndex = _AvailableObjectIndex
+                };
+                @object.SetActive(true);
+                _AvailableObjects[_AvailableObjectIndex] = null;
+                _BusyObjects[_AvailableObjectIndex] = @object;
+                _AvailableObjectIndex = (_AvailableObjectIndex + 1) % number_of_available_objects;
+                _CycleCounter++;
+                return @object;
+            }
+            else
+                throw new Exception("No available objects in pool");
         }
 
         /// <summary>
@@ -189,8 +213,8 @@ namespace RoaringFangs.Utility
                     "Cannot return an object to the pool that was not cycled from it");
             @object.SetActive(false);
             var info = PoolData[@object];
-            //_ActiveObjects[info.BufferIndex] = null;
             _AvailableObjects[info.BufferIndex] = @object;
+            _BusyObjects[info.BufferIndex] = null;
             PoolData.Remove(@object);
             _ReturnCounter++;
         }
