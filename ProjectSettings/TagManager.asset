@@ -10,6 +10,8 @@ TagManager:
   - Fire
   - pointer
   - material
+  - LCD Renderer
+  - LCD Canvas
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - 
   - Physical Support
-  - 
+  - Plot Renderer
   - 
   - 
   - 

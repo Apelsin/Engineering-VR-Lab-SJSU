@@ -99,10 +99,13 @@ public class CanvasLineSegment : MonoBehaviour, ISerializationCallbackReceiver
         var local_position = Vector3.Lerp(local_a, local_b, center_balance);
 
         var right = (local_b - local_a).normalized;
+        if (right == Vector3.zero)
+            right = Vector3.right;
 
         // Incoming tricky rotational math
         var forward = Vector3.forward;
         var up = Vector3.Cross(right, forward);
+        
         var local_rotation = Quaternion.LookRotation(right, up) * Quaternion.Euler(0f, 90f, 0f);
 
         var size = RectTransform.sizeDelta;

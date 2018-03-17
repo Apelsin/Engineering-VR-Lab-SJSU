@@ -27,7 +27,7 @@ public class InstronTester : MonoBehaviour
     private void Start()
     {
         var type_id = TestMaterialTypes.IndexOf(CurrentTestMaterialType);
-        GrabberAnimator.SetInteger("Test Material Type", type_id);
+        GrabberAnimator.SetInteger("Material Type", type_id);
     }
 
     private void Update()

@@ -1,5 +1,6 @@
 ﻿using RoaringFangs.Utility;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +49,22 @@ public class LinePlotter : MonoBehaviour, ISerializationCallbackReceiver
             segment = null;
             return false;
         }
+    }
+
+    public bool RemoveVertex(Transform point)
+    {
+        // TODO: optimize this
+        var segments = LineSegmentPoolBehavior
+            .GetComponentsInChildren<CanvasLineSegment>()
+            .Where(s => s.PointA == point || s.PointB == point);
+        VertexPool.Return(point.gameObject);
+        if (segments.Any())
+        {
+            foreach(var segment in segments)
+                LineSegmentPool.Return(segment.gameObject);
+            return true;
+        }
+        return false;
     }
 
     public virtual void OnBeforeSerialize()
