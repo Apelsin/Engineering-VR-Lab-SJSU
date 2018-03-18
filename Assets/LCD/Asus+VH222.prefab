@@ -1196,7 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Plotter: {fileID: 114876233037976666}
-  _Period: 0.05
+  _Period: 0.01
   _LineColor: {r: 0.305904, g: 0.9044118, b: 0.35956332, a: 1}
   GraphRectTransform: {fileID: 224919928084722970}
   _Curve:

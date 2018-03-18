@@ -71,9 +71,17 @@ public class CurveGrapher : MonoBehaviour
 
     private HashSet<Transform> Points = new HashSet<Transform>();
 
-    private void Start()
+    private IEnumerator CurrentOperation;
+
+    private IEnumerator Start()
     {
-        //StartCoroutine(Test().GetEnumerator());
+        for (; ; )
+        {
+            if(CurrentOperation != null)
+                while (CurrentOperation.MoveNext())
+                    yield return CurrentOperation.Current;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     private IEnumerable Test()
@@ -97,8 +105,20 @@ public class CurveGrapher : MonoBehaviour
         }
     }
 
+    static IEnumerator Concat(params IEnumerator[] enumerators)
+    {
+        for(int i = 0; i < enumerators.Length; i++)
+        {
+            var enumerator = enumerators[i];
+            while (enumerator.MoveNext())
+                yield return enumerator.Current;
+        }
+    }
+
     public void Graph()
     {
+        //var clear = EraseCurve(Plotter, 0f).GetEnumerator();
+        Plotter.Break();
         var plot = PlotCurve(
             Plotter,
             Curve,
@@ -108,13 +128,24 @@ public class CurveGrapher : MonoBehaviour
             GraphRectTransform.rect,
             MaxSegmentLength,
             MaxIterations,
-            MaxNumberOfPoints);
-        StartCoroutine(plot.GetEnumerator());
+            MaxNumberOfPoints)
+            .GetEnumerator();
+        //StartCoroutine(plot.GetEnumerator());
+        CurrentOperation = plot;// Concat(clear, plot);
     }
 
     public void Clear()
     {
-        StartCoroutine(EraseCurve(Plotter, Period).GetEnumerator());
+        //StartCoroutine(EraseCurve(Plotter, Period).GetEnumerator());
+        Plotter.Break();
+        CurrentOperation = EraseCurve(Plotter, Period).GetEnumerator();
+    }
+
+    public void ClearImmediately()
+    {
+        //StartCoroutine(EraseCurve(Plotter, 0f).GetEnumerator());
+        Plotter.Break();
+        foreach (var _ in EraseCurve(Plotter, 0f)) ;
     }
 
     private static float Distance(float x0, float y0, float x1, float y1)
@@ -162,6 +193,7 @@ public class CurveGrapher : MonoBehaviour
     {
         if (plotter == null)
             throw new ArgumentNullException("plotter", "Plotter must be set before plotting a curve.");
+        //plotter.Break();
         float x = 0f;
         float y = curve.Evaluate(x);
         for (int i = 0; i <= max_number_of_points; i++)
@@ -194,7 +226,7 @@ public class CurveGrapher : MonoBehaviour
 
             EquidistantStep(curve.Evaluate, x, y, max_segment_length, max_iterations, out x, out y);
         }
-        plotter.Break();
+        //plotter.Break();
     }
 
     private static bool TrySetColor(Color color, params GameObject[] game_objects)
@@ -212,6 +244,7 @@ public class CurveGrapher : MonoBehaviour
     {
         if (plotter == null)
             throw new ArgumentNullException("plotter", "Plotter must be set before erasing a curve.");
+        //plotter.Break();
         foreach (var point in Points.ToArray())
         {
             plotter.RemoveVertex(point);
