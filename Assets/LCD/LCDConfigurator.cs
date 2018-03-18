@@ -10,6 +10,11 @@ public class LCDConfigurator : MonoBehaviour
         foreach (var grapher in graphers)
             grapher.Graph();
 
+        var cursor_drivers = FindObjectsOfType<CanvasCursorDriver>();
+
+        foreach (var cursor_driver in cursor_drivers)
+            cursor_driver.Camera = Camera.main;
+
         //var lcd_images = FindObjectsOfType<LCDRendererImage>();
 
         //foreach (var lcd_image in lcd_images)

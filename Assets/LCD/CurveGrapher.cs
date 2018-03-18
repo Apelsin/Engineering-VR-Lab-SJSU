@@ -33,6 +33,11 @@ public class CurveGrapher : MonoBehaviour
 
     public AnimationCurve Curve { get { return _Curve; } set { _Curve = value; } }
 
+    [SerializeField]
+    private Rect _CurveBounds = new Rect(0f, 0f, 1f, 1f);
+
+    public Rect CurveBounds { get { return _CurveBounds; } set { _CurveBounds = value; } }
+
     [Header("Evaluator Settings")]
     [SerializeField]
     [Range(0.001f, 1.0f)]
@@ -214,6 +219,13 @@ public class CurveGrapher : MonoBehaviour
             if (period > 0)
                 yield return new WaitForSeconds(period);
         }
+    }
+
+    public float EvaluateCurveBounded(float x)
+    {
+        float t = Mathf.InverseLerp(CurveBounds.xMin, CurveBounds.xMax, x);
+        float ft = Curve.Evaluate(t);
+        return Mathf.Lerp(CurveBounds.yMin, CurveBounds.yMax, ft);
     }
 
     private void Update()
