@@ -80,12 +80,12 @@ public class GraphTrace : MonoBehaviour
         TraceLineX.color = color_x;
         TraceLineY.color = color_y;
 
-        var pos_x = TraceLineX.rectTransform.position;
-        var pos_y = TraceLineY.rectTransform.position;
-        pos_x.x = cursor_world_pos_constrained.x;
-        pos_y.y = cursor_world_pos_constrained.y;
-        TraceLineX.rectTransform.position = pos_x;
-        TraceLineY.rectTransform.position = pos_y;
+        var pos_x = TraceLineX.rectTransform.localPosition;
+        var pos_y = TraceLineY.rectTransform.localPosition;
+        pos_x.x = cursor_rel_pos_constrained.x;
+        pos_y.y = cursor_rel_pos_constrained.y;
+        TraceLineX.rectTransform.localPosition = pos_x;
+        TraceLineY.rectTransform.localPosition = pos_y;
     }
 
     public void OnTraceUpdated(Vector2 lcd_coordinates, Vector2 normalized_coordinates)
