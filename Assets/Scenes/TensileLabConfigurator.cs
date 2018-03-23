@@ -11,7 +11,7 @@ public class TensileLabConfigurator : MonoBehaviour
             lever.Pressed.AddListener(() =>
             {
                 var graph = FindObjectOfType<CurveGrapher>();
-                graph.Clear();
+                graph.ClearImmediately();
                 graph.Graph();
             });
         }

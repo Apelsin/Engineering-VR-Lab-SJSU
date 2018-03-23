@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class CanvasCursorDriver : MonoBehaviour, ISerializationCallbackReceiver
 {
@@ -25,13 +28,24 @@ public class CanvasCursorDriver : MonoBehaviour, ISerializationCallbackReceiver
     {
     }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    var mouse_position = GetMousePosition();
+    //    OnSetCursorPosition(mouse_position);
+    //}
+
+    public void HandlePointerEnter(BaseEventData base_data)
     {
-        var mouse_position = GetMousePosition();
+        var e = (PointerEventData)base_data;
+        OnSetCursorPosition(e.position);
+    }
+
+    public void OnSetCursorPosition(Vector3 cursor_position)
+    {
         Vector3 world_position;
         bool cursor_in_plane = RectTransformUtility.ScreenPointToWorldPointInRectangle(
             CursorArea,
-            mouse_position,
+            cursor_position,
             Camera,
             out world_position);
 
@@ -39,7 +53,7 @@ public class CanvasCursorDriver : MonoBehaviour, ISerializationCallbackReceiver
         {
             var cursor_in_rect = RectTransformUtility.RectangleContainsScreenPoint(
                 CursorArea,
-                mouse_position,
+                cursor_position,
                 Camera);
             if (cursor_in_rect)
                 Cursor.RectTransform.position = world_position;
