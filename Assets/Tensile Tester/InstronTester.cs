@@ -9,7 +9,7 @@ public class InstronTester : MonoBehaviour
 
     public Transform TopClampPoint;
     public Transform BaseClampPoint;
-    public GameObject Subject;
+    public GameObject ClampedSpecimen;
 
     [Range(0f, 1f)]
     public float ClampCenterBalance = 0.5f;
@@ -58,7 +58,7 @@ public class InstronTester : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (TopClampPoint && BaseClampPoint && Subject)
+        if (TopClampPoint && BaseClampPoint && ClampedSpecimen)
         {
             //var base_pos = BaseClampPoint.position;
             //var top_pos = TopClampPoint.position;
@@ -66,11 +66,11 @@ public class InstronTester : MonoBehaviour
 
             // TODO: make this not hacky
 
-            var mesh_filter = Subject.GetComponent<MeshFilter>();
+            var mesh_filter = ClampedSpecimen.GetComponent<MeshFilter>();
             var subject_bounds = mesh_filter?.sharedMesh?.bounds ?? new Bounds(Vector3.zero, Vector3.one);
             var subject_size_x = 2f * subject_bounds.extents.x;
 
-            StretchSubject(BaseClampPoint, TopClampPoint, Subject.transform, subject_size_x, ClampCenterBalance);
+            StretchSubject(BaseClampPoint, TopClampPoint, ClampedSpecimen.transform, subject_size_x, ClampCenterBalance);
         }
     }
 }

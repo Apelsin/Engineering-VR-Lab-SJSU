@@ -10,9 +10,13 @@ public class TensileLabConfigurator : MonoBehaviour
         {
             lever.Pressed.AddListener(() =>
             {
-                var graph = FindObjectOfType<CurveGrapher>();
-                graph.ClearImmediately();
-                graph.Graph();
+                var _tester = FindObjectOfType<InstronTester>();
+                var grapher = FindObjectOfType<CurveGrapher>();
+                var specimen_properties = _tester.ClampedSpecimen.GetComponent<TTSpecimenProperties>();
+                grapher.Curve = specimen_properties.NormalizedStressStrain;
+                grapher.CurveBounds = new Rect(0f, 0f, specimen_properties.MaxStrain, specimen_properties.MaxStress);
+                grapher.ClearImmediately();
+                grapher.Graph();
             });
         }
 
@@ -36,7 +40,7 @@ public class TensileLabConfigurator : MonoBehaviour
                 if (collision.gameObject.tag == "material")
                 {
                     // Assign the tester's subject to the other collider's GameObject
-                    tester.Subject = collision.gameObject;
+                    tester.ClampedSpecimen = collision.gameObject;
                 }
             });
         else

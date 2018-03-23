@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54195696250030860}
   - component: {fileID: 65952111366572626}
   - component: {fileID: 65627278234599128}
+  - component: {fileID: 114343543045779618}
   m_Layer: 0
   m_Name: d638-type1
   m_TagString: material
@@ -37,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393068044880650}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 24.77, y: 22.45, z: 103.17}
-  m_LocalScale: {x: 6.5, y: 6.5, z: 6.5}
+  m_LocalRotation: {x: 0.50000024, y: -0.49999982, z: 0.49999982, w: 0.50000024}
+  m_LocalPosition: {x: 0.393, y: 1.102, z: -1.115}
+  m_LocalScale: {x: 0.21666661, y: 0.21666658, z: 0.21666661}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 90.00001}
 --- !u!23 &23951287393327156
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -53,6 +54,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -68,12 +70,14 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33462910613088926
 MeshFilter:
@@ -105,7 +109,7 @@ BoxCollider:
   m_GameObject: {fileID: 1393068044880650}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.6499999, y: 0.18999995, z: 0.03199999}
   m_Center: {x: -0.8249999, y: 0.09499998, z: 0.015999995}
@@ -117,7 +121,56 @@ BoxCollider:
   m_GameObject: {fileID: 1393068044880650}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.6499999, y: 0.18999995, z: 0.03199999}
   m_Center: {x: -0.8249999, y: 0.09499998, z: 0.015999995}
+--- !u!114 &114343543045779618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393068044880650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79036cf917797d46bfd3113d84402d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalizedStressStrain:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.8061945
+      outSlope: 15.66161
+      tangentMode: 69
+    - serializedVersion: 2
+      time: 0.05090359
+      value: 0.79723215
+      inSlope: 14.023784
+      outSlope: -0.24071224
+      tangentMode: 1
+    - serializedVersion: 2
+      time: 0.08099608
+      value: 0.81336
+      inSlope: 1.0578607
+      outSlope: 1.0578607
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 1.0000075
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.60000443
+      inSlope: -2.1234248
+      outSlope: -2.1234248
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  MaxStress: 60
+  MaxStrain: 10

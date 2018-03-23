@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54730706129792728}
   - component: {fileID: 65329725724411822}
   - component: {fileID: 65493126947165168}
+  - component: {fileID: 114323401725260468}
   m_Layer: 0
   m_Name: impactTest
   m_TagString: material
@@ -37,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515163227322994}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 40.62, y: 21.99, z: 102.97}
-  m_LocalScale: {x: 6.5, y: 6.5, z: 6.5}
+  m_LocalRotation: {x: -0, y: -0.7071064, z: -0, w: 0.70710725}
+  m_LocalPosition: {x: -0.08999999, y: 1.095, z: -1.115}
+  m_LocalScale: {x: 0.21666679, y: 0.21666661, z: 0.21666688}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!23 &23899305777351456
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -53,11 +54,12 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 83871a6de15fe1549a3275acd8b6a807, type: 2}
+  - {fileID: 2100000, guid: 7aa0f98523196d0449116b32e3d76d8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -68,12 +70,14 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33136533809735022
 MeshFilter:
@@ -121,3 +125,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.54999995, y: 0.09999997, z: 0.09999997}
   m_Center: {x: -0.27499998, y: 0.049999986, z: 0.049999986}
+--- !u!114 &114323401725260468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1515163227322994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79036cf917797d46bfd3113d84402d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NormalizedStressStrain:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 4.6377997
+      outSlope: 4.6377997
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 1.0000075
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0.66069853
+      inSlope: -1.8615184
+      outSlope: -1.8615184
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  MaxStress: 10
+  MaxStrain: 10
