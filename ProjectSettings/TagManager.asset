@@ -12,6 +12,7 @@ TagManager:
   - material
   - LCD Renderer
   - LCD Canvas
+  - Camera Rig
   layers:
   - Default
   - TransparentFX

@@ -173,6 +173,8 @@ GameObject:
   - component: {fileID: 65962338241947398}
   - component: {fileID: 65339290148501854}
   - component: {fileID: 95487299920878180}
+  - component: {fileID: 114700312031168708}
+  - component: {fileID: 114212570078512354}
   m_Layer: 0
   m_Name: Grabber
   m_TagString: Untagged
@@ -1155,7 +1157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1456191027357714}
   m_LocalRotation: {x: -0, y: 0.0000005066394, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0333338, y: 0.525, z: -1.6010007}
+  m_LocalPosition: {x: 0.5333338, y: 0.027448475, z: -1.1660006}
   m_LocalScale: {x: 0.21217534, y: 0.21217524, z: 0.21217524}
   m_Children:
   - {fileID: 4723640633652930}
@@ -3592,6 +3594,44 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114212570078512354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189615249883944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7505f415766ad3d44bb3183c8c586199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 95487299920878180}
+  _ParameterEntries: []
+  _AnyStateEntry:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RoaringFangs.ASM.ManagedStateEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _AnyStateExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RoaringFangs.ASM.ManagedStateEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _AnyStateUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RoaringFangs.ASM.ManagedStateEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _AnyStateMachineEntry:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RoaringFangs.ASM.ManagedStateMachineEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _AnyStateMachineExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RoaringFangs.ASM.ManagedStateMachineEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114339543179418536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3653,7 +3693,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Push
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
       - m_Target: {fileID: 95487299920878180}
         m_MethodName: SetTrigger
         m_Mode: 5
@@ -3664,7 +3704,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Toggle
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114648270088356594
@@ -3682,7 +3722,34 @@ MonoBehaviour:
   TestMaterialTypes:
   - Metal
   GrabberAnimator: {fileID: 95487299920878180}
+  GrabberCSM: {fileID: 114212570078512354}
   TopClampPoint: {fileID: 4546719430604254}
   BaseClampPoint: {fileID: 4501439715645248}
-  Subject: {fileID: 0}
+  ClampedSpecimen: {fileID: 0}
   ClampCenterBalance: 0
+--- !u!114 &114700312031168708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189615249883944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c84492402c974429945b5018ac0732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  CollisionExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  CollisionStay:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CollisionEvents+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null

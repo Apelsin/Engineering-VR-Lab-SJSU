@@ -2,12 +2,15 @@
 
 public class TeleportPointer : MonoBehaviour, ISerializationCallbackReceiver
 {
-    public GameObject TeleportReticlePrefab;
     public SteamVR_TrackedObject TrackedObject;
+    public GameObject TeleportReticlePrefab;
+    public Vector3 ReticleOffset;
+    public LayerMask LayerMask;
+
+    public bool HandleTeleport = true;
+
     public Transform CameraRig;
-    public Transform HeadTransform;
-    public Vector3 TeleportReticleOffset;
-    public LayerMask TeleportMask;
+    public Transform EyesTransform;
 
     private GameObject TeleportReticle;
 
@@ -23,16 +26,18 @@ public class TeleportPointer : MonoBehaviour, ISerializationCallbackReceiver
         var p = TrackedObject.transform.position;
         var fwd = transform.forward;
         RaycastHit hit;
-        if ((press || press_up) && Physics.Raycast(p, fwd, out hit, 100, TeleportMask))
+        if ((press || press_up) && Physics.Raycast(p, fwd, out hit, 100, LayerMask))
         {
             if (press_up)
             {
-                Teleport(hit.point);
+                if(HandleTeleport)
+                    Teleport(hit.point);
+                TeleportReticle.SetActive(false);
             }
             else
             {
                 TeleportReticle.SetActive(true);
-                TeleportReticle.transform.position = hit.point + TeleportReticleOffset;
+                TeleportReticle.transform.position = hit.point + ReticleOffset;
             }
         }
         else
@@ -43,10 +48,9 @@ public class TeleportPointer : MonoBehaviour, ISerializationCallbackReceiver
 
     private void Teleport(Vector3 point)
     {
-        TeleportReticle.SetActive(false);
-        Vector3 difference = CameraRig.position - HeadTransform.position;
-        difference.y = 0;
-        CameraRig.position = point + difference;
+        var camera_to_eyes = EyesTransform.position - CameraRig.position;
+        camera_to_eyes.y = 0f; // TODO
+        CameraRig.position = point - camera_to_eyes;
     }
 
     private void Start()

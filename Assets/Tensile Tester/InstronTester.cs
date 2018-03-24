@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using RoaringFangs.ASM;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InstronTester : MonoBehaviour
@@ -6,6 +8,7 @@ public class InstronTester : MonoBehaviour
     public string CurrentTestMaterialType;
     public List<string> TestMaterialTypes;
     public Animator GrabberAnimator;
+    public ControlledStateManager GrabberCSM;
 
     public Transform TopClampPoint;
     public Transform BaseClampPoint;
@@ -13,6 +16,9 @@ public class InstronTester : MonoBehaviour
 
     [Range(0f, 1f)]
     public float ClampCenterBalance = 0.5f;
+
+    public bool GrabberIsReset => GrabberCSM.ActiveStateControllers.Any(c => c.Tag == "Reset");
+    public bool GrabberIsBusy => GrabberCSM.ActiveStateControllers.Any(c => c.Tag == "Busy");
 
     public void OnBeginTensileTest()
     {
@@ -69,7 +75,6 @@ public class InstronTester : MonoBehaviour
             var mesh_filter = ClampedSpecimen.GetComponent<MeshFilter>();
             var subject_bounds = mesh_filter?.sharedMesh?.bounds ?? new Bounds(Vector3.zero, Vector3.one);
             var subject_size_x = 2f * subject_bounds.extents.x;
-
             StretchSubject(BaseClampPoint, TopClampPoint, ClampedSpecimen.transform, subject_size_x, ClampCenterBalance);
         }
     }

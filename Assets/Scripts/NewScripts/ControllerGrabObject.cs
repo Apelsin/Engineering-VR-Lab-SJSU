@@ -1,70 +1,88 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 
-public class ControllerGrabObject : MonoBehaviour
+public class ControllerGrabObject : MonoBehaviour, ISerializationCallbackReceiver
 {
-    private SteamVR_TrackedObject trackedObj;
+    public class StartEventArgs : EventArgs { }
+    public static event EventHandler<StartEventArgs> Started;
+    public class GrabEventArgs : EventArgs
+    {
+        public GameObject GameObject;
+        public SteamVR_Controller.Device ControllerDevice;
+    }
+    [Serializable]
+    public class GrabEvent : UnityEvent<object, GrabEventArgs> { }
+
+    public SteamVR_TrackedObject TrackedObject;
+
+    [SerializeField]
+    private GrabEvent _Grabbed;
+    public GrabEvent Grabbed => _Grabbed;
+
+    [SerializeField]
+    private GrabEvent _Released;
+    public GrabEvent Released => _Released;
 
     private SteamVR_Controller.Device Controller
     {
-        get { return SteamVR_Controller.Input((int)trackedObj.index); }
+        get { return SteamVR_Controller.Input((int)TrackedObject.index); }
     }
 
-    private void Awake()
-    {
-        trackedObj = GetComponent<SteamVR_TrackedObject>();
-    }
-
-    // 1
-    private GameObject collidingObject;
-
-    // 2
-    private GameObject objectInHand;
+    private GameObject CollidingObject;
+    private GameObject HeldObject;
+    //private Grabbed HeldObjectGrabMarker;
 
     private void SetCollidingObject(Collider col)
     {
-        // 1
-        if (collidingObject || !col.GetComponent<Rigidbody>())
+        if (CollidingObject || !col.GetComponent<Rigidbody>())
         {
             return;
         }
-        // 2
-        collidingObject = col.gameObject;
+        CollidingObject = col.gameObject;
     }
 
-    // 1 When the trigger collider enters another, this sets up the other collider as a potential grab target.
+    // When the trigger collider enters another, this sets up the other collider as a potential grab target.
     public void OnTriggerEnter(Collider other)
     {
         SetCollidingObject(other);
     }
 
-    // 2 Similar to section one (// 1), but different because it ensures that the target is set when the player holds a controller over an object for a while. Without this, the collision may fail or become buggy.
+    // Similar to trigger, but different because it ensures that the target is set when the player holds a controller over an object for a while. Without this, the collision may fail or become buggy.
     public void OnTriggerStay(Collider other)
     {
         SetCollidingObject(other);
     }
 
-    // 3 When the collider exits an object, abandoning an ungrabbed target, this code removes its target by setting it to null.
+    // When the collider exits an object, abandoning an ungrabbed target, this code removes its target by setting it to null.
     public void OnTriggerExit(Collider other)
     {
-        if (!collidingObject)
+        if (!CollidingObject)
         {
             return;
         }
 
-        collidingObject = null;
+        CollidingObject = null;
     }
 
     private void GrabObject()
     {
-        // 1  Move the GameObject inside the player’s hand and remove it from the collidingObject variable.
-        objectInHand = collidingObject;
-        collidingObject = null;
-        // 2 Add a new joint that connects the controller to the object using the AddFixedJoint() method below.
+        // Move the GameObject inside the player’s hand and remove it from the CollidingObject variable.
+        HeldObject = CollidingObject;
+        // Add the grabbed marker to the held object
+        //HeldObjectGrabMarker = HeldObject.AddComponent<Grabbed>();
+        CollidingObject = null;
+        // Add a new joint that connects the controller to the object using the AddFixedJoint() method below.
         var joint = AddFixedJoint();
-        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+        joint.connectedBody = HeldObject.GetComponent<Rigidbody>();
+        Grabbed.Invoke(this, new GrabEventArgs()
+        {
+            ControllerDevice = Controller,
+            GameObject = HeldObject
+        });
     }
 
-    // 3 Make a new fixed joint, add it to the controller, and then set it up so it doesn’t break easily. Finally, you return it.
+    // Make a new fixed joint, add it to the controller, and then set it up so it doesn’t break easily. Finally, you return it.
     private FixedJoint AddFixedJoint()
     {
         FixedJoint fx = gameObject.AddComponent<FixedJoint>();
@@ -75,39 +93,63 @@ public class ControllerGrabObject : MonoBehaviour
 
     private void ReleaseObject()
     {
-        // 1 Make sure there’s a fixed joint attached to the controller.
+        // Make sure there’s a fixed joint attached to the controller.
         if (GetComponent<FixedJoint>())
         {
-            // 2 Remove the connection to the object held by the joint and destroy the joint.
+            // Remove the connection to the object held by the joint and destroy the joint.
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
-            // 3 Add the speed and rotation of the controller when the player releases the object, so the result is a realistic arc.
-            objectInHand.GetComponent<Rigidbody>().velocity = Controller.velocity;
-            objectInHand.GetComponent<Rigidbody>().angularVelocity = Controller.angularVelocity;
+            // Add the speed and rotation of the controller when the player releases the object, so the result is a realistic arc.
+            var held_rigidbody = HeldObject.GetComponent<Rigidbody>();
+            held_rigidbody.velocity = Controller.velocity;
+            held_rigidbody.angularVelocity = Controller.angularVelocity;
         }
-        // 4 Remove the reference to the formerly attached object.
-        objectInHand = null;
+        // Destroy the grabbed marker on the held object
+        //Destroy(HeldObjectGrabMarker);
+        //HeldObjectGrabMarker = null;
+        // Remove the reference to the formerly attached object.
+        var was_held = HeldObject;
+        HeldObject = null;
+        Released.Invoke(this, new GrabEventArgs()
+        {
+            ControllerDevice = Controller,
+            GameObject = was_held
+        });
+    }
+
+    private void Start()
+    {
+        Started(this, new StartEventArgs());
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // 1 When the player squeezes the trigger and there’s a potential grab target, this grabs it.
+        // When the player squeezes the trigger and there’s a potential grab target, this grabs it.
         if (Controller.GetHairTriggerDown())
         {
-            if (collidingObject)
+            if (CollidingObject)
             {
                 GrabObject();
             }
         }
 
-        // 2 If the player releases the trigger and there’s an object attached to the controller, this releases it.
+        // If the player releases the trigger and there’s an object attached to the controller, this releases it.
         if (Controller.GetHairTriggerUp())
         {
-            if (objectInHand)
+            if (HeldObject)
             {
                 ReleaseObject();
             }
         }
+    }
+
+    public void OnBeforeSerialize()
+    {
+        TrackedObject = TrackedObject ?? GetComponent<SteamVR_TrackedObject>();
+    }
+
+    public void OnAfterDeserialize()
+    {
     }
 }
