@@ -29,7 +29,7 @@ public class PlotTraceReadout : MonoBehaviour, ISerializationCallbackReceiver
 
     public void SetTraceText(float x, float y, float fx, float slope)
     {
-        string str = $"x: {x:0.00}\ny: {y:0.00}\nf(x): {y:0.00}\nslope: {slope:0.00}";
+        string str = $"x: {x:0.00}\ny: {y:0.00}\nf(x): {fx:0.00}\nslope: {slope:0.00}";
         ReadoutText.text = str;
     }
 }
