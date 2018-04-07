@@ -28,11 +28,11 @@ public class CanvasCursorDriver : MonoBehaviour, ISerializationCallbackReceiver
     {
     }
 
-    //private void Update()
-    //{
-    //    var mouse_position = GetMousePosition();
-    //    OnSetCursorPosition(mouse_position);
-    //}
+    private void Update()
+    {
+        var mouse_position = GetMousePosition();
+        OnSetCursorPosition(mouse_position);
+    }
 
     public void HandlePointerEnter(BaseEventData base_data)
     {

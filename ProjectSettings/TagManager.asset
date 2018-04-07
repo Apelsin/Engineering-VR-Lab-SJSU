@@ -13,6 +13,8 @@ TagManager:
   - LCD Renderer
   - LCD Canvas
   - Camera Rig
+  - Deform Example
+  - projectile
   layers:
   - Default
   - TransparentFX
@@ -24,8 +26,8 @@ TagManager:
   - 
   - Physical Support
   - Plot Renderer
-  - 
-  - 
+  - Diagrams
+  - Specimen
   - 
   - 
   - 
