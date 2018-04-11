@@ -11,8 +11,15 @@ public class MainMenuConfigurator : MonoBehaviour
         var main_manu = FindObjectOfType<PanelManagerUI>();
         main_manu.NavigateChapter.AddListener((chapter_name) =>
         {
-            manager.SetAnimatorTrigger("Exit Main Menu");
+            manager.SetAnimatorTrigger("To Limbo");
             manager.SetAnimatorTrigger("To " + chapter_name);
         });
+
+        var panel_object = GameObject.FindGameObjectWithTag("Chapter Select Panel");
+        var panel_animator = panel_object.GetComponent<Animator>();
+        if (panel_animator)
+        {
+            panel_animator.SetBool("Presented", true);
+        }
     }
 }

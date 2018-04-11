@@ -6,13 +6,6 @@ public class TensileLabConfigurator : MonoBehaviour
 {
     private HashSet<GameObject> GrabbedObjects = new HashSet<GameObject>();
 
-    private void HandleControllerGrabObjectStarted(object sender, ControllerGrabObject.StartEventArgs e)
-    {
-        var grabber = (ControllerGrabObject)sender;
-        grabber.Grabbed.AddListener(HandleGrabbed);
-        grabber.Released.AddListener(HandleReleased);
-    }
-
     private void HandleGrabbed(object sender, ControllerGrabObject.GrabEventArgs args)
     {
         GrabbedObjects.Add(args.GameObject);
@@ -36,6 +29,21 @@ public class TensileLabConfigurator : MonoBehaviour
         var rigidbody = args.GameObject.GetComponent<Rigidbody>();
         if (rigidbody)
             rigidbody.detectCollisions = true;
+    }
+
+    private void OnSubscribeToGrabber(ControllerGrabObject grabber)
+    {
+        // Ensure listeners are added once (and only once)
+        grabber.Grabbed.RemoveListener(HandleGrabbed);
+        grabber.Grabbed.AddListener(HandleGrabbed);
+        grabber.Released.RemoveListener(HandleReleased);
+        grabber.Released.AddListener(HandleReleased);
+    }
+
+    private void HandleControllerGrabObjectStarted(object sender, ControllerGrabObject.StartEventArgs e)
+    {
+        var grabber = (ControllerGrabObject)sender;
+        OnSubscribeToGrabber(grabber);
     }
 
     private void Start()
@@ -123,7 +131,12 @@ public class TensileLabConfigurator : MonoBehaviour
                 Debug.LogError("Could not find tensile tester collision events component");
         }
 
+        // Subscribe to handle new controller instances
         ControllerGrabObject.Started += HandleControllerGrabObjectStarted;
+
+        // Handle existing grabbers
+        foreach (var grabber in FindObjectsOfType<ControllerGrabObject>())
+            OnSubscribeToGrabber(grabber);
     }
 
     private void OnDestroy()

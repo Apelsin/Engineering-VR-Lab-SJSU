@@ -686,9 +686,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138035313749836}
-  m_LocalRotation: {x: -0.6994331, y: 0.10389135, z: 0.103891365, w: 0.6994331}
-  m_LocalPosition: {x: 0.21, y: 1.0905515, z: -1.482}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalRotation: {x: 0.103891365, y: 0.6994331, z: 0.6994331, w: -0.10389135}
+  m_LocalPosition: {x: 0.29000002, y: 0.593, z: 1.0469999}
+  m_LocalScale: {x: 1.2000008, y: 1.2000011, z: 1.200001}
   m_Children:
   - {fileID: 4822355157505036}
   - {fileID: 4519143669504882}
@@ -1105,7 +1105,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Graph Title
+  m_Text: 
 --- !u!114 &114050389857358126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Grapher: {fileID: 114095168460500208}
   Readout: {fileID: 114700901720313684}
-  SlopeDt: 0.001
+  SlopeDt: 0.0001
 --- !u!114 &114095168460500208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1359,7 +1359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vertical Axis Label
+  m_Text: Tensile Stress
 --- !u!114 &114282733453370608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1555,7 +1555,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Horizontal Axis Label
+  m_Text: Tensile Strain
 --- !u!114 &114592773882272038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1641,7 +1641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
-  CursorArea: {fileID: 224823793644049600}
+  CursorArea: {fileID: 224382511745942778}
   Cursor: {fileID: 114050389857358126}
 --- !u!114 &114766257852581944
 MonoBehaviour:
@@ -2048,7 +2048,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -32, y: -32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224523046073144200
 RectTransform:
@@ -2125,7 +2125,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 256, y: 256}
+  m_SizeDelta: {x: 320, y: 256}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224786525323822042
 RectTransform:

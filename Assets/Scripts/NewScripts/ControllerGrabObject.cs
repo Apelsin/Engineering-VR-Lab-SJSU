@@ -119,7 +119,7 @@ public class ControllerGrabObject : MonoBehaviour, ISerializationCallbackReceive
 
     private void Start()
     {
-        Started(this, new StartEventArgs());
+        Started?.Invoke(this, new StartEventArgs());
     }
 
     // Update is called once per frame

@@ -38,4 +38,9 @@ public class PanelManagerUI : MonoBehaviour
     {
         NavigateChapter.Invoke(chapter_name);
     }
+
+    public void OnQuit()
+    {
+        Application.Quit();
+    }
 }

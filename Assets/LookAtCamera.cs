@@ -18,8 +18,11 @@ public class LookAtCamera : MonoBehaviour
 
     public Vector3 TargetOffset;
 
-    private void Start()
+    public bool AutomaticallyFindCamera = false;
+    private void OnEnable()
     {
+        if (AutomaticallyFindCamera)
+            CameraTransform = GameObject.FindGameObjectWithTag("MainCamera")?.transform;
     }
 
     private static Quaternion GetDirectionalLookAtRotation(

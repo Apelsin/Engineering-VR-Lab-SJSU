@@ -5,8 +5,8 @@ public class GraphReadout : MonoBehaviour
     public CurveGrapher Grapher;
     public PlotTraceReadout Readout;
 
-    [Range(0.001f, 0.1f)]
-    public float SlopeDt = 0.01f;
+    [Range(0.0001f, 0.01f)]
+    public float SlopeDt = 0.001f;
 
     // TODO: Decouple GraphReadout and GraphTrace
     public void HandleTraceUpdated(object sender, GraphTrace.TraceUpdateEventArgs args)

@@ -86,7 +86,9 @@ namespace VRTK
             {
                 customRaycaster.ignoreReversedGraphics = defaultRaycaster.ignoreReversedGraphics;
                 customRaycaster.blockingObjects = defaultRaycaster.blockingObjects;
-                defaultRaycaster.enabled = false;
+                // <edit>
+                //defaultRaycaster.enabled = false;
+                // </edit>
             }
 
             //add a box collider and background image to ensure the rays always hit

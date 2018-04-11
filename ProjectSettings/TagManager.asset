@@ -15,6 +15,7 @@ TagManager:
   - Camera Rig
   - Deform Example
   - projectile
+  - Chapter Select Panel
   layers:
   - Default
   - TransparentFX
