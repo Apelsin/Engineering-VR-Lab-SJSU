@@ -77,7 +77,9 @@ MonoBehaviour:
   _SecondScenesEntryLoad: []
   _FirstScenesExitUnload: []
   _SecondScenesExitUnload: []
-  ConfigurationObjects: []
+  ConfigurationObjects:
+  - Object: {fileID: 1799103281541100, guid: d6f2ac004270b2a4d806d22b8ced76e2, type: 2}
+    ConditionParameter: 
   _EnterAtStart: 1
   _LayerIndex: 0
 --- !u!114 &114040448741601678
@@ -137,9 +139,7 @@ MonoBehaviour:
     Type: 0
     ConditionParameter: 
   _SecondScenesExitUnload: []
-  ConfigurationObjects:
-  - Object: {fileID: 1799103281541100, guid: d6f2ac004270b2a4d806d22b8ced76e2, type: 2}
-    ConditionParameter: 
+  ConfigurationObjects: []
 --- !u!114 &114685825528238436
 MonoBehaviour:
   m_ObjectHideFlags: 3

@@ -1,26 +1,33 @@
 fileFormatVersion: 2
-guid: 4ec057c2222891046ba7fdfbea3f13e2
-timeCreated: 1497647036
+guid: f6ed978441209f147978524fa21ec7fe
+timeCreated: 1523519686
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: impact test
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: cf0ffd415bd616a468c2908c8277cd19, type: 2}
+    100000: ASTM_D638_10_Type_I_1_A
+    100002: ASTM_D638_10_Type_I_1_B
+    100004: CINEMA_4D_Editor
+    100006: //RootNode
+    400000: ASTM_D638_10_Type_I_1_A
+    400002: ASTM_D638_10_Type_I_1_B
+    400004: CINEMA_4D_Editor
+    400006: //RootNode
+    2000000: CINEMA_4D_Editor
+    2100000: No Name
+    2300000: ASTM_D638_10_Type_I_1_A
+    2300002: ASTM_D638_10_Type_I_1_B
+    3300000: ASTM_D638_10_Type_I_1_A
+    3300002: ASTM_D638_10_Type_I_1_B
+    4300000: ASTM_D638_10_Type_I_1_B
+    4300002: ASTM_D638_10_Type_I_1_A
+    9500000: //RootNode
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -59,17 +66,17 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 20
+    normalImportMode: 1
     tangentImportMode: 3
-    normalCalculationMode: 0
+    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -89,7 +96,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

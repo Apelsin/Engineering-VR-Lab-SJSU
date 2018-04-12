@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23492866000181430}
   - component: {fileID: 54711987536947244}
   - component: {fileID: 65798501227551110}
-  - component: {fileID: 65667924131974606}
   - component: {fileID: 114483792877356122}
   m_Layer: 0
   m_Name: Specimen
@@ -38,7 +37,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1455552556328668}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.49999982, y: 0.50000024, z: -0.50000024, w: 0.49999982}
   m_LocalPosition: {x: 0.10699999, y: 0.6044485, z: 0.6799999}
   m_LocalScale: {x: 0.15, y: 0.2, z: 0.2}
   m_Children: []
@@ -101,18 +100,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65667924131974606
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1455552556328668}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.6499999, y: 0.18999995, z: 0.03199999}
-  m_Center: {x: -0.8249999, y: 0.09499998, z: 0.015999995}
 --- !u!65 &65798501227551110
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -146,14 +133,14 @@ MonoBehaviour:
       outSlope: 11.104659
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.049663797
-      value: 0.546167
-      inSlope: 2.392028
-      outSlope: 2.392028
+      time: 0.0551963
+      value: 0.52661264
+      inSlope: 4.250092
+      outSlope: 4.250092
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.153421
-      value: 0.71016514
+      time: 0.14927162
+      value: 0.71505374
       inSlope: 0.62172824
       outSlope: 0.62172824
       tangentMode: 0
@@ -174,3 +161,6 @@ MonoBehaviour:
     m_RotationOrder: 0
   MaxStress: 500
   MaxStrain: 0.4
+  YieldStrength: 0.1
+  UltimateTensileStrength: 0.75
+  FracturePoint: Infinity

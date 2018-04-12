@@ -1,11 +1,12 @@
-﻿using System;
+﻿using RoaringFangs.Utility;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CurveGrapher : MonoBehaviour
+public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 {
     public LinePlotter Plotter;
 
@@ -69,6 +70,28 @@ public class CurveGrapher : MonoBehaviour
         set { _MaxNumberOfPoints = value; }
     }
 
+    public RectTransform XAxisTickMarkRT;
+
+    [SerializeField]
+    private MonoBehaviour _XAxisTextPoolBehaviour;
+    public IGameObjectPool XAxisTextPool
+    {
+        get { return (IGameObjectPool)_XAxisTextPoolBehaviour; }
+        set { _XAxisTextPoolBehaviour = (MonoBehaviour)value; }
+    }
+
+    public RectTransform YAxisTickMarkRT;
+
+    [SerializeField]
+    private MonoBehaviour _YAxisTextPoolBehaviour;
+    public IGameObjectPool YAxisTextPool
+    {
+        get { return (IGameObjectPool)_YAxisTextPoolBehaviour; }
+        set { _YAxisTextPoolBehaviour = (MonoBehaviour)value; }
+    }
+
+    public Vector2Int NumberOfMajorTickMarks;
+
     private HashSet<Transform> Points = new HashSet<Transform>();
 
     private IEnumerator CurrentOperation;
@@ -115,6 +138,54 @@ public class CurveGrapher : MonoBehaviour
         }
     }
 
+    private HashSet<GameObject> XAxisTexts = new HashSet<GameObject>();
+    private HashSet<GameObject> YAxisTexts = new HashSet<GameObject>();
+
+    public void SetMajorTickMarkNumbers(Rect bounds, Vector2Int counts)
+    {
+        SetMajorTickMarkNumbers(bounds.xMin, bounds.yMin, bounds.xMax, bounds.yMax, counts.x, counts.y);
+    }
+
+    public void SetMajorTickMarkNumbers(
+        float x_min,
+        float y_min,
+        float x_max,
+        float y_max,
+        int x_count,
+        int y_count)
+    {
+        var x_size = XAxisTickMarkRT.rect.width;
+        var y_size = YAxisTickMarkRT.rect.height;
+
+        foreach (var text in XAxisTexts)
+            XAxisTextPool.Return(text);
+        XAxisTexts.Clear();
+
+        foreach (var text in YAxisTexts)
+            YAxisTextPool.Return(text);
+        YAxisTexts.Clear();
+
+        // TODO: DRY this out
+        for (int i = 0; i < x_count; i++)
+        {
+            var t = (float)i / (float)(x_count - 1);
+            var x = Mathf.Lerp(x_min, x_max, t);
+            var text = XAxisTextPool.Cycle();
+            XAxisTexts.Add(text);
+            text.transform.localPosition = new Vector2(t * x_size, 0f);
+            text.GetComponent<Text>().text = $"{x:0.00}";
+        }
+        for (int i = 0; i < y_count; i++)
+        {
+            var t = (float)i / (float)(y_count - 1);
+            var y = Mathf.Lerp(y_min, y_max, t);
+            var text = YAxisTextPool.Cycle();
+            YAxisTexts.Add(text);
+            text.transform.localPosition = new Vector2(0f, t * y_size);
+            text.GetComponent<Text>().text = $"{y:0.00}";
+        }
+    }
+
     public void Graph()
     {
         //var clear = EraseCurve(Plotter, 0f).GetEnumerator();
@@ -132,6 +203,7 @@ public class CurveGrapher : MonoBehaviour
             .GetEnumerator();
         //StartCoroutine(plot.GetEnumerator());
         CurrentOperation = plot;// Concat(clear, plot);
+        SetMajorTickMarkNumbers(CurveBounds, NumberOfMajorTickMarks);
     }
 
     public void Clear()
@@ -193,6 +265,7 @@ public class CurveGrapher : MonoBehaviour
     {
         if (plotter == null)
             throw new ArgumentNullException("plotter", "Plotter must be set before plotting a curve.");
+
         //plotter.Break();
         float x = 0f;
         float y = curve.Evaluate(x);
@@ -262,6 +335,17 @@ public class CurveGrapher : MonoBehaviour
     }
 
     private void Update()
+    {
+    }
+
+    public void OnBeforeSerialize()
+    {
+        // Round-trip
+        XAxisTextPool = XAxisTextPool;
+        YAxisTextPool = YAxisTextPool;
+    }
+
+    public void OnAfterDeserialize()
     {
     }
 }

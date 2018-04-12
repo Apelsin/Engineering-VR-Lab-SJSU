@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17757832, g: 0.22232302, b: 0.30451876, a: 1}
+  m_IndirectSpecularColor: {r: 0.1775782, g: 0.22232315, b: 0.3045186, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -230,6 +230,11 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10960602}
+--- !u!4 &118010065 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279,
+    type: 2}
+  m_PrefabInternal: {fileID: 1162980592}
 --- !u!1001 &274628356
 Prefab:
   m_ObjectHideFlags: 0
@@ -327,6 +332,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4723640633652930, guid: 87989fa23de08c548998a05b839e71d3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87989fa23de08c548998a05b839e71d3, type: 2}
   m_IsPrefabParent: 0
@@ -403,6 +412,219 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 315910540}
+--- !u!1001 &376713656
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 118010065}
+    m_Modifications:
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455552556328668, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_Name
+      value: Al2O3 Specimen (Broken B)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].inSlope
+      value: 2.8061945
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].outSlope
+      value: 1.4028103
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].value
+      value: 0.70140517
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].inSlope
+      value: 1.4028103
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].outSlope
+      value: -0.0004878044
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].value
+      value: 0.70116127
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].inSlope
+      value: -0.0004878044
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].outSlope
+      value: -2.1234248
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: MaxStress
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: MaxStrain
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].time
+      value: 0.6969309
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].value
+      value: 0.90426207
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].inSlope
+      value: 0.13606516
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].outSlope
+      value: 0.13606516
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].value
+      value: 0.70372856
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].inSlope
+      value: -2.1234248
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].outSlope
+      value: -2.1234248
+      objectReference: {fileID: 0}
+    - target: {fileID: 23492866000181430, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de857c3e87f4ab2439647151d5a9dc54, type: 2}
+    - target: {fileID: 33630385388364278, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f6ed978441209f147978524fa21ec7fe, type: 3}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.81476676
+      objectReference: {fileID: 0}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.031999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -1.2426155
+      objectReference: {fileID: 0}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.09499997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455552556328668, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &386846820
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +854,220 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &492462135
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 118010065}
+    m_Modifications:
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455552556328668, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_Name
+      value: Al2O3 Specimen (Broken A)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].inSlope
+      value: 2.8061945
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].outSlope
+      value: 1.4028103
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].value
+      value: 0.70140517
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].inSlope
+      value: 1.4028103
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].outSlope
+      value: -0.0004878044
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].value
+      value: 0.70116127
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].inSlope
+      value: -0.0004878044
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].outSlope
+      value: -2.1234248
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].tangentMode
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: MaxStress
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: MaxStrain
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].time
+      value: 0.6969309
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].value
+      value: 0.90426207
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].inSlope
+      value: 0.13606516
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].outSlope
+      value: 0.13606516
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].value
+      value: 0.70372856
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].inSlope
+      value: -2.1234248
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].outSlope
+      value: -2.1234248
+      objectReference: {fileID: 0}
+    - target: {fileID: 23492866000181430, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de857c3e87f4ab2439647151d5a9dc54, type: 2}
+    - target: {fileID: 33630385388364278, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: f6ed978441209f147978524fa21ec7fe, type: 3}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.89652157
+      objectReference: {fileID: 0}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.031999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.44826058
+      objectReference: {fileID: 0}
+    - target: {fileID: 65798501227551110, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.09499997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455552556328668, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+    - {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &506824407
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,12 +1184,12 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].inSlope
-      value: 5.002454
+      value: 3.9818342
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[0].outSlope
-      value: 5.002454
+      value: 3.9818342
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
@@ -763,17 +1199,17 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].value
-      value: 0.90628344
+      value: 0.70426875
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].inSlope
-      value: 4.9929156
+      value: 4.0153847
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].outSlope
-      value: 4.9929156
+      value: 4.0153847
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
@@ -783,7 +1219,7 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].value
-      value: 0.9338517
+      value: 0.725692
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
@@ -803,7 +1239,7 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].value
-      value: 0.84791845
+      value: 0.6589136
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
@@ -818,12 +1254,12 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].time
-      value: 0.96999997
+      value: 0.89531106
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].value
-      value: 0.8646676
+      value: 0.6719293
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
@@ -843,17 +1279,17 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[5].value
-      value: 0.70225954
+      value: 0.000007390976
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[5].inSlope
-      value: -12.306659
+      value: -18.839348
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[5].outSlope
-      value: -12.306659
+      value: -18.839348
       objectReference: {fileID: 0}
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
@@ -870,6 +1306,21 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7aa0f98523196d0449116b32e3d76d8f, type: 2}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: YieldStrength
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: UltimateTensileStrength
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: FracturePoint
+      value: 0.96
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
   m_IsPrefabParent: 0
@@ -1347,6 +1798,25 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: de857c3e87f4ab2439647151d5a9dc54, type: 2}
+    - target: {fileID: 1455552556328668, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: YieldStrength
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: UltimateTensileStrength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: FracturePoint
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
   m_IsPrefabParent: 0

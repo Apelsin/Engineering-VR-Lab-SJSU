@@ -7,6 +7,8 @@ public class PoissonDemoCanvas01 : MonoBehaviour
     public float PressureScale = 1f;
     public string PressureUnits;
 
+    public Text PoissonRatioReadout;
+
     public RectTransform PoissonGraphTransform;
     public RectTransform PoissonGraphMarkerTransform;
     public RectTransform SlopeLine;
@@ -69,7 +71,7 @@ public class PoissonDemoCanvas01 : MonoBehaviour
     public void OnPressureSliderValueChanged(float value)
     {
         var pressure = PressureScale * value;
-        PressureReadout.text = $"{pressure:0}{PressureUnits}";
+        PressureReadout.text = $"{pressure:0} {PressureUnits}";
     }
 
     private void Start()
@@ -101,6 +103,11 @@ public class PoissonDemoCanvas01 : MonoBehaviour
         transform.sizeDelta = size;
     }
 
+    private static void SetPoissonReadout(Text readout, float value)
+    {
+        readout.text = $"{value:0.00}";
+    }
+
     private void Update()
     {
         if (PoissonGraphTransform && PoissonGraphMarkerTransform)
@@ -117,8 +124,14 @@ public class PoissonDemoCanvas01 : MonoBehaviour
             EpsilonTReadout.text = $"{e_t:0.00}";
             EpsilonLReadout.text = $"{e_l:0.00}";
 
-            if (SlopeLine && e_l != 0f)
-                SetSlopeLine(SlopeLine, graph_size_delta, e_l, e_t);
+            if (e_t != 0f)
+            {
+                if (SlopeLine)
+                    SetSlopeLine(SlopeLine, graph_size_delta, e_l, e_t);
+
+                if (PoissonRatioReadout)
+                    SetPoissonReadout(PoissonRatioReadout, -e_l / e_t);
+            }
         }
     }
 }
