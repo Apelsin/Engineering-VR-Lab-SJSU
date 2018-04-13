@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class InstronTester : MonoBehaviour
 {
-    public string CurrentTestMaterialType;
     public List<string> TestMaterialTypes;
     public Animator GrabberAnimator;
     public ControlledStateManager GrabberCSM;
@@ -20,24 +19,33 @@ public class InstronTester : MonoBehaviour
     public bool GrabberIsReset => GrabberCSM.ActiveStateControllers.Any(c => c.Tag == "Reset");
     public bool GrabberIsBusy => GrabberCSM.ActiveStateControllers.Any(c => c.Tag == "Busy");
 
+    public void UpdateGrabberAnimatorParameters()
+    {
+        var specimen_properties = ClampedSpecimen?.GetComponent<TTSpecimenProperties>();
+        if (specimen_properties)
+        {
+            var material_type = specimen_properties.MaterialType;
+            var material_index = TestMaterialTypes.IndexOf(material_type);
+            GrabberAnimator.SetInteger("Material Type", material_index);
+        }
+    }
+
     public void OnBeginTensileTest()
     {
+        UpdateGrabberAnimatorParameters();
         GrabberAnimator.SetTrigger("Start");
+    }
+
+    public void OnToggleTensileTest()
+    {
+        UpdateGrabberAnimatorParameters();
+        GrabberAnimator.SetTrigger("Toggle");
     }
 
     public void OnResetTensileTest()
     {
+        UpdateGrabberAnimatorParameters();
         GrabberAnimator.SetTrigger("Reset");
-    }
-
-    private void Start()
-    {
-        var type_id = TestMaterialTypes.IndexOf(CurrentTestMaterialType);
-        GrabberAnimator.SetInteger("Material Type", type_id);
-    }
-
-    private void Update()
-    {
     }
 
     private static void StretchSubject(Transform @base, Transform @top, Transform subject_xform, float subject_size_x, float center_balance)

@@ -4,10 +4,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 {
+    public class PointAddedEventArgs : EventArgs
+    {
+        public Vector3 Position;
+        public CanvasLineSegment Segment;
+        public Rect? Area;
+    }
+
+    [Serializable]
+    public class PointAddedEvent : UnityEvent<object, PointAddedEventArgs> { }
+
     public LinePlotter Plotter;
 
     [SerializeField]
@@ -38,6 +49,11 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
     private Rect _CurveBounds = new Rect(0f, 0f, 1f, 1f);
 
     public Rect CurveBounds { get { return _CurveBounds; } set { _CurveBounds = value; } }
+
+    [SerializeField]
+    private Rect _GraphBounds = new Rect(0f, 0f, 1f, 1f);
+    public Rect GraphBounds { get { return _GraphBounds; } set { _GraphBounds = value; } }
+
 
     [Header("Evaluator Settings")]
     [SerializeField]
@@ -74,6 +90,7 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField]
     private MonoBehaviour _XAxisTextPoolBehaviour;
+
     public IGameObjectPool XAxisTextPool
     {
         get { return (IGameObjectPool)_XAxisTextPoolBehaviour; }
@@ -84,6 +101,7 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 
     [SerializeField]
     private MonoBehaviour _YAxisTextPoolBehaviour;
+
     public IGameObjectPool YAxisTextPool
     {
         get { return (IGameObjectPool)_YAxisTextPoolBehaviour; }
@@ -92,45 +110,57 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 
     public Vector2Int NumberOfMajorTickMarks;
 
+    public bool XAxisIsPercentage = false;
+    public string XAxisNumberFormat = "{0}";
+    public bool YAxisIsPercentage = false;
+    public string YAxisNumberFormat = "{0}";
+
+
+    [SerializeField]
+    private MonoBehaviour _LabelPoolBehavior;
+
+    public IGameObjectPool LabelPool
+    {
+        get { return (IGameObjectPool)_LabelPoolBehavior; }
+        set { _LabelPoolBehavior = (MonoBehaviour)value; }
+    }
+
+    [SerializeField]
+    private PointAddedEvent _PointAdded;
+
+    public PointAddedEvent PointAdded => _PointAdded;
+
     private HashSet<Transform> Points = new HashSet<Transform>();
 
+    private bool CancelCurrentOperation = false;
     private IEnumerator CurrentOperation;
 
     private IEnumerator Start()
     {
         for (; ; )
         {
-            if(CurrentOperation != null)
+            if (CurrentOperation != null)
                 while (CurrentOperation.MoveNext())
-                    yield return CurrentOperation.Current;
+                {
+                    // This is probably a bad way to do this
+                    if (!CancelCurrentOperation)
+                    {
+                        yield return CurrentOperation.Current;
+                    }
+                    else
+                    {
+                        CurrentOperation = null;
+                        CancelCurrentOperation = false;
+                        break;
+                    }
+                }
             yield return new WaitForEndOfFrame();
         }
     }
 
-    private IEnumerable Test()
+    private static IEnumerator Concat(params IEnumerator[] enumerators)
     {
-        for (; ; )
-        {
-            var plot = PlotCurve(
-                Plotter,
-                Curve,
-                Period,
-                ZOffset,
-                LineColor,
-                GraphRectTransform.rect,
-                MaxSegmentLength,
-                MaxIterations,
-                MaxNumberOfPoints);
-            foreach (var _ in plot)
-                yield return _;
-            foreach (var _ in EraseCurve(Plotter, Period))
-                yield return _;
-        }
-    }
-
-    static IEnumerator Concat(params IEnumerator[] enumerators)
-    {
-        for(int i = 0; i < enumerators.Length; i++)
+        for (int i = 0; i < enumerators.Length; i++)
         {
             var enumerator = enumerators[i];
             while (enumerator.MoveNext())
@@ -140,6 +170,7 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 
     private HashSet<GameObject> XAxisTexts = new HashSet<GameObject>();
     private HashSet<GameObject> YAxisTexts = new HashSet<GameObject>();
+    private HashSet<GameObject> Labels = new HashSet<GameObject>();
 
     public void SetMajorTickMarkNumbers(Rect bounds, Vector2Int counts)
     {
@@ -173,7 +204,8 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
             var text = XAxisTextPool.Cycle();
             XAxisTexts.Add(text);
             text.transform.localPosition = new Vector2(t * x_size, 0f);
-            text.GetComponent<Text>().text = $"{x:0.00}";
+            string str = string.Format(XAxisNumberFormat, XAxisIsPercentage ? 100f * x : x);
+            text.GetComponent<Text>().text = str;
         }
         for (int i = 0; i < y_count; i++)
         {
@@ -182,12 +214,48 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
             var text = YAxisTextPool.Cycle();
             YAxisTexts.Add(text);
             text.transform.localPosition = new Vector2(0f, t * y_size);
-            text.GetComponent<Text>().text = $"{y:0.00}";
+            string str = string.Format(YAxisNumberFormat, YAxisIsPercentage ? 100f * y : y);
+            text.GetComponent<Text>().text = str;
         }
+    }
+
+    private static float InverseLerpUnclamped(float a, float b, float c)
+    {
+        var n = c - a;
+        var d = b - a;
+        if (d == 0)
+            return 0f;
+        return n / d;
+    }
+
+    private static Rect GetNormalizedRect(Rect R, Rect r)
+    {
+        return new Rect()
+        {
+            xMin = InverseLerpUnclamped(R.xMin, R.xMax, r.xMin),
+            xMax = InverseLerpUnclamped(R.xMin, R.xMax, r.xMax),
+            yMin = InverseLerpUnclamped(R.yMin, R.yMax, r.yMin),
+            yMax = InverseLerpUnclamped(R.yMin, R.yMax, r.yMax),
+        };
+    }
+
+    private static Rect ScaleRect(Rect R, Rect r)
+    {
+        return new Rect()
+        {
+            xMin = Mathf.LerpUnclamped(R.xMin, R.xMax, r.xMin),
+            xMax = Mathf.LerpUnclamped(R.xMin, R.xMax, r.xMax),
+            yMin = Mathf.LerpUnclamped(R.yMin, R.yMax, r.yMin),
+            yMax = Mathf.LerpUnclamped(R.yMin, R.yMax, r.yMax),
+        };
     }
 
     public void Graph()
     {
+        var graph_rect = GraphRectTransform.rect;
+        var normalized_rect = GetNormalizedRect(GraphBounds, CurveBounds);
+        var area_rect = ScaleRect(graph_rect, normalized_rect);
+
         //var clear = EraseCurve(Plotter, 0f).GetEnumerator();
         Plotter.Break();
         var plot = PlotCurve(
@@ -196,14 +264,20 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
             Period,
             ZOffset,
             LineColor,
-            GraphRectTransform.rect,
+            area_rect,
             MaxSegmentLength,
             MaxIterations,
             MaxNumberOfPoints)
             .GetEnumerator();
         //StartCoroutine(plot.GetEnumerator());
         CurrentOperation = plot;// Concat(clear, plot);
-        SetMajorTickMarkNumbers(CurveBounds, NumberOfMajorTickMarks);
+        SetMajorTickMarkNumbers(GraphBounds, NumberOfMajorTickMarks);
+    }
+
+    public void Cancel()
+    {
+        // TODO: is this a good idea...?
+        CancelCurrentOperation = true;
     }
 
     public void Clear()
@@ -228,11 +302,12 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
         var dydy = dy * dy;
         return Mathf.Sqrt(dxdx + dydy);
     }
-    private static void EquidistantStep(
+
+    private static bool EquidistantStep(
         Func<float, float> f,
         float x0,
         float y0,
-        float max_segment_length, 
+        float max_segment_length,
         int max_iterations,
         out float x1,
         out float y1)
@@ -250,6 +325,30 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
                 x1 += d;
             y1 = f(x1);
         }
+        return x0 != x1 && y0 != y1;
+    }
+
+    public GameObject AddLabel(string label_text)
+    {
+        var label = LabelPool.Cycle();
+        label.GetComponentInChildren<Text>().text = label_text;
+        Labels.Add(label);
+        return label;
+    }
+
+    public void RemoveLabel(GameObject label_object)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnPointAdded(Vector3 position, CanvasLineSegment segment, Rect? area)
+    {
+        PointAdded.Invoke(this, new PointAddedEventArgs()
+        {
+            Position = position,
+            Segment = segment,
+            Area = area
+        });
     }
 
     private IEnumerable PlotCurve(
@@ -293,11 +392,15 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 
                 TrySetColor(line_color, segment.gameObject, segment.PointA.gameObject, segment.PointB.gameObject);
 
+                OnPointAdded(position, segment, area);
+
                 if (period > 0)
                     yield return new WaitForSeconds(period);
             }
 
-            EquidistantStep(curve.Evaluate, x, y, max_segment_length, max_iterations, out x, out y);
+            bool next_point = EquidistantStep(curve.Evaluate, x, y, max_segment_length, max_iterations, out x, out y);
+            if (!next_point)
+                break;
         }
         //plotter.Break();
     }
@@ -318,6 +421,11 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
         if (plotter == null)
             throw new ArgumentNullException("plotter", "Plotter must be set before erasing a curve.");
         //plotter.Break();
+        // TODO: RemoveLabel etc.
+        foreach (var label in Labels)
+            LabelPool.Return(label);
+        Labels.Clear();
+
         foreach (var point in Points.ToArray())
         {
             plotter.RemoveVertex(point);

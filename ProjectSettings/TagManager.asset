@@ -16,6 +16,9 @@ TagManager:
   - Deform Example
   - projectile
   - Chapter Select Panel
+  - LCD
+  - Single Test Tensile Graph
+  - Multi Test Tensile Graph
   layers:
   - Default
   - TransparentFX

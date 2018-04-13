@@ -50,41 +50,82 @@ public class TensileLabConfigurator : MonoBehaviour
     {
         var tester = FindObjectOfType<InstronTester>();
         var lever = FindObjectOfType<LeverPressed>();
-        var grapher = FindObjectOfType<CurveGrapher>();
+
+        var single_grapher = GameObject
+            .FindGameObjectWithTag("Single Test Tensile Graph")
+            ?.GetComponent<CurveGrapher>();
+
+        var multi_grapher = GameObject
+            .FindGameObjectWithTag("Multi Test Tensile Graph")
+            ?.GetComponent<CurveGrapher>();
+
+        //var grapher = FindObjectOfType<CurveGrapher>();
 
         {
             if (lever)
             {
                 lever.Pressed.AddListener(() =>
                 {
-                    var clamped_specimen = tester?.ClampedSpecimen;
-                    if (clamped_specimen)
+                    if (!tester.GrabberIsBusy)
                     {
-                        if (!tester.GrabberIsBusy)
+                        if (tester.GrabberIsReset)
                         {
-                            if (tester.GrabberIsReset)
+                            var clamped_specimen = tester.ClampedSpecimen;
+                            if (clamped_specimen)
                             {
+                                // *Inhale*...
                                 var specimen_properties = clamped_specimen?.GetComponent<TTSpecimenProperties>();
-                                grapher.Curve = specimen_properties.NormalizedStressStrain;
                                 float max_strain = specimen_properties.MaxStrain;
                                 float max_stress = specimen_properties.MaxStress;
-                                grapher.CurveBounds = new Rect(0f, 0f, max_strain, max_stress);
-                                grapher.ClearImmediately();
-                                grapher.Period = 0.1f; // TODO
-                                grapher.Graph();
+
+                                // Only set the graph bounds for the single grapher
+                                single_grapher.GraphBounds = new Rect(0f, 0f, max_strain, max_stress);
+
+                                // Only clear the single grapher
+                                single_grapher.ClearImmediately();
+
+                                foreach (var grapher in new[] { single_grapher, multi_grapher })
+                                {
+                                    // Skip missing graphers
+                                    if (grapher == null)
+                                        continue;
+
+                                    var tensile_labeler = grapher.GetComponent<TensileGraphController>();
+                                    grapher.Curve = specimen_properties.NormalizedStressStrain;
+
+                                    grapher.LineColor = specimen_properties.CurveColor;
+
+                                    // Set the curve bounds for all graphers (necessary for drawing the curve correctly)
+                                    grapher.CurveBounds = new Rect(0f, 0f, max_strain, max_stress);
+
+                                    if (tensile_labeler)
+                                    {
+                                        // TODO: struct for these properties???
+                                        tensile_labeler.YieldStrength = specimen_properties.YieldStrength;
+                                        tensile_labeler.UltimateTensileStrength = specimen_properties.UltimateTensileStrength;
+                                        tensile_labeler.FracturePoint = specimen_properties.FracturePoint;
+                                    }
+
+                                    grapher.Period = 0.1f; // TODO
+                                    grapher.Graph();
+                                }
+                                tester.OnBeginTensileTest();
                             }
                             else
+                                Debug.LogWarning("Tester needs a clamped specimen to operate");
+                        }
+                        else
+                        {
+                            foreach (var grapher in new[] { single_grapher /*, multi_grapher */ })
                             {
                                 grapher.Period = 0.01f; // TODO
                                 grapher.Clear();
                             }
-                            tester.GrabberAnimator.SetTrigger("Toggle");
+                            tester.OnResetTensileTest();
                         }
-                        else
-                            Debug.LogError("Cannot activate tester because it is already in operation.");
                     }
                     else
-                        Debug.LogWarning("Tester needs a clamped specimen to operate");
+                        Debug.LogError("Cannot activate tester because it is already in operation.");
                 });
             }
             else
@@ -115,8 +156,8 @@ public class TensileLabConfigurator : MonoBehaviour
                         if (collision.gameObject.tag == "material")
                         {
                             var specimen = collision.gameObject;
-                        // Only assign the specimen if the user lets go of it (not still grabbing it)
-                        if (!GrabbedObjects.Contains(specimen))
+                            // Only assign the specimen if the user lets go of it (not still grabbing it)
+                            if (!GrabbedObjects.Contains(specimen))
                             {
                                 var specimen_properties = specimen?.GetComponent<TTSpecimenProperties>();
                                 if (specimen_properties)
