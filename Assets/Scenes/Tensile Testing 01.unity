@@ -903,6 +903,11 @@ Prefab:
       propertyPath: CurveColor.b
       value: 0.20161116
       objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 2}
+      propertyPath: FracturePoint
+      value: 0.95
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
   m_IsPrefabParent: 0
@@ -1456,7 +1461,7 @@ Prefab:
     - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
         type: 2}
       propertyPath: FracturePoint
-      value: 0.96
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4438236093165414, guid: aa63e78255bb1c34199a0eea95fce279, type: 2}
       propertyPath: m_LocalScale.x
