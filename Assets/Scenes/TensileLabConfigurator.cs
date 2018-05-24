@@ -90,7 +90,7 @@ public class TensileLabConfigurator : MonoBehaviour
                                     if (grapher == null)
                                         continue;
 
-                                    var tensile_labeler = grapher.GetComponent<TensileGraphController>();
+                                    var tensile_graph_controller = grapher.GetComponentInChildren<TensileGraphController>();
                                     grapher.Curve = specimen_properties.NormalizedStressStrain;
 
                                     grapher.LineColor = specimen_properties.CurveColor;
@@ -98,12 +98,12 @@ public class TensileLabConfigurator : MonoBehaviour
                                     // Set the curve bounds for all graphers (necessary for drawing the curve correctly)
                                     grapher.CurveBounds = new Rect(0f, 0f, max_strain, max_stress);
 
-                                    if (tensile_labeler)
+                                    if (tensile_graph_controller)
                                     {
                                         // TODO: struct for these properties???
-                                        tensile_labeler.YieldStrength = specimen_properties.YieldStrength;
-                                        tensile_labeler.UltimateTensileStrength = specimen_properties.UltimateTensileStrength;
-                                        tensile_labeler.FracturePoint = specimen_properties.FracturePoint;
+                                        tensile_graph_controller.YieldStrength = specimen_properties.YieldStrength;
+                                        tensile_graph_controller.UltimateTensileStrength = specimen_properties.UltimateTensileStrength;
+                                        tensile_graph_controller.FracturePoint = specimen_properties.FracturePoint;
                                     }
 
                                     grapher.Period = 0.1f; // TODO
