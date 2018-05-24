@@ -170,7 +170,7 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
 
     private HashSet<GameObject> XAxisTexts = new HashSet<GameObject>();
     private HashSet<GameObject> YAxisTexts = new HashSet<GameObject>();
-    private HashSet<GameObject> Labels = new HashSet<GameObject>();
+    private HashSet<GameObject> LabelObjects = new HashSet<GameObject>();
 
     public void SetMajorTickMarkNumbers(Rect bounds, Vector2Int counts)
     {
@@ -328,13 +328,28 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
         return x0 != x1 && y0 != y1;
     }
 
-    public GameObject AddLabel(string label_text)
+    public GraphLabel AddLabel(string label_text, string sublabel_text = "", Color? color = null)
     {
-        var label = LabelPool.Cycle();
-        label.GetComponentInChildren<Text>().text = label_text;
-        Labels.Add(label);
+        var label_object = LabelPool.Cycle();
+        var label = label_object.GetComponent<GraphLabel>();
+        label.Text.text = label_text;
+        label.SecondaryText.text = sublabel_text;
+        if (color.HasValue)
+        {
+            label.Text.color = color.Value;
+            label.SecondaryText.color = color.Value;
+        }
+        LabelObjects.Add(label_object);
         return label;
     }
+
+    //public void SetLabelText(GameObject label_object, string label_text, string sublabel_text)
+    //{
+    //    //label.GetComponentInChildren<Text>().text = label_text;
+    //    var label = label_object.GetComponent<GraphLabel>();
+    //    label.Text.text = label_text;
+    //    label.SecondaryText.text = sublabel_text; // TODO
+    //}
 
     public void RemoveLabel(GameObject label_object)
     {
@@ -422,9 +437,9 @@ public class CurveGrapher : MonoBehaviour, ISerializationCallbackReceiver
             throw new ArgumentNullException("plotter", "Plotter must be set before erasing a curve.");
         //plotter.Break();
         // TODO: RemoveLabel etc.
-        foreach (var label in Labels)
+        foreach (var label in LabelObjects)
             LabelPool.Return(label);
-        Labels.Clear();
+        LabelObjects.Clear();
 
         foreach (var point in Points.ToArray())
         {
