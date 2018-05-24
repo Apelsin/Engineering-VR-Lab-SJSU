@@ -58,7 +58,8 @@ public class GraphTrace : MonoBehaviour
         if (cursor_in_graph_area)
             OnTraceUpdated(cursor_relative_position, normalized_position);
 
-        Readout.SetVisible(cursor_in_graph_area);
+        if(Readout.gameObject.activeInHierarchy)
+            Readout.SetVisible(cursor_in_graph_area);
 
         // Don't allow the readout rect to escape the allowed area
         var allowed_area = PlotArea.rect;
