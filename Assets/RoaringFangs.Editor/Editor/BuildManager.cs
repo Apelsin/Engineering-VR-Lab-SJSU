@@ -341,9 +341,16 @@ namespace RoaringFangs.Editor
 
             Debug.Log("");
 
+#if UNITY_2018
+            // Not sure how to check for success/failure in Unity 2018...
+            var result = BuildPipeline.BuildPlayer(player_options);
+            Debug.Log(result.summary);
+#else
             var error = BuildPipeline.BuildPlayer(player_options);
             if (error.Length != 0)
                 throw new Exception("Build Error:" + error);
+            Debug.Log("Build successful");
+#endif
         }
 
         public static void Build()
@@ -355,7 +362,6 @@ namespace RoaringFangs.Editor
                 BuildSettings settings;
                 ParseOptionsAndFindScenes(args, out player_options, out settings);
                 BuildWithOptions(player_options, settings);
-                Debug.Log("Build successful");
             }
             catch (Exception ex)
             {
