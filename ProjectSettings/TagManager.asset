@@ -19,6 +19,7 @@ TagManager:
   - LCD
   - Single Test Tensile Graph
   - Multi Test Tensile Graph
+  - Behavior Manager
   layers:
   - Default
   - TransparentFX
@@ -55,4 +56,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Touch Menu
+    uniqueID: 1768485553
     locked: 0
