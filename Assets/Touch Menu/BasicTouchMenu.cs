@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using VRTK;
 
@@ -15,19 +14,6 @@ public class BasicTouchMenu : MonoBehaviour
     public MenuButtons Template;
 
     public ButtonInfo[] Buttons;
-
-    //private static IEnumerable<ButtonInfo> GetFlattenedButtons(IEnumerable<ButtonInfo> buttons)
-    //{
-    //    foreach(var b in buttons)
-    //    {
-    //        yield return b;
-    //        if(b.Children != null)
-    //        {
-    //            foreach (var c in GetFlattenedButtons(b.Children))
-    //                yield return c;
-    //        }
-    //    }
-    //}
 
     private DestinationMarkerEventReceiver DestinationEvents;
     private VRTK_InteractableObject InteractableObject;
@@ -55,7 +41,6 @@ public class BasicTouchMenu : MonoBehaviour
             .GetComponentInChildren<ButtonBehaviorManager>();
         if (!button_behavior_manager)
             throw new Exception("Could not find button behavior manager.");
-        //Debug.Log(MenuPosition);
         var pointer = args.interactingObject.GetComponent<VRTK_Pointer>();
         if (!PointerMenus.ContainsKey(pointer))
         {
@@ -103,14 +88,15 @@ public class BasicTouchMenu : MonoBehaviour
             }
             else
             {
-                button_component.onClick.AddListener(() => {
+                button_component.onClick.AddListener(() =>
+                {
                     SetMenuButtons(menu, info.Children, behaviors);
                     menu.Pulse();
                 });
                 button_component.interactable = true;
             }
         }
-        for (; i <buttons.Length; i++)
+        for (; i < buttons.Length; i++)
         {
             var button_component = buttons[i];
             button_component.GetComponentInChildren<Text>().text = String.Empty;
@@ -120,7 +106,12 @@ public class BasicTouchMenu : MonoBehaviour
 
     public void Start()
     {
-        Buttons = Template.Buttons.ToArray();
+        if (Template)
+            Buttons = Template.Buttons.ToArray();
+        else
+            Debug.LogWarning("Menu has no template.");
+        if (Buttons.Length == 0)
+            Debug.LogWarning("Menu has no buttons.");
     }
 
     public void OnEnable()
