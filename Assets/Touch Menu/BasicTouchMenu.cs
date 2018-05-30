@@ -29,7 +29,6 @@ public class BasicTouchMenu : MonoBehaviour
 
     private void HandleDestinationMarkerEnter(object sender, DestinationMarkerEventArgs args)
     {
-        // This feels hacky as shit but whatever
         var pointer = (sender as Component).GetComponent<VRTK_Pointer>();
         Destinations[pointer] = args.destinationPosition;
     }
