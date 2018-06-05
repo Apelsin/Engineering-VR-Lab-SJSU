@@ -31,17 +31,30 @@ namespace RoaringFangs
 {
     public static class Scenes
     {
-        public static IEnumerable LoadTogether(IEnumerable<string> scene_names, bool skip_if_already_loaded = false)
+        public struct Options
+        {
+            public string Name;
+            public bool ReplaceExisting;
+        }
+        public static IEnumerable LoadTogether(IEnumerable<Options> scene_options, bool skip_if_already_loaded)
         {
             var operations_remaining = new List<AsyncOperation>();
             // Asynchronously load the scenes
-            foreach (var scene_name in scene_names)
+            foreach (var options in scene_options)
             {
-                var scene = SceneManager.GetSceneByName(scene_name);
-                if (skip_if_already_loaded && scene.isLoaded)
-                    continue;
-                Debug.Log("Async loading scene \"" + scene_name + "\"");
-                var load = SceneManager.LoadSceneAsync(scene_name, LoadSceneMode.Additive);
+                var scene = SceneManager.GetSceneByName(options.Name);
+                if (scene.isLoaded)
+                {
+                    if (options.ReplaceExisting)
+                    {
+                        var unload = SceneManager.UnloadSceneAsync(options.Name);
+                        operations_remaining.Add(unload);
+                    }
+                    else if (skip_if_already_loaded)
+                        continue;
+                }
+                Debug.Log("Async loading scene \"" + options.Name + "\"");
+                var load = SceneManager.LoadSceneAsync(options.Name, LoadSceneMode.Additive);
                 operations_remaining.Add(load);
             }
             // Wait for all of the scenes in the list to be loaded
@@ -54,14 +67,14 @@ namespace RoaringFangs
             }
         }
 
-        public static IEnumerable UnloadTogether(IEnumerable<string> scene_names)
+        public static IEnumerable UnloadTogether(IEnumerable<Options> scene_options)
         {
             var operations_remaining = new List<AsyncOperation>();
             // Asynchronously unload the scenes
-            foreach (var scene_name in scene_names)
+            foreach (var options in scene_options)
             {
-                Debug.Log("Async unloading scene \"" + scene_name + "\"");
-                var unload = SceneManager.UnloadSceneAsync(scene_name);
+                Debug.Log("Async unloading scene \"" + options.Name + "\"");
+                var unload = SceneManager.UnloadSceneAsync(options.Name);
                 operations_remaining.Add(unload);
             }
             // Wait for all of the scenes in the list to be unloaded

@@ -128,11 +128,11 @@ namespace RoaringFangs.ASM
             yield return null;
         }
 
-        private void EnqueueUnloadScenes(IEnumerable<string> scene_names)
+        private void EnqueueUnloadScenes(IEnumerable<Scenes.Options> scene_unload_options)
         {
-            foreach (var scene_name in scene_names)
-                Debug.Log("Will remove " + scene_name);
-            EnqueueCoroutine(Scenes.UnloadTogether(scene_names).GetEnumerator());
+            foreach (var option in scene_unload_options)
+                Debug.Log("Will remove " + option.Name);
+            EnqueueCoroutine(Scenes.UnloadTogether(scene_unload_options).GetEnumerator());
             EnqueueCoroutine(ClearScenesToUnload().GetEnumerator());
         }
 
@@ -140,7 +140,9 @@ namespace RoaringFangs.ASM
         {
             if (!ScenesToUnloadAtStart.Any())
                 return;
-            EnqueueUnloadScenes(ScenesToUnloadAtStart);
+            var scene_options = ScenesToUnloadAtStart
+                .Select(s => new Scenes.Options() { Name = s });
+            EnqueueUnloadScenes(scene_options);
         }
 
         protected override void VerifyStateEventInfo(

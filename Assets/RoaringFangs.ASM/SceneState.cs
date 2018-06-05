@@ -46,6 +46,28 @@ namespace RoaringFangs.ASM
         }
 
         [Serializable]
+        public struct SceneActivateDirective
+        {
+#if ODIN_INSPECTOR
+
+            [HorizontalGroup("Value")]
+#endif
+            public string Value;
+
+#if ODIN_INSPECTOR
+
+            [HorizontalGroup("Value")]
+#endif
+            public SceneLoadDirectiveType Type;
+
+#if ODIN_INSPECTOR
+
+            [HorizontalGroup("Condition")]
+#endif
+            public string ConditionParameter;
+        }
+
+        [Serializable]
         public struct SceneLoadDirective
         {
 #if ODIN_INSPECTOR
@@ -65,6 +87,8 @@ namespace RoaringFangs.ASM
             [HorizontalGroup("Condition")]
 #endif
             public string ConditionParameter;
+
+            public bool ReplaceExisting;
         }
 
         [Serializable]
@@ -96,14 +120,14 @@ namespace RoaringFangs.ASM
         [HideLabel]
         [Header("Active Scene")]
 #endif
-        public SceneLoadDirective ActiveScene;
+        public SceneActivateDirective ActiveScene;
 
         /// <summary>
         /// The name of the scene to be set active after entering this state
         /// </summary>
         public string ActiveSceneName
         {
-            get { return ResolveSceneName(ActiveScene); }
+            get { return ResolveSceneName(ActiveScene.Value, ActiveScene.Type); }
         }
 
         [SerializeField]
@@ -153,60 +177,66 @@ namespace RoaringFangs.ASM
             }
         }
 
-        private string ResolveSceneName(SceneLoadDirective directive)
+        private Scenes.Options GetSceneInstruction(SceneLoadDirective directive)
         {
-            return ResolveSceneName(directive.Value, directive.Type);
+            var name = ResolveSceneName(directive.Value, directive.Type);
+            var forced = directive.ReplaceExisting;
+            return new Scenes.Options()
+            {
+                Name = name,
+                ReplaceExisting = forced
+            };
         }
 
-        private static bool StringIsNotNullOrEmpty(string str)
+        private static bool NameIsNotNullOrEmpty(Scenes.Options instruction)
         {
-            return !string.IsNullOrEmpty(str);
+            return !string.IsNullOrEmpty(instruction.Name);
         }
 
-        public IEnumerable<string> FirstScenesEntryLoad
+        public IEnumerable<Scenes.Options> FirstScenesEntryLoad
         {
             get
             {
                 return _FirstScenesEntryLoad
                     .Where(GetSceneDirectiveConditionValue)
-                    .Select(ResolveSceneName)
-                    .Where(StringIsNotNullOrEmpty)
+                    .Select(GetSceneInstruction)
+                    .Where(NameIsNotNullOrEmpty)
                     .ToArray();
             }
         }
 
-        public IEnumerable<string> SecondScenesEntryLoad
+        public IEnumerable<Scenes.Options> SecondScenesEntryLoad
         {
             get
             {
                 return _SecondScenesEntryLoad
                     .Where(GetSceneDirectiveConditionValue)
-                    .Select(ResolveSceneName)
-                    .Where(StringIsNotNullOrEmpty)
+                    .Select(GetSceneInstruction)
+                    .Where(NameIsNotNullOrEmpty)
                     .ToArray();
             }
         }
 
-        public IEnumerable<string> FirstScenesExitUnload
+        public IEnumerable<Scenes.Options> FirstScenesExitUnload
         {
             get
             {
                 return _FirstScenesExitUnload
                     .Where(GetSceneDirectiveConditionValue)
-                    .Select(ResolveSceneName)
-                    .Where(StringIsNotNullOrEmpty)
+                    .Select(GetSceneInstruction)
+                    .Where(NameIsNotNullOrEmpty)
                     .ToArray();
             }
         }
 
-        public IEnumerable<string> SecondScenesExitUnload
+        public IEnumerable<Scenes.Options> SecondScenesExitUnload
         {
             get
             {
                 return _SecondScenesExitUnload
                     .Where(GetSceneDirectiveConditionValue)
-                    .Select(ResolveSceneName)
-                    .Where(StringIsNotNullOrEmpty)
+                    .Select(GetSceneInstruction)
+                    .Where(NameIsNotNullOrEmpty)
                     .ToArray();
             }
         }
@@ -214,9 +244,14 @@ namespace RoaringFangs.ASM
         public List<ConfigurationObjectDirective> ConfigurationObjects =
             new List<ConfigurationObjectDirective>();
 
-        private IEnumerable OnStateEnterCoroutine(IEnumerable<string> scene_names, bool skip_if_already_loaded)
+        private IEnumerable OnStateEnterCoroutine(
+            IEnumerable<Scenes.Options> first_scene_options,
+            IEnumerable<Scenes.Options> second_scene_options,
+            bool skip_if_already_loaded)
         {
-            foreach (object o in Scenes.LoadTogether(scene_names, skip_if_already_loaded))
+            foreach (object o in Scenes.LoadTogether(first_scene_options, skip_if_already_loaded))
+                yield return o;
+            foreach (object o in Scenes.LoadTogether(second_scene_options, skip_if_already_loaded))
                 yield return o;
             string active_scene_name = ActiveSceneName;
             if (String.IsNullOrEmpty(active_scene_name))
@@ -240,19 +275,24 @@ namespace RoaringFangs.ASM
             }
         }
 
-        private IEnumerable OnStateExitCoroutine(IEnumerable<string> scene_names)
+        private IEnumerable OnStateExitCoroutine(
+            IEnumerable<Scenes.Options> first_scene_options,
+            IEnumerable<Scenes.Options> second_scene_options)
         {
-            foreach (object o in Scenes.UnloadTogether(scene_names))
+            foreach (object o in Scenes.UnloadTogether(first_scene_options))
+                yield return o;
+            foreach (object o in Scenes.UnloadTogether(second_scene_options))
                 yield return o;
         }
 
         protected void DoVerifyEnter()
         {
-            var scene_names_to_load = FirstScenesEntryLoad
+            var scene_load_names = FirstScenesEntryLoad
                 .Concat(SecondScenesEntryLoad)
+                .Select(o => o.Name)
                 .ToArray();
             var inner_exceptions = new List<Exception>();
-            foreach (var scene_name in scene_names_to_load)
+            foreach (var scene_name in scene_load_names)
             {
                 Debug.Log("Verifying " + scene_name);
                 // Verify that the scenes to be loaded are valid before enqueing the loader coroutine
@@ -271,12 +311,13 @@ namespace RoaringFangs.ASM
 
         protected void DoVerifyExit()
         {
-            var scene_names_to_unload = FirstScenesExitUnload
+            var scene_unload_names = FirstScenesExitUnload
                 .Concat(SecondScenesExitUnload)
+                .Select(o => o.Name)
                 .ToArray();
             // Verify that the scenes to be unloaded are valid before enqueing the unloader coroutine
             var inner_exceptions = new List<Exception>();
-            foreach (var scene_name in scene_names_to_unload)
+            foreach (var scene_name in scene_unload_names)
                 if (!Application.CanStreamedLevelBeLoaded(scene_name))
                     inner_exceptions.Add(new ArgumentException(
                         "Scene cannot not be unloaded: \"" + scene_name + "\""));
@@ -286,19 +327,18 @@ namespace RoaringFangs.ASM
 
         protected void DoEnter(ControlledStateManager manager, bool skip_if_already_loaded)
         {
-            var scene_names_to_load = FirstScenesEntryLoad
-                .Concat(SecondScenesEntryLoad)
-                .ToArray();
-            //manager.EnqueueDeferredCoroutine(OnStateEnterCoroutine(scene_names_to_load).GetEnumerator());
-            manager.EnqueueCoroutine(OnStateEnterCoroutine(scene_names_to_load, skip_if_already_loaded).GetEnumerator());
+            //var scene_load_options = FirstScenesEntryLoad
+            //    .Concat(SecondScenesEntryLoad)
+            //    .ToArray();
+            manager.EnqueueCoroutine(OnStateEnterCoroutine(FirstScenesEntryLoad, SecondScenesEntryLoad, skip_if_already_loaded).GetEnumerator());
         }
 
         protected void DoExit(ControlledStateManager manager)
         {
-            var scene_names_to_unload = FirstScenesExitUnload
-                .Concat(SecondScenesExitUnload)
-                .ToArray();
-            manager.EnqueueCoroutine(OnStateExitCoroutine(scene_names_to_unload).GetEnumerator());
+            //var scene_unload_options = FirstScenesExitUnload
+            //    .Concat(SecondScenesExitUnload)
+            //    .ToArray();
+            manager.EnqueueCoroutine(OnStateExitCoroutine(FirstScenesExitUnload, SecondScenesExitUnload).GetEnumerator());
         }
 
         public override void Initialize(ControlledStateManager manager)
