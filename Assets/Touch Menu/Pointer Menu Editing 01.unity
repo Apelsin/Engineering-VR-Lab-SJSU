@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.38440746, g: 0.47292575, b: 0.66176474, a: 1}
+  m_AmbientEquatorColor: {r: 0.41176468, g: 0.41176468, b: 0.41176468, a: 1}
+  m_AmbientGroundColor: {r: 0.5588235, g: 0.5095156, b: 0.41089964, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -194,13 +194,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 60362912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1350e6b6fecebd4ebd4b76391372844, type: 3}
+  m_Script: {fileID: 11500000, guid: c64228dc44a032c498375c689eb5b084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuPrefab: {fileID: 1356751059040444, guid: 53a2c7d717f1dca4d9bd7001cbe0b889, type: 2}
-  MenuLayerIgnoreMask:
-    serializedVersion: 2
-    m_Bits: 4294967263
+  _Manager: {fileID: 0}
   Template: {fileID: 11400000, guid: c51846b8cd0049f48b988e8dd99c3a66, type: 2}
   Buttons: []
 --- !u!1 &155047812
@@ -517,10 +514,6 @@ Prefab:
     - target: {fileID: 4682514155653110, guid: 53a2c7d717f1dca4d9bd7001cbe0b889, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1356751059040444, guid: 53a2c7d717f1dca4d9bd7001cbe0b889, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53a2c7d717f1dca4d9bd7001cbe0b889, type: 2}

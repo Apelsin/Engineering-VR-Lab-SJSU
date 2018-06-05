@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PointerContextMenu : MonoBehaviour
@@ -31,9 +33,56 @@ public class PointerContextMenu : MonoBehaviour
         OnUpdate(false);
     }
 
-    public void Pulse()
+    private void Pulse()
     {
         Animator.SetTrigger("Pulse");
+    }
+
+    public void SetMenuButtons(
+        ButtonInfo[] button_infos,
+        IDictionary<string, ManagedButtonBehavior> behaviors)
+    {
+        // Set menu buttons and behaviors
+        foreach (var button in Buttons)
+            button.onClick.RemoveAllListeners();
+        var number_of_buttons = Mathf.Min(button_infos.Length, Buttons.Length);
+        int i;
+        for (i = 0; i < number_of_buttons; i++)
+        {
+            var info = button_infos[i];
+            var button_component = Buttons[i];
+            button_component.GetComponentInChildren<Text>().text = info.Text;
+            bool interactable = !String.IsNullOrEmpty(info.Id);
+            if (info.IsTerminal)
+            {
+                if (behaviors != null)
+                {
+                    ManagedButtonBehavior behavior;
+                    if (behaviors.TryGetValue(info.Id, out behavior))
+                    {
+                        button_component.onClick.AddListener(behavior.Clicked.Invoke);
+                        interactable &= behavior.IsEnabled;
+                    }
+                }
+                else
+                    Debug.LogWarning("Behaviors mapping is null.");
+            }
+            else
+            {
+                button_component.onClick.AddListener(() =>
+                {
+                    SetMenuButtons(info.Children, behaviors);
+                    Pulse();
+                });
+            }
+            button_component.interactable = interactable;
+        }
+        for (; i < Buttons.Length; i++)
+        {
+            var button_component = Buttons[i];
+            button_component.GetComponentInChildren<Text>().text = String.Empty;
+            button_component.interactable = false;
+        }
     }
 
     public void RequestDestroy()

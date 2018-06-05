@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224637075162691082}
   Image: {fileID: 114815556868815896}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114091244278065092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224774085252518310}
   Image: {fileID: 114565292871590878}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114123703229652782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224437977487089292}
   Image: {fileID: 114919697185198930}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114270407735302622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224828157493828842}
   Image: {fileID: 114196243784813212}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114314823717713166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224612191856043024}
   Image: {fileID: 114222669066349344}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114489866151989342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224401412904959334}
   Image: {fileID: 114195256215049712}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114679089736893748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224514761042974064}
   Image: {fileID: 114270407735302622}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114919697185198930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1541,7 +1541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 224932493854216714}
   Image: {fileID: 114375474689411068}
-  AlphaCutoff: 0.5
+  AlphaCutoff: 0.01
 --- !u!114 &114983043960955234
 MonoBehaviour:
   m_ObjectHideFlags: 1
