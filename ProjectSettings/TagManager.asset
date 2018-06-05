@@ -19,7 +19,6 @@ TagManager:
   - LCD
   - Single Test Tensile Graph
   - Multi Test Tensile Graph
-  - Behavior Manager
   layers:
   - Default
   - TransparentFX
