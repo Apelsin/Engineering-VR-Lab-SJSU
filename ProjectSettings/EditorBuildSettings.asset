@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Development Main.unity
     guid: 2e2cd1c2e08671442a566480ff36bf44
   - enabled: 1
-    path: Assets/Scenes/Chapter 6.6.unity
+    path: Assets/Scenes/Tensile Testing 01.unity
     guid: daba8ffd9251a9a4db3a0b9b6f3879a9
   - enabled: 1
     path: Assets/QuickRopes/_Example/Scenes/Edit Rope Renderer.unity
@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Old Scenes/MainMenuUI.unity
+    path: Assets/Scenes/Start.unity
     guid: f5778428d49f9f74eafa0babadbc61f9
   - enabled: 1
     path: Assets/Old Scenes/MainScene.unity
@@ -65,3 +65,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Old Scenes/TheLab 1.unity
     guid: ea5471e429abe644cae7243e99e6f4eb
+  - enabled: 1
+    path: Assets/Scenes/Poisson's Ratio 01.unity
+    guid: 73db5090d62a4b34a8e2234b85f333ba
+  - enabled: 1
+    path: Assets/Scenes/Chapter Select Add-in.unity
+    guid: 2640fcc2a1df69f428086ab7e5823ddb
+  - enabled: 1
+    path: Assets/Scenes/Globals.unity
+    guid: c43abc8f1ec441044b4bd6c2dd8859aa
+  - enabled: 1
+    path: Assets/Touch Menu/Pointer Menu Editing 01.unity
+    guid: cedb6d3d143659e45be58a21d76b8866
+  m_configObjects: {}
