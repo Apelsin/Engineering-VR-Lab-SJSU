@@ -68,18 +68,49 @@ MonoBehaviour:
     Type: 0
     ConditionParameter: 
   _FirstScenesEntryLoad:
+  - Value: Globals
+    Type: 0
+    ConditionParameter: 
+    ReplaceExisting: 0
+  _SecondScenesEntryLoad:
   - Value: VRTK Add-in
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 1
+  _FirstScenesExitUnload: []
+  _SecondScenesExitUnload: []
+  ConfigurationObjects: []
+  _EnterAtStart: 1
+  _LayerIndex: 0
+--- !u!114 &114020104798890570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdcff455f0629a4ebb80d9751e942cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Tag: 
+  ActiveScene:
+    Value: 
+    Type: 0
+    ConditionParameter: 
+  _FirstScenesEntryLoad:
   - Value: Chapter Select Add-in
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesEntryLoad: []
-  _FirstScenesExitUnload: []
-  _SecondScenesExitUnload: []
-  ConfigurationObjects:
-  - Object: {fileID: 1799103281541100, guid: d6f2ac004270b2a4d806d22b8ced76e2, type: 2}
+  _FirstScenesExitUnload:
+  - Value: Chapter Select Add-in
+    Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
+  _SecondScenesExitUnload: []
+  ConfigurationObjects: []
   _EnterAtStart: 1
   _LayerIndex: 0
 --- !u!114 &114040448741601678
@@ -102,17 +133,48 @@ MonoBehaviour:
   - Value: Tensile Testing 01
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesEntryLoad: []
   _FirstScenesExitUnload:
   - Value: Tensile Testing 01
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesExitUnload: []
   ConfigurationObjects:
   - Object: {fileID: 1681560445222110, guid: b4f89150d0c110245a8d713266373167, type: 2}
     ConditionParameter: 
   - Object: {fileID: 1930866508562582, guid: e97420fffa466d746b7d57b527bf57f7, type: 2}
     ConditionParameter: 
+--- !u!114 &114168949676655184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d077294cf3bd04e98daae5e2385ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Tag: 
+  ActiveScene:
+    Value: Pointer Menu Editing 01
+    Type: 0
+    ConditionParameter: 
+  _FirstScenesEntryLoad:
+  - Value: Pointer Menu Editing 01
+    Type: 0
+    ConditionParameter: 
+    ReplaceExisting: 0
+  _SecondScenesEntryLoad: []
+  _FirstScenesExitUnload:
+  - Value: Pointer Menu Editing 01
+    Type: 0
+    ConditionParameter: 
+    ReplaceExisting: 0
+  _SecondScenesExitUnload: []
+  ConfigurationObjects: []
 --- !u!114 &114416726322006082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,13 +195,17 @@ MonoBehaviour:
   - Value: Start
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesEntryLoad: []
   _FirstScenesExitUnload:
   - Value: Start
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesExitUnload: []
-  ConfigurationObjects: []
+  ConfigurationObjects:
+  - Object: {fileID: 1799103281541100, guid: d6f2ac004270b2a4d806d22b8ced76e2, type: 2}
+    ConditionParameter: 
 --- !u!114 &114685825528238436
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -160,11 +226,13 @@ MonoBehaviour:
   - Value: Poisson's Ratio 01
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesEntryLoad: []
   _FirstScenesExitUnload:
   - Value: Poisson's Ratio 01
     Type: 0
     ConditionParameter: 
+    ReplaceExisting: 0
   _SecondScenesExitUnload: []
   ConfigurationObjects:
   - Object: {fileID: 1001819089837294, guid: f2fcea6ec33000449a4763ffc4b38747, type: 2}
@@ -384,17 +452,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &1102060494536252984
+--- !u!1102 &1102073414972218422
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 'TODO: Chapter sub-state machine'
+  m_Name: Pointer Menu Editing 01
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114168949676655184}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -528,21 +597,12 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 1102639802916428758}
-    m_Position: {x: 444, y: 108, z: 0}
+    m_State: {fileID: 1102073414972218422}
+    m_Position: {x: 276, y: 216, z: 0}
+  m_ChildStateMachines:
   - serializedVersion: 1
-    m_State: {fileID: 1102629066739318700}
-    m_Position: {x: 708, y: 240, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102490831988833118}
-    m_Position: {x: 708, y: 108, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102706552972665180}
-    m_Position: {x: 936, y: 240, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102060494536252984}
-    m_Position: {x: 924, y: 108, z: 0}
-  m_ChildStateMachines: []
+    m_StateMachine: {fileID: 1107866964321759070}
+    m_Position: {x: 264, y: 120, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -552,4 +612,35 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 732, y: 492, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102706552972665180}
+  m_DefaultState: {fileID: 1102073414972218422}
+--- !u!1107 &1107866964321759070
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Chapters
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: 1102639802916428758}
+    m_Position: {x: 408, y: -36, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102629066739318700}
+    m_Position: {x: 564, y: 204, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102490831988833118}
+    m_Position: {x: 408, y: 72, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102706552972665180}
+    m_Position: {x: 252, y: 204, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours:
+  - {fileID: 114020104798890570}
+  m_AnyStatePosition: {x: 48, y: 48, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 48, y: 180, z: 0}
+  m_ParentStateMachinePosition: {x: 24, y: -48, z: 0}
+  m_DefaultState: {fileID: 1102639802916428758}
