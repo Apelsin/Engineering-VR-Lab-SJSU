@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 
-public class LCDRenderer : MonoBehaviour
+namespace CVRLabSJSU
 {
-    public Camera Camera;
-    // Use this for initialization
-    private void Start()
+    public class LCDRenderer : MonoBehaviour
     {
-    }
+        public Camera Camera;
+        // Use this for initialization
+        private void Start()
+        {
+        }
 
-    // Update is called once per frame
-    private void Update()
-    {
+        // Update is called once per frame
+        private void Update()
+        {
+        }
     }
 }

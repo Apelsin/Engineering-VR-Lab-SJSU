@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using CVRLabSJSU;
 using UnityEngine;
 
 public class PoissonRatio01Configurator : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
         //yield return new WaitForSeconds(1f);
         var main_camera_object = GameObject.FindGameObjectWithTag("MainCamera");

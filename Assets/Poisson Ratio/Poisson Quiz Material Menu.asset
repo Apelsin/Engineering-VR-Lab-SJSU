@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4bbbe99d9c881442a38e270fe2bb793, type: 3}
-  m_Name: Posson Quiz Material Menu
+  m_Name: Poisson Quiz Material Menu
   m_EditorClassIdentifier: 
   Buttons:
   - Id: 

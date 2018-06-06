@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class LCDConfigurator : MonoBehaviour
+namespace CVRLabSJSU
 {
-    private void Start()
+    public class LCDConfigurator : MonoBehaviour
     {
-        var cursor_drivers = FindObjectsOfType<CanvasCursorDriver>();
+        private void Start()
+        {
+            var cursor_drivers = FindObjectsOfType<CanvasCursorDriver>();
 
-        foreach (var cursor_driver in cursor_drivers)
-            cursor_driver.Camera = Camera.main;
+            foreach (var cursor_driver in cursor_drivers)
+                cursor_driver.Camera = Camera.main;
+        }
     }
 }
