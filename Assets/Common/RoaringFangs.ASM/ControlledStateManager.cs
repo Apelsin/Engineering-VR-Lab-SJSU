@@ -94,8 +94,8 @@ namespace RoaringFangs.ASM
 #if ODIN_INSPECTOR
 
         [TitleGroup("References")]
+        [HideInInspector] // For Odin Inspector... I think this is a bug...
 #endif
-
         private Queue<IEnumerator> _CoroutineQueue = new Queue<IEnumerator>();
 
         private int _LastGoodStatePathHash;
@@ -183,7 +183,7 @@ namespace RoaringFangs.ASM
 
 #if ODIN_INSPECTOR
 
-        [TitleGroup("Events", indent: false, order: 100)]
+        [FoldoutGroup("Events", order: 100)]
 #endif
 
         [SerializeField]
@@ -191,7 +191,7 @@ namespace RoaringFangs.ASM
 
 #if ODIN_INSPECTOR
 
-        [TitleGroup("Events")]
+        [FoldoutGroup("Events")]
 #endif
 
         [SerializeField]
@@ -199,7 +199,7 @@ namespace RoaringFangs.ASM
 
 #if ODIN_INSPECTOR
 
-        [TitleGroup("Events")]
+        [FoldoutGroup("Events")]
 #endif
 
         [SerializeField]
@@ -207,7 +207,7 @@ namespace RoaringFangs.ASM
 
 #if ODIN_INSPECTOR
 
-        [TitleGroup("Events")]
+        [FoldoutGroup("Events")]
 #endif
 
         [SerializeField]
@@ -215,7 +215,7 @@ namespace RoaringFangs.ASM
 
 #if ODIN_INSPECTOR
 
-        [TitleGroup("Events")]
+        [FoldoutGroup("Events")]
 #endif
 
         [SerializeField]
