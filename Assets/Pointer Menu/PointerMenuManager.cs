@@ -36,8 +36,13 @@ namespace CVRLabSJSU
         public GameObject MenuPrefab;
         public LayerMask MenuLayerIgnoreMask = ~UI_LAYER_MASK;
 
-        public PointerMenuEvent MenuAdded;
-        public PointerMenuEvent MenuRemoved;
+        [SerializeField]
+        private PointerMenuEvent _MenuAdded;
+        public PointerMenuEvent MenuAdded => _MenuAdded;
+
+        [SerializeField]
+        private PointerMenuEvent _MenuRemoved;
+        public PointerMenuEvent MenuRemoved => _MenuRemoved;
 
         private DestinationMarkerEventReceiver DestinationEvents;
         private VRTK_InteractableObject InteractableObject;
