@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Name: Poisson Quiz Material Menu
   m_EditorClassIdentifier: 
   Buttons:
-  - Id: 
-    Text: 
-    Children: []
   - Id: BtnPolymer
     Text: Polymer
     Children: []
@@ -23,6 +20,9 @@ MonoBehaviour:
     Children: []
   - Id: BtnMetal
     Text: Metal
+    Children: []
+  - Id: 
+    Text: 
     Children: []
   - Id: 
     Text: 

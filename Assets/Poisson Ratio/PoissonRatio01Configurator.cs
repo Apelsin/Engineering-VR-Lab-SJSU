@@ -10,5 +10,7 @@ public class PoissonRatio01Configurator : MonoBehaviour
         //var main_camera = main_camera_object.GetComponent<Camera>();
         foreach (var fc in FindObjectsOfType<LookAtCamera>())
             fc.CameraTransform = main_camera_object.transform;
+
+
     }
 }

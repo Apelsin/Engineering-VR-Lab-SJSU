@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class MenuButtons : ScriptableObject
+namespace CVRLabSJSU
 {
-    public ButtonInfo[] Buttons;
+    public class MenuButtons : ScriptableObject
+    {
+        public ButtonInfo[] Buttons;
+    }
 }

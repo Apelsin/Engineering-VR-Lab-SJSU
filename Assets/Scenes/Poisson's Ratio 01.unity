@@ -1154,18 +1154,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1371873833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,18 +1223,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1371873836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,18 +1292,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1371873839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,18 +1361,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!64 &1371873854
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1585,18 +1585,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1412348205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,18 +1654,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1412348208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1723,18 +1723,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1412348211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1792,18 +1792,18 @@ MonoBehaviour:
   _DestinationMarkerEnter:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _DestinationMarkerSet:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: DestinationMarkerEventReceiver+DestinationMarkerEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: CVRLabSJSU.DestinationMarkerEventReceiver+DestinationMarkerEvent,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!64 &1412348226
 MeshCollider:
   m_ObjectHideFlags: 0

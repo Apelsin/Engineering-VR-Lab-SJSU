@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ButtonBehaviorManager : MonoBehaviour
+namespace CVRLabSJSU
 {
-    [Serializable]
-    public struct ButtonBehaviorEntry
+    public class ButtonBehaviorManager : MonoBehaviour
     {
-        public string Id;
-        public ManagedButtonBehavior Behavior;
-    }
+        [Serializable]
+        public struct ButtonBehaviorEntry
+        {
+            public string Id;
+            public ManagedButtonBehavior Behavior;
+        }
 
-    [SerializeField]
-    private ButtonBehaviorEntry[] _ButtonBehaviors;
-    public IDictionary<string, ManagedButtonBehavior> GetButtonBehaviorsMap()
-    {
-        return _ButtonBehaviors.ToDictionary(b => b.Id, b => b.Behavior);
+        [SerializeField]
+        private ButtonBehaviorEntry[] _ButtonBehaviors;
+
+        public IDictionary<string, ManagedButtonBehavior> GetButtonBehaviorsMap()
+        {
+            return _ButtonBehaviors.ToDictionary(b => b.Id, b => b.Behavior);
+        }
     }
 }
