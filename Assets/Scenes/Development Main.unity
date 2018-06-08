@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 601520267}
   - component: {fileID: 601520266}
   - component: {fileID: 601520265}
+  - component: {fileID: 601520268}
   m_Layer: 0
   m_Name: Development Game Controller
   m_TagString: GameController
@@ -202,6 +203,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &601520268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 601520264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0721252e659f6142a79a81809ac12ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myNote:
+    noteSettingId: 
+    note: This object is responsible for managing the loading and unloading of all
+      scenes in the entire project. Its Animator component uses triggers to control
+      the scene transition graph (state machine), and the Animator Controller has
+      Scene State behaviors on its states, which communicate with the object's, Scene
+      State Manager, which is responsible for async loading and unloading of scenes,
+      as well as instantiation of configuration objects.
+    editable: 0
 --- !u!1 &1229712091
 GameObject:
   m_ObjectHideFlags: 0
