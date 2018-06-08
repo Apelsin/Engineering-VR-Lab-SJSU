@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf1a62e5e0210d4e96aaeecb5720821, type: 3}
+  m_Name: UniNotesSettings
+  m_EditorClassIdentifier: 
+  uniNote:
+    noteSettingId: 
+    note: Here you can modify or create all the avilable notes that can be used on
+      the hierarchy and project windows. Usefull for big teams working on a project.
+    editable: 0
+  notes:
+  - noteId: BugNoteId
+    noteName: Bug
+    backgroundColor: {r: 0.734, g: 0, b: 0, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: d_console.erroricon.sml
+  - noteId: WarningNoteId
+    noteName: Warning
+    backgroundColor: {r: 0.66176474, g: 0.50659233, b: 0, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: d_console.warnicon.sml
+  - noteId: fd6978cc74704a49815e352ea28cf587
+    noteName: Published
+    backgroundColor: {r: 0.3130561, g: 0.8602941, b: 0.05060553, a: 0.609}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: Collab
+  - noteId: a89c0b852fa7485ba132b8288136d9b2
+    noteName: PendingReview
+    backgroundColor: {r: 0.6985294, g: 0.67925966, b: 0, a: 0.397}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: CollabPush
+  - noteId: 27f1b1922c124dcb819d97f19ba7baf0
+    noteName: WikiMissing
+    backgroundColor: {r: 1, g: 1, b: 1, a: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: d_winbtn_mac_close
+  - noteId: 9ba7186a88c548bfa855a60e678cafcb
+    noteName: WikiCompleted
+    backgroundColor: {r: 1, g: 1, b: 1, a: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: d_winbtn_mac_max
+  - noteId: 5c3d54edeca5474bb8cb5c378d9a3fc9
+    noteName: WikiUpdate
+    backgroundColor: {r: 1, g: 1, b: 1, a: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    icon: {fileID: 0}
+    unityIcon: d_winbtn_mac_min
+  - noteId: 2a685c49593145d396fb9b4b6b21e315
+    noteName: Needs Revision
+    backgroundColor: {r: 1, g: 0.88965523, b: 0, a: 1}
+    textColor: {r: 0, g: 0, b: 0, a: 1}
+    icon: {fileID: 0}
+    unityIcon: d_console.warnicon.sml
