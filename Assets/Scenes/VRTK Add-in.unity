@@ -114,49 +114,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &68466513
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 68466515}
-  - component: {fileID: 68466514}
-  m_Layer: 0
-  m_Name: Active Scene Override
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &68466514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 68466513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81080743361628f4cabface2e6e2890e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameObjectsToActivate:
-  - {fileID: 1417035850}
---- !u!4 &68466515
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 68466513}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &108494418
+--- !u!21 &25466851
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -260,39 +218,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 261759922}
   outlineCamera: {fileID: 2111678592}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 339870163}
-  extraRenderTexture: {fileID: 1372377641}
---- !u!84 &339870163
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1224
-  m_Height: 675
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
+  renderTexture: {fileID: 2086946758}
+  extraRenderTexture: {fileID: 1297853594}
 --- !u!1 &460006110
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +265,98 @@ MonoBehaviour:
   headsetPositionCompensation: 1
   targetListPolicy: {fileID: 1377898512}
   navMeshLimitDistance: 0
+--- !u!1 &630492400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 630492402}
+  - component: {fileID: 630492401}
+  - component: {fileID: 630492403}
+  m_Layer: 0
+  m_Name: VRTK Delayed Activation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &630492401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630492400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d65e8dcd8809f04d9220a602eef6435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _OnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _OnDisable:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _Awake:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _Start:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1417035850}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!4 &630492402
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630492400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630492403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630492400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0721252e659f6142a79a81809ac12ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myNote:
+    noteSettingId: 
+    note: 'Used to avoid some script errors caused by VRTK trying to automagically
+      find an EventSystem during OnEnable.
+
+
+      If the EventSystem happens to be loading in from another scene, VRTK should
+      wait for the initial Start() call before locating it. That is what this is for.'
+    editable: 0
 --- !u!1 &683500434
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +369,6 @@ GameObject:
   - component: {fileID: 683500440}
   - component: {fileID: 683500439}
   - component: {fileID: 683500438}
-  - component: {fileID: 683500437}
   - component: {fileID: 683500436}
   - component: {fileID: 683500435}
   - component: {fileID: 683500443}
@@ -414,18 +432,6 @@ MonoBehaviour:
   grabToPointerTip: 0
   controller: {fileID: 0}
   customOrigin: {fileID: 0}
---- !u!114 &683500437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 683500434}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15bd609dfce5aff44a4ac73e4bc28cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  togglePointerOnHit: 0
 --- !u!114 &683500438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,23 +657,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4143231636558742, guid: f14e44b1b31147a4f9ee729e776db6e3, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23114033333550210, guid: f14e44b1b31147a4f9ee729e776db6e3,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 108494418}
+      objectReference: {fileID: 25466851}
     - target: {fileID: 33093497269230698, guid: f14e44b1b31147a4f9ee729e776db6e3,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1962286119}
+      objectReference: {fileID: 1999746330}
     m_RemovedComponents:
     - {fileID: 114216784684812260, guid: f14e44b1b31147a4f9ee729e776db6e3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f14e44b1b31147a4f9ee729e776db6e3, type: 2}
   m_IsPrefabParent: 0
---- !u!84 &1372377641
+--- !u!84 &1297853594
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -678,7 +684,7 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 1224
+  m_Width: 832
   m_Height: 675
   m_AntiAliasing: 1
   m_DepthFormat: 1
@@ -811,6 +817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426328924}
   - component: {fileID: 1426328923}
+  - component: {fileID: 1426328925}
   m_Layer: 0
   m_Name: Mouse Input Disabler
   m_TagString: Untagged
@@ -840,8 +847,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426328925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426328922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0721252e659f6142a79a81809ac12ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myNote:
+    noteSettingId: 
+    note: Disables the mouse input to avoid interference while using VR Input methods.
+    editable: 0
 --- !u!1 &1509888530
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +928,6 @@ GameObject:
   - component: {fileID: 1624930175}
   - component: {fileID: 1624930174}
   - component: {fileID: 1624930173}
-  - component: {fileID: 1624930172}
   - component: {fileID: 1624930171}
   - component: {fileID: 1624930170}
   - component: {fileID: 1624930178}
@@ -970,18 +991,6 @@ MonoBehaviour:
   grabToPointerTip: 0
   controller: {fileID: 0}
   customOrigin: {fileID: 0}
---- !u!114 &1624930172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1624930169}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15bd609dfce5aff44a4ac73e4bc28cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  togglePointerOnHit: 0
 --- !u!114 &1624930173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,7 +1131,7 @@ Transform:
   m_PrefabParentObject: {fileID: 4742138451269058, guid: f14e44b1b31147a4f9ee729e776db6e3,
     type: 2}
   m_PrefabInternal: {fileID: 1255357679}
---- !u!43 &1962286119
+--- !u!43 &1999746330
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1268,6 +1277,37 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!84 &2086946758
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 832
+  m_Height: 675
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2111678590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1363,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 339870163}
+  m_TargetTexture: {fileID: 2086946758}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
