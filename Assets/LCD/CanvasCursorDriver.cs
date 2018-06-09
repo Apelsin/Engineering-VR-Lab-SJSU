@@ -3,48 +3,40 @@ using UnityEngine.EventSystems;
 
 namespace CVRLabSJSU
 {
-    public class CanvasCursorDriver : MonoBehaviour, ISerializationCallbackReceiver
+    [RequireComponent(typeof(RectTransform))]
+    public class CanvasCursorDriver :
+        MonoBehaviour,
+        ISerializationCallbackReceiver,
+        IPointerEnterHandler,
+        IPointerExitHandler
     {
         public Camera Camera;
-        public RectTransform CursorArea;
+        public RectTransform RectTransform;
         public CanvasCursor Cursor;
 
-        public void OnAfterDeserialize()
-        {
-        }
+        private bool CursorInArea;
 
-        public void OnBeforeSerialize()
-        {
-        }
-
-        // TODO: abstract this into an input class
-        // (not the UnityEngine.Input static class!!!)
         private Vector3 GetMousePosition()
         {
+            // TODO: abstract this into an input class
+            // (i.e. not the UnityEngine.Input static class)
             return Input.mousePosition;
-        }
-
-        private void Start()
-        {
         }
 
         private void Update()
         {
-            var mouse_position = GetMousePosition();
-            OnSetCursorPosition(mouse_position);
-        }
-
-        public void HandlePointerEnter(BaseEventData base_data)
-        {
-            var e = (PointerEventData)base_data;
-            OnSetCursorPosition(e.position);
+            if (CursorInArea)
+            {
+                var mouse_position = GetMousePosition();
+                OnSetCursorPosition(mouse_position);
+            }
         }
 
         public void OnSetCursorPosition(Vector3 cursor_position)
         {
             Vector3 world_position;
             bool cursor_in_plane = RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                CursorArea,
+                RectTransform,
                 cursor_position,
                 Camera,
                 out world_position);
@@ -52,12 +44,32 @@ namespace CVRLabSJSU
             if (cursor_in_plane)
             {
                 var cursor_in_rect = RectTransformUtility.RectangleContainsScreenPoint(
-                    CursorArea,
+                    RectTransform,
                     cursor_position,
                     Camera);
                 if (cursor_in_rect)
                     Cursor.RectTransform.position = world_position;
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            CursorInArea = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            CursorInArea = false;
+        }
+
+        public void OnBeforeSerialize()
+        {
+            if (RectTransform == null)
+                RectTransform = GetComponent<RectTransform>();
+        }
+
+        public void OnAfterDeserialize()
+        {
         }
     }
 }
