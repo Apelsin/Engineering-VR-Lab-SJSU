@@ -52,6 +52,15 @@
 
             List<RaycastResult> raycasts = new List<RaycastResult>();
             eventSystem.RaycastAll(pointer.pointerEventData, raycasts);
+
+            //foreach(var r in raycasts)
+            //{
+            //    var a = r.worldPosition;
+            //    var n = (r.worldNormal + new Vector3(0.0001f, 0f, 0f)).normalized;
+            //    var b = a + n;
+            //    Debug.DrawLine(a, b, Color.cyan);
+            //}
+            
             return raycasts;
         }
 
@@ -109,6 +118,19 @@
 
         private void Hover(VRTK_UIPointer pointer, List<RaycastResult> results)
         {
+            // <edit>
+            // This is a complete hack job (heads up)
+            for(int i = 0; i < results.Count; i++)
+            {
+                var result = results[i];
+                if (!ValidElement(result.gameObject))
+                    continue;
+                var target = ExecuteEvents.ExecuteHierarchy(
+                    result.gameObject,
+                    pointer.pointerEventData,
+                    CVRLabSJSU.StandaloneInputModule2.PointerHoverHandler);
+            }
+            // </edit>
             if (pointer.pointerEventData.pointerEnter)
             {
                 CheckPointerHoverClick(pointer, results);
