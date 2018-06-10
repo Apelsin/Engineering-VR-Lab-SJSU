@@ -20,8 +20,35 @@ namespace CVRLabSJSU
                     SendSubmitEventToSelectedObject();
             }
 
-            if (AllowProcessMouseEvent)
+            // touch needs to take precedence because of the mouse emulation layer
+            if (!ProcessTouchEvents() && input.mousePresent && AllowProcessMouseEvent)
                 ProcessMouseEvent();
+        }
+
+        private bool ProcessTouchEvents()
+        {
+            for (int i = 0; i < input.touchCount; ++i)
+            {
+                Touch touch = input.GetTouch(i);
+
+                if (touch.type == TouchType.Indirect)
+                    continue;
+
+                bool released;
+                bool pressed;
+                var pointer = GetTouchPointerEventData(touch, out pressed, out released);
+
+                ProcessTouchPress(pointer, pressed, released);
+
+                if (!released)
+                {
+                    ProcessMove(pointer);
+                    ProcessDrag(pointer);
+                }
+                else
+                    RemovePointerData(pointer);
+            }
+            return input.touchCount > 0;
         }
 
         private static void Execute(IPointerHoverHandler handler, BaseEventData eventData)
@@ -47,5 +74,4 @@ namespace CVRLabSJSU
                 ExecuteEvents.Execute(hovered[i], currentPointerData, PointerHoverHandler);
         }
     }
-
 }
