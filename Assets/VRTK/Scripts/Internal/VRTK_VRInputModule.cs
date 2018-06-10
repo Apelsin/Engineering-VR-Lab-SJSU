@@ -55,8 +55,9 @@
             eventSystem.RaycastAll(pointer.pointerEventData, raycasts);
 
             // <edit>
-            // Restrict raycast results to VRTK_UIGraphicRaycaster type
-            //raycasts = raycasts.Where(r => r.module is VRTK_UIGraphicRaycaster).ToList();
+            // Restrict raycast results to ones with modules of VRTK_UIGraphicRaycaster type.
+            // Raycast results from other types of raycaster modules might have unexpected values.
+            raycasts = raycasts.Where(r => r.module is VRTK_UIGraphicRaycaster).ToList();
             // </edit>
 
             return raycasts;
