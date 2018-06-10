@@ -20,7 +20,8 @@
         "MainScene": "Scenes/Development Main.unity",
         "Scenes": 
         [
-            "Scenes"
+            "Scenes",
+            "LCD"
         ]
     }
 }
