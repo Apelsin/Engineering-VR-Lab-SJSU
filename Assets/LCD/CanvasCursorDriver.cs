@@ -7,37 +7,42 @@ namespace CVRLabSJSU
     public class CanvasCursorDriver :
         MonoBehaviour,
         ISerializationCallbackReceiver,
-        IPointerEnterHandler,
-        IPointerExitHandler
+        IPointerHoverHandler
     {
-        public Camera Camera;
-        public RectTransform RectTransform;
-        public CanvasCursor Cursor;
+        [SerializeField]
+        private Camera _Camera;
 
-        private bool CursorInArea;
+        private Camera _CachedCamera;
 
-        private Vector3 GetMousePosition()
+        public Camera Camera
         {
-            // TODO: abstract this into an input class
-            // (i.e. not the UnityEngine.Input static class)
-            return Input.mousePosition;
-        }
-
-        private void Update()
-        {
-            if (CursorInArea)
+            get
             {
-                var mouse_position = GetMousePosition();
-                OnSetCursorPosition(mouse_position);
+                if (_Camera != null)
+                    return _Camera;
+                if (_CachedCamera != null)
+                    return _CachedCamera;
+                return _CachedCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+            }
+            set
+            {
+                _Camera = value;
             }
         }
 
-        public void OnSetCursorPosition(Vector3 cursor_position)
+        public RectTransform RectTransform;
+        public CanvasCursor Cursor;
+
+        private void Update()
+        {
+        }
+
+        protected void OnSetCursorScreenPosition(Vector2 screen_position)
         {
             Vector3 world_position;
             bool cursor_in_plane = RectTransformUtility.ScreenPointToWorldPointInRectangle(
                 RectTransform,
-                cursor_position,
+                screen_position,
                 Camera,
                 out world_position);
 
@@ -45,21 +50,28 @@ namespace CVRLabSJSU
             {
                 var cursor_in_rect = RectTransformUtility.RectangleContainsScreenPoint(
                     RectTransform,
-                    cursor_position,
+                    screen_position,
                     Camera);
                 if (cursor_in_rect)
-                    Cursor.RectTransform.position = world_position;
+                    OnSetCursorPosition(world_position);
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        protected void OnSetCursorPosition(Vector3 world_position)
         {
-            CursorInArea = true;
+            Cursor.RectTransform.position = world_position;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public void OnPointerHover(PointerEventData eventData)
         {
-            CursorInArea = false;
+            // Optimization: only calculate the world position from screen position
+            // if the world position is not already defined.
+            // Ideally, the result should be the same.
+            var world_position = eventData.pointerCurrentRaycast.worldPosition;
+            if (world_position == Vector3.zero)
+                OnSetCursorScreenPosition(eventData.position);
+            else
+                OnSetCursorPosition(world_position);
         }
 
         public void OnBeforeSerialize()
