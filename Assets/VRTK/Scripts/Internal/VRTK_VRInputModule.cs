@@ -4,6 +4,7 @@
     using UnityEngine.EventSystems;
     using UnityEngine.UI;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class VRTK_VRInputModule : PointerInputModule
     {
@@ -53,14 +54,11 @@
             List<RaycastResult> raycasts = new List<RaycastResult>();
             eventSystem.RaycastAll(pointer.pointerEventData, raycasts);
 
-            //foreach(var r in raycasts)
-            //{
-            //    var a = r.worldPosition;
-            //    var n = (r.worldNormal + new Vector3(0.0001f, 0f, 0f)).normalized;
-            //    var b = a + n;
-            //    Debug.DrawLine(a, b, Color.cyan);
-            //}
-            
+            // <edit>
+            // Restrict raycast results to VRTK_UIGraphicRaycaster type
+            //raycasts = raycasts.Where(r => r.module is VRTK_UIGraphicRaycaster).ToList();
+            // </edit>
+
             return raycasts;
         }
 
