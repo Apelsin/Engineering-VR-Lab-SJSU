@@ -32,9 +32,13 @@ namespace CVRLabSJSU
             set
             {
                 _IsSelected = value;
-                var colors = Button.colors;
-                colors.normalColor = IsSelected ? SelectedColor : DefaultColor;
-                Button.colors = colors;
+                // BUG: When IsSelected is called from OnBeforeSerialize, Button is null...for some reason...
+                if (Button)
+                {
+                    var colors = Button.colors;
+                    colors.normalColor = IsSelected ? SelectedColor : DefaultColor;
+                    Button.colors = colors;
+                }
             }
         }
 
