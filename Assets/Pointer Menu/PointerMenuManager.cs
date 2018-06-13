@@ -72,7 +72,7 @@ namespace CVRLabSJSU
                 pointer.pointerRenderer.layersToIgnore = MenuLayerIgnoreMask;
                 var map = button_behavior_manager?.GetButtonBehaviorsMap();
                 // Here is where the magic happens
-                pointer_context_menu.SetMenuButtons(managed_pointer_menu.Buttons, map);
+                pointer_context_menu.OnSetManagedMenuButtons(managed_pointer_menu.Buttons, map);
                 // Magic happens here
                 MenuAdded.Invoke(this, new PointerMenuEventArgs()
                 {

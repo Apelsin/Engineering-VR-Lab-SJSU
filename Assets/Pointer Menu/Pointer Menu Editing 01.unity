@@ -198,8 +198,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  Template: {fileID: 11400000, guid: c51846b8cd0049f48b988e8dd99c3a66, type: 2}
-  Buttons: []
+  _Template: {fileID: 11400000, guid: c51846b8cd0049f48b988e8dd99c3a66, type: 2}
+  _SharedTemplate: {fileID: 0}
+  _Buttons: []
+  _MenuAddedCallback:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CVRLabSJSU.PointerMenuManager+PointerMenuEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _MenuRemovedCallback:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CVRLabSJSU.PointerMenuManager+PointerMenuEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &155047812
 GameObject:
   m_ObjectHideFlags: 0

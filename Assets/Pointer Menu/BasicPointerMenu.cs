@@ -53,7 +53,7 @@ namespace CVRLabSJSU
                 };
                 pointer.pointerRenderer.layersToIgnore = MenuLayerIgnoreMask;
                 var map = button_behavior_manager?.GetButtonBehaviorsMap();
-                pointer_context_menu.SetMenuButtons(Buttons, map);
+                pointer_context_menu.OnSetManagedMenuButtons(Buttons, map);
             }
         }
 
