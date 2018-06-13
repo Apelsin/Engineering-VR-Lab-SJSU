@@ -148,7 +148,7 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
-  AllowProcessMouseEvent: 1
+  AllowProcessMouseEvent: 0
 --- !u!114 &1093315670
 MonoBehaviour:
   m_ObjectHideFlags: 0
