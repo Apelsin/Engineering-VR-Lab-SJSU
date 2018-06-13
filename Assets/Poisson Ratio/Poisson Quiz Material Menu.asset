@@ -13,20 +13,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Buttons:
   - Id: BtnPolymer
+    Class: TCQuizOption
     Text: Polymer
+    Checked: 0
     Children: []
   - Id: 
+    Class: 
     Text: 
+    Checked: 0
     Children: []
   - Id: BtnMetal
+    Class: TCQuizOption
     Text: Metal
+    Checked: 0
     Children: []
   - Id: 
+    Class: 
     Text: 
+    Checked: 0
     Children: []
   - Id: 
+    Class: 
     Text: 
+    Checked: 0
     Children: []
   - Id: BtnCeramic
+    Class: TCQuizOption
     Text: Ceramic
+    Checked: 0
     Children: []
