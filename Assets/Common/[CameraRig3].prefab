@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 20115244844525820}
   - component: {fileID: 124015193507362208}
   - component: {fileID: 114483265485599472}
-  - component: {fileID: 114427170506888442}
+  - component: {fileID: 114896793563477090}
   m_Layer: 0
   m_Name: Camera (eye)
   m_TagString: Untagged
@@ -213,7 +213,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343799266892150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4641358177635584}
@@ -452,13 +452,13 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.08
     y: 0
-    width: 1
+    width: 1.18
     height: 1
   near clip plane: 0.05
   far clip plane: 1000
-  field of view: 54
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -2
@@ -693,20 +693,6 @@ MonoBehaviour:
   verbose: 0
   createComponents: 1
   updateDynamically: 1
---- !u!114 &114427170506888442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1579863081782842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _head: {fileID: 4742138451269058}
-  _ears: {fileID: 4764443156687360}
-  wireframe: 0
 --- !u!114 &114469899896702076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -888,6 +874,20 @@ MonoBehaviour:
   currentlySelectedObject: {fileID: 0}
   infoScreen: {fileID: 0}
   isGrabbing: 0
+--- !u!114 &114896793563477090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579863081782842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _head: {fileID: 4742138451269058}
+  _ears: {fileID: 4764443156687360}
+  wireframe: 0
 --- !u!114 &114952760337681518
 MonoBehaviour:
   m_ObjectHideFlags: 1
