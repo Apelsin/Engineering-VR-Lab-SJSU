@@ -104,7 +104,7 @@ namespace CVRLabSJSU
         }
 
         public void OnSetManagedMenuButtons(
-            ButtonInfo[] button_infos,
+            List<ButtonInfo> button_infos,
             IDictionary<string, ManagedButtonBehavior> behaviors)
         {
             // Set menu buttons and behaviors
@@ -112,7 +112,7 @@ namespace CVRLabSJSU
             {
                 button.onClick.RemoveAllListeners();
             }
-            var number_of_buttons = Mathf.Min(button_infos.Length, Buttons.Length);
+            var number_of_buttons = Mathf.Min(button_infos.Count, Buttons.Length);
             int i;
             if (behaviors == null)
                 Debug.LogWarning("Behaviors mapping is null.");

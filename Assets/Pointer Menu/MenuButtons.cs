@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace CVRLabSJSU
 {
     public class MenuButtons : ScriptableObject
     {
-        public ButtonInfo[] Buttons;
+        public List<ButtonInfo> Buttons = new List<ButtonInfo>();
     }
 }

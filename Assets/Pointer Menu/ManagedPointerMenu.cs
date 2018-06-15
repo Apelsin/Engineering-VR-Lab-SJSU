@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -70,13 +71,13 @@ namespace CVRLabSJSU
             else if (Template)
                 _Buttons = Template.Buttons;
             else
-                _Buttons = default(ButtonInfo[]);
+                _Buttons = default(List<ButtonInfo>);
         }
 
         [SerializeField]
-        private ButtonInfo[] _Buttons;
+        private List<ButtonInfo> _Buttons;
 
-        public ButtonInfo[] Buttons
+        public List<ButtonInfo> Buttons
         {
             get { return _Buttons; }
         }
@@ -134,12 +135,12 @@ namespace CVRLabSJSU
 
         // TODO: improve memory efficiency of this function and ButtonInfo in general
         // Probably use a backing hashtable for Button array
-        protected static bool CheckButton(ref ButtonInfo[] buttons, string id, bool @checked)
+        protected static bool CheckButton(ref List<ButtonInfo> buttons, string id, bool @checked)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 var button = buttons[i];
-                if (button.Children.Length > 0)
+                if (button.Children != null && button.Children.Count > 0)
                 {
                     if (CheckButton(ref button.Children, id, @checked))
                     {
@@ -157,9 +158,9 @@ namespace CVRLabSJSU
             return false;
         }
 
-        protected static bool IsButtonChecked(ref ButtonInfo[] buttons, string id, out bool @checked)
+        protected static bool IsButtonChecked(ref List<ButtonInfo> buttons, string id, out bool @checked)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 var button = buttons[i];
                 if (button.Id == id)
@@ -167,7 +168,7 @@ namespace CVRLabSJSU
                     @checked = button.Checked;
                     return true;
                 }
-                if (button.Children.Length > 0 && IsButtonChecked(ref button.Children, id, out @checked))
+                if (button.Children.Count > 0 && IsButtonChecked(ref button.Children, id, out @checked))
                     return true;
             }
             @checked = false;
@@ -186,13 +187,13 @@ namespace CVRLabSJSU
             ClearCheckedButtons(ref _Buttons, @checked);
         }
 
-        protected static void ClearCheckedButtons(ref ButtonInfo[] buttons, bool @checked = false)
+        protected static void ClearCheckedButtons(ref List<ButtonInfo> buttons, bool @checked = false)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 var button = buttons[i];
                 button.Checked = @checked;
-                if (button.Children.Length > 0)
+                if (button.Children != null && button.Children.Count > 0)
                     ClearCheckedButtons(ref button.Children, @checked);
                 buttons[i] = button; // Replace button info value in array
             }
@@ -233,7 +234,7 @@ namespace CVRLabSJSU
                 Template = Template; // Round trip
             else
                 Debug.LogWarning("Menu has no template.");
-            if (Buttons.Length == 0)
+            if (Buttons.Count == 0)
                 Debug.LogWarning("Menu has no buttons.");
         }
 

@@ -14,7 +14,7 @@ namespace CVRLabSJSU
         public LayerMask MenuLayerIgnoreMask = ~UI_LAYER_MASK;
         public MenuButtons Template;
 
-        public ButtonInfo[] Buttons;
+        public List<ButtonInfo> Buttons;
 
         private struct PointerMenuInfo
         {
@@ -69,10 +69,10 @@ namespace CVRLabSJSU
         public void Start()
         {
             if (Template)
-                Buttons = Template.Buttons.ToArray();
+                Buttons = Template.Buttons.ToList();
             else
                 Debug.LogWarning("Menu has no template.");
-            if (Buttons.Length == 0)
+            if (Buttons.Count == 0)
                 Debug.LogWarning("Menu has no buttons.");
         }
 

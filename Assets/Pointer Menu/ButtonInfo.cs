@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
 
@@ -13,8 +14,8 @@ namespace CVRLabSJSU
         public string Text;
         public object Data;
         public bool Checked;
-        public ButtonInfo[] Children;
-        public bool IsTerminal { get { return !(Children?.Length > 0); } }
+        public List<ButtonInfo> Children;
+        public bool IsTerminal { get { return !(Children?.Count > 0); } }
     }
 
     [Serializable]
