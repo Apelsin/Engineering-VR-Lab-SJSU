@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdba99556fe8dbc4e8a2416bf19aa5ed, type: 3}
+  m_Name: TC Quiz
+  m_EditorClassIdentifier: 
+  Text: 
+  Items:
+  - {fileID: 11400000, guid: 42a0654a7d25aad48b989ce2b550c154, type: 2}
+  - {fileID: 11400000, guid: abb7b8b9125559d48ac53c748cf5a5c9, type: 2}
+  - {fileID: 11400000, guid: 329c7eaa6164e204f9a29a12acb1983b, type: 2}

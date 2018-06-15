@@ -241,16 +241,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcc52123893bd544815abc2acac5aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Source: {fileID: 11400000, guid: 740a5944b6da47c4c9507ef781c2f01f, type: 2}
   TensionObjects:
     Reference: {fileID: 1371873829}
-    Metal: {fileID: 1371873828}
-    Ceramic: {fileID: 1371873827}
-    Polymer: {fileID: 1371873826}
+    Material01: {fileID: 1371873828}
+    Material02: {fileID: 1371873827}
+    Material03: {fileID: 1371873826}
   CompressionObjects:
     Reference: {fileID: 1412348198}
-    Metal: {fileID: 1412348199}
-    Ceramic: {fileID: 1412348200}
-    Polymer: {fileID: 1412348201}
+    Material01: {fileID: 1412348199}
+    Material02: {fileID: 1412348200}
+    Material03: {fileID: 1412348201}
 --- !u!1001 &354835070
 Prefab:
   m_ObjectHideFlags: 0
@@ -1098,15 +1099,15 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 8e21052fcf729f94fbc80a6d70d8a5a5, type: 2}
     - target: {fileID: 100008, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
-      value: Polymer
+      value: Material03
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
-      value: Ceramic
+      value: Material02
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
-      value: Metal
+      value: Material01
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
@@ -1147,7 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1227,7 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1307,7 +1308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1387,7 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1589,15 +1590,15 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 664603ab81662db4290111101905d638, type: 2}
     - target: {fileID: 100002, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
-      value: Polymer
+      value: Material03
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
-      value: Ceramic
+      value: Material02
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
-      value: Metal
+      value: Material01
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 9c21e23a89e85d147be455c125325224, type: 3}
       propertyPath: m_Name
@@ -1638,7 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1718,7 +1719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1798,7 +1799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
@@ -1878,7 +1879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Manager: {fileID: 0}
-  _Template: {fileID: 11400000, guid: 6f86e8be55c20d64f825de854ed7e629, type: 2}
+  _Template: {fileID: 0}
   _SharedTemplate: {fileID: 0}
   _Buttons: []
   _MenuAddedCallback:
