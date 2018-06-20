@@ -30,16 +30,18 @@ bin/
 .vscode
 
 # Sirenix plugins (Odin Inspector, etc.)
-# You will need to add this yourself
+# You will need to provide this yourself
 Assets/Plugins/Sirenix
 Assets/Plugins/Sirenix.meta
-
-# Unity is putting some DLLs in the base directory for some odd reason...
-/*.dll
+**/EnsureOdinInspectorDefine.cs
+**/EnsureOdinInspectorDefine.cs.meta
 
 # Unity scripting define symbols will be user-dependent
 Assets/mcs.rsp
 Assets/mcs.rsp.meta
+
+# Unity is putting some DLLs in the base directory for some odd reason...
+/*.dll
 
 # OS Stuff
 .DS_Store
