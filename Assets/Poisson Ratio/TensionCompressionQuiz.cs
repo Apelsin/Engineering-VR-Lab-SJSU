@@ -34,10 +34,21 @@ namespace CVRLabSJSU
             }
         }
 
+        private struct QuizChoice
+        {
+            public string ItemId;
+            public MultipleChoiceQuizItem.Option ChosenOption;
+        }
+
         public MultipleChoiceQuiz Source;
 
         public TCObjects TensionObjects;
         public TCObjects CompressionObjects;
+
+        public Animator Animator;
+
+        private Dictionary<string, QuizChoice> QuizAnswers =
+            new Dictionary<string, QuizChoice>();
 
         private void HandleMenuAddedCallback(object sender, PointerMenuManager.PointerMenuEventArgs args)
         {
@@ -60,18 +71,33 @@ namespace CVRLabSJSU
                 // Read from current buttons array
                 foreach (var info in current_infos)
                 {
+                    // If the clicked button info id matches any of the current button infos
                     if (info.Id == args2.Info.Id)
                     {
                         // TODO: separate color and checked logic (decouple)
-                        // Clear colors
+                        // Clear button colors
                         foreach (var button in buttons)
                             button.colors = normal_colors;
-                        // Clear logic
+
+                        // Clear pointer menu button checked states
                         pointer_menu.ClearCheckedButtons();
-                        // Set colors
+
+                        // Set button colors
                         args2.Button.colors = checked_colors;
-                        // Set logic
+
+                        // Set pointer menu button checked
                         pointer_menu.SetButtonChecked(args2.Info.Id, true);
+
+                        // Quiz logic
+                        // Merge the chosen button info's quiz choice to the quiz answers dictionary
+                        var choice = (QuizChoice)args2.Info.Data;
+                        QuizAnswers[choice.ItemId] = choice;
+
+                        // Show the check answers button when the quiz is ready for assessment
+                        var quiz_ready_for_assessment = IsQuizReadyForAssessment();
+                        ShowCheckAnswersButton(quiz_ready_for_assessment);
+
+                        // Break because we matched
                         break;
                     }
                 }
@@ -86,6 +112,21 @@ namespace CVRLabSJSU
             };
 
             CheckButtons(buttons, current_infos, ref normal_colors, ref checked_colors);
+        }
+
+        private bool IsQuizReadyForAssessment()
+        {
+            return Source.Items.All(i => QuizAnswers.ContainsKey(i.Id));
+        }
+
+        private void ShowCheckAnswersButton(bool value)
+        {
+            Animator.SetBool("Show Check Answers", value);
+        }
+
+        public void DisplayQuizResults()
+        {
+            Debug.LogWarning("TODO\nDisplayQuizResults");
         }
 
         /// <summary>
@@ -128,7 +169,16 @@ namespace CVRLabSJSU
                     {
                         // Make button infos for each quiz item option
                         var button_infos = e.quiz_item.Options
-                            .Select(i => new ButtonInfo() { Id = i.Id, Text = i.Text, Data = i });
+                            .Select(i => new ButtonInfo()
+                            {
+                                Id = i.Id,
+                                Text = i.Text,
+                                Data = new QuizChoice()
+                                {
+                                    ItemId = e.quiz_item.Id,
+                                    ChosenOption = i
+                                }
+                            });
                         template = new MenuButtons()
                         {
                             Buttons = button_infos.ToList()
@@ -190,6 +240,8 @@ namespace CVRLabSJSU
 
         public void OnBeforeSerialize()
         {
+            if (Animator == null)
+                Animator = GetComponent<Animator>();
         }
 
         public void OnAfterDeserialize()
