@@ -19,6 +19,7 @@ TagManager:
   - LCD
   - Single Test Tensile Graph
   - Multi Test Tensile Graph
+  - Global Lighting
   layers:
   - Default
   - TransparentFX
