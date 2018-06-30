@@ -1259,6 +1259,7 @@ GameObject:
   - component: {fileID: 1648395242}
   - component: {fileID: 1648395241}
   - component: {fileID: 1648395240}
+  - component: {fileID: 1648395243}
   m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
@@ -1273,7 +1274,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1648395238}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.501}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children:
   - {fileID: 1633581347}
@@ -1342,6 +1343,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1648395243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1648395238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1518a5e598c7da244bc4850d3ae63354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickOnPointerCollision: 0
+  autoActivateWithinDistance: 0
 --- !u!1 &1832748886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,6 +1622,7 @@ MonoBehaviour:
     type: 2}
   _NumberOfParticles: 200
   _ParticleEnergy: 1
+  _NumberOfParticleTrails: 5
 --- !u!114 &1978477210
 MonoBehaviour:
   m_ObjectHideFlags: 0
