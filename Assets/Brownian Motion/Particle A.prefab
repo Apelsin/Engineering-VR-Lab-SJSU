@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4237952148137654}
   - component: {fileID: 33519427991609110}
   - component: {fileID: 23297427616432166}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4028918964954484}
   - component: {fileID: 33593726016802268}
   - component: {fileID: 23976747980398444}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4768926154108804}
   - component: {fileID: 33160974035408536}
   - component: {fileID: 23221001130134100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4987561034530662}
   - component: {fileID: 33901489552546592}
   - component: {fileID: 23781698030624274}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 54847847339950626}
   - component: {fileID: 135891424320516724}
   - component: {fileID: 96647248457799134}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4828967754659084}
   - component: {fileID: 33111624402093498}
   - component: {fileID: 23651532783853400}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere_LOD4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
