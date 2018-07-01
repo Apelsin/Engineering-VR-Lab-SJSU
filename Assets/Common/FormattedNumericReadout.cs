@@ -75,18 +75,21 @@ public class FormattedNumericReadout : MonoBehaviour, ISerializationCallbackRece
     {
         if (String.IsNullOrWhiteSpace(format))
         {
-            text_component.text = value.ToString();
+            if (text_component)
+                text_component.text = value.ToString();
             return;
         }
         try
         {
             var rounded_value = ApplyRounding(value, rounding_mode);
             var formatted = string.Format(format, rounded_value);
-            text_component.text = formatted;
+            if(text_component)
+                text_component.text = formatted;
         }
         catch (FormatException)
         {
-            text_component.text = format;
+            if (text_component)
+                text_component.text = format;
         }
     }
 
