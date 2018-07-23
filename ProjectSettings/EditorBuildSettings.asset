@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: f5778428d49f9f74eafa0babadbc61f9
   - enabled: 1
+    path: Assets/Scenes/Tensile Lateral Quiz 01.unity
+    guid: 883f4b7ad13ad3f4981e7386111d6a95
+  - enabled: 1
     path: Assets/Scenes/Tensile Testing 01.unity
     guid: daba8ffd9251a9a4db3a0b9b6f3879a9
   - enabled: 1
