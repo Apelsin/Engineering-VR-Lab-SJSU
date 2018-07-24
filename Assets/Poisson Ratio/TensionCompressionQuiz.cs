@@ -3,12 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CVRLabSJSU
 {
     public class TensionCompressionQuiz : MonoBehaviour, ISerializationCallbackReceiver
     {
+        [SerializeField]
+        [Sirenix.OdinInspector.DrawWithUnity]
+        private MCQuizResultsEvent _DisplayResults = new MCQuizResultsEvent();
+
+        public event UnityAction<object, MCQuizResultsEventArgs> DisplayResults
+        {
+            add
+            {
+                _DisplayResults.AddListener(value);
+            }
+            remove
+            {
+                _DisplayResults.RemoveListener(value);
+            }
+        }
+
         [Serializable]
         public struct TCObjects : IEnumerable<GameObject>
         {
@@ -47,7 +64,7 @@ namespace CVRLabSJSU
 
         public Animator Animator;
 
-        private Dictionary<string, MultipleChoiceQuizItem.Option> QuizAnswers =
+        private Dictionary<string, MultipleChoiceQuizItem.Option> QuizChoices =
             new Dictionary<string, MultipleChoiceQuizItem.Option>();
 
         private void HandleMenuAddedCallback(object sender, PointerMenuManager.PointerMenuEventArgs args)
@@ -116,7 +133,7 @@ namespace CVRLabSJSU
 
         public void SetQuizChoice(string item_id, MultipleChoiceQuizItem.Option choice_option)
         {
-            QuizAnswers[item_id] = choice_option;
+            QuizChoices[item_id] = choice_option;
         }
 
         public void SetQuizChoice(QuizChoice choice)
@@ -132,18 +149,19 @@ namespace CVRLabSJSU
 
         private bool IsQuizReadyForAssessment()
         {
-            return Source.Items.All(i => QuizAnswers.ContainsKey(i.Id));
+            return Source.Items.All(i => QuizChoices.ContainsKey(i.Id));
         }
 
-        private void ShowCheckAnswersButton(bool value)
+        public void ShowCheckAnswersButton(bool value)
         {
             Animator.SetBool("Show Check Answers", value);
         }
 
-        public void DisplayQuizResults()
+        public void OnDisplayQuizResults()
         {
-            var report_lines = QuizAnswers.Select(q => $"{q.Key}: {q.Value}");
-            var report = String.Join("\n", report_lines.ToArray());
+            // TODO: replace quiz_id: Source.name with something more definitive
+            var args = new MCQuizResultsEventArgs(Source.name, QuizChoices);
+            _DisplayResults.Invoke(this, args);
         }
 
         public QuizChoice DbgQuizChoice(QuizChoice choice)
