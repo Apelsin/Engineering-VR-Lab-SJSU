@@ -34,7 +34,7 @@ namespace CVRLabSJSU
             }
         }
 
-        private struct QuizChoice
+        public struct QuizChoice
         {
             public string ItemId;
             public MultipleChoiceQuizItem.Option ChosenOption;
@@ -47,8 +47,8 @@ namespace CVRLabSJSU
 
         public Animator Animator;
 
-        private Dictionary<string, QuizChoice> QuizAnswers =
-            new Dictionary<string, QuizChoice>();
+        private Dictionary<string, MultipleChoiceQuizItem.Option> QuizAnswers =
+            new Dictionary<string, MultipleChoiceQuizItem.Option>();
 
         private void HandleMenuAddedCallback(object sender, PointerMenuManager.PointerMenuEventArgs args)
         {
@@ -91,7 +91,7 @@ namespace CVRLabSJSU
                         // Quiz logic
                         // Merge the chosen button info's quiz choice to the quiz answers dictionary
                         var choice = (QuizChoice)args2.Info.Data;
-                        QuizAnswers[choice.ItemId] = choice;
+                        SetQuizChoice(choice);
 
                         // Show the check answers button when the quiz is ready for assessment
                         var quiz_ready_for_assessment = IsQuizReadyForAssessment();
@@ -114,6 +114,22 @@ namespace CVRLabSJSU
             CheckButtons(buttons, current_infos, ref normal_colors, ref checked_colors);
         }
 
+        public void SetQuizChoice(string item_id, MultipleChoiceQuizItem.Option choice_option)
+        {
+            QuizAnswers[item_id] = choice_option;
+        }
+
+        public void SetQuizChoice(QuizChoice choice)
+        {
+            SetQuizChoice(choice.ItemId, choice.ChosenOption);
+        }
+
+        public void SetQuizChoice(string choice_json)
+        {
+            var choice = JsonUtility.FromJson<QuizChoice>(choice_json);
+            SetQuizChoice(choice);
+        }
+
         private bool IsQuizReadyForAssessment()
         {
             return Source.Items.All(i => QuizAnswers.ContainsKey(i.Id));
@@ -126,7 +142,14 @@ namespace CVRLabSJSU
 
         public void DisplayQuizResults()
         {
-            Debug.LogWarning("TODO\nDisplayQuizResults");
+            var report_lines = QuizAnswers.Select(q => $"{q.Key}: {q.Value}");
+            var report = String.Join("\n", report_lines.ToArray());
+        }
+
+        public QuizChoice DbgQuizChoice(QuizChoice choice)
+        {
+            Debug.Log(JsonUtility.ToJson(choice));
+            return choice;
         }
 
         /// <summary>
