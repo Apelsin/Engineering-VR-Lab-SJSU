@@ -2390,7 +2390,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934160863014112}
   m_LocalRotation: {x: -0.7071068, y: 0.000000014901159, z: 0.000000014901159, w: 0.7071068}
-  m_LocalPosition: {x: 0.74999994, y: -0.71874976, z: 0}
+  m_LocalPosition: {x: 0.74999994, y: -0.71875, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4409451418817290}
@@ -3957,10 +3957,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb87a0affd835d84398b8369dc711b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tip: {fileID: 0}
-  End: {fileID: 0}
-  Target: {fileID: 0}
-  Reference: {fileID: 0}
+  Tip: {fileID: 4070810718617156}
+  End: {fileID: 4957125977125580}
+  Target: {fileID: 4070431695135116}
+  Reference: {fileID: 4793551462565836}
 --- !u!114 &114033543194894170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4090,10 +4090,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb87a0affd835d84398b8369dc711b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tip: {fileID: 0}
-  End: {fileID: 0}
-  Target: {fileID: 0}
-  Reference: {fileID: 0}
+  Tip: {fileID: 4941313594137954}
+  End: {fileID: 4948999896044880}
+  Target: {fileID: 4241632367498784}
+  Reference: {fileID: 4160502935055446}
 --- !u!114 &114098870616488134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4185,10 +4185,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c82c5611cc0b7429cd136b3cb85c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reference: {fileID: 0}
+  Reference: {fileID: 8600000, guid: 6d80a4fed57516e4db56788f7b3d3d69, type: 2}
   Instantiated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114831056496001256}
+        m_MethodName: set_texture
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 20369867408755260}
+        m_MethodName: set_targetTexture
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: CVRLabSJSU.InstancedRenderTexture+RenderTextureInstantiatedEvent,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &114209826765375056
@@ -4202,10 +4224,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c82c5611cc0b7429cd136b3cb85c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reference: {fileID: 0}
+  Reference: {fileID: 8600000, guid: 5bc6947c655f0cb4eb0d92e2938a4334, type: 2}
   Instantiated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114364889404429992}
+        m_MethodName: set_texture
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 20950449419169870}
+        m_MethodName: set_targetTexture
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: CVRLabSJSU.InstancedRenderTexture+RenderTextureInstantiatedEvent,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &114231778908045920
@@ -4353,10 +4397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb87a0affd835d84398b8369dc711b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tip: {fileID: 0}
-  End: {fileID: 0}
-  Target: {fileID: 0}
-  Reference: {fileID: 0}
+  Tip: {fileID: 4136209209084214}
+  End: {fileID: 4458537193582566}
+  Target: {fileID: 4821234842493024}
+  Reference: {fileID: 4009043769594956}
 --- !u!114 &114308168851499552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4736,8 +4780,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Stress: 0
-  ModulusOfElasticity: 2000000
-  PoissonRatio: 0
+  ModulusOfElasticity: 2000
+  PoissonRatio: 0.2
 --- !u!114 &114559777199528820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4763,22 +4807,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d17ca5ba9f67f45a2db3e260b17c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PressureReadout: {fileID: 0}
+  PressureReadout: {fileID: 114098870616488134}
   PressureScale: 1
-  PressureUnits: 
-  PoissonRatioReadout: {fileID: 0}
-  PoissonGraphTransform: {fileID: 0}
-  PoissonGraphMarkerTransform: {fileID: 0}
-  SlopeLine: {fileID: 0}
+  PressureUnits: MPa
+  PoissonRatioReadout: {fileID: 114014439926441216}
+  PoissonGraphTransform: {fileID: 224805880123793792}
+  PoissonGraphMarkerTransform: {fileID: 224517618118948682}
+  SlopeLine: {fileID: 224516193115041294}
   PoissonGraphZoomAmount: 1
-  Reference: {fileID: 0}
-  ReferenceTensileMarker: {fileID: 0}
-  ReferenceLateralMarker: {fileID: 0}
-  SpecimenTensileMarker: {fileID: 0}
-  SpecimenLateralMarker: {fileID: 0}
-  ReferenceCollider: {fileID: 0}
-  EpsilonTReadout: {fileID: 0}
-  EpsilonLReadout: {fileID: 0}
+  Reference: {fileID: 4070725199952300}
+  ReferenceTensileMarker: {fileID: 4202518823405904}
+  ReferenceLateralMarker: {fileID: 4564865934075524}
+  SpecimenTensileMarker: {fileID: 4722095324490670}
+  SpecimenLateralMarker: {fileID: 4680270360405372}
+  ReferenceCollider: {fileID: 65564446406691608}
+  EpsilonTReadout: {fileID: 114050343057950958}
+  EpsilonLReadout: {fileID: 114847857620458442}
   DebugViz: 0
 --- !u!114 &114611216725519724
 MonoBehaviour:
@@ -5092,8 +5136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Stress: 0
-  ModulusOfElasticity: 2000000
-  PoissonRatio: 0
+  ModulusOfElasticity: 2000
+  PoissonRatio: 0.2
 --- !u!114 &114916003824367736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5154,10 +5198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb87a0affd835d84398b8369dc711b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tip: {fileID: 0}
-  End: {fileID: 0}
-  Target: {fileID: 0}
-  Reference: {fileID: 0}
+  Tip: {fileID: 4789348912820356}
+  End: {fileID: 4030805354542838}
+  Target: {fileID: 4145849708843674}
+  Reference: {fileID: 4103584567567486}
 --- !u!114 &114926770927261826
 MonoBehaviour:
   m_ObjectHideFlags: 1
