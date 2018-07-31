@@ -32,6 +32,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1168629028256214
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4041902139893030}
+  - component: {fileID: 20744540547397368}
+  m_Layer: 0
+  m_Name: Outline Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1204171053252668
 GameObject:
   m_ObjectHideFlags: 1
@@ -102,6 +118,7 @@ GameObject:
   - component: {fileID: 4242641631290508}
   - component: {fileID: 114286436438773036}
   - component: {fileID: 95753472752081450}
+  - component: {fileID: 114653143042800264}
   m_Layer: 0
   m_Name: TC Quiz
   m_TagString: Untagged
@@ -300,6 +317,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4041902139893030
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168629028256214}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.00000029802322, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.1, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4279242659536646}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4242641631290508
 Transform:
   m_ObjectHideFlags: 1
@@ -330,6 +360,7 @@ Transform:
   - {fileID: 4355836560145252}
   - {fileID: 4708649677964978}
   - {fileID: 4990285722600924}
+  - {fileID: 4041902139893030}
   m_Father: {fileID: 4242641631290508}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -454,6 +485,46 @@ Transform:
   m_Father: {fileID: 4279242659536646}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &20744540547397368
+Camera:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168629028256214}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_RenderingPath: 1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!23 &23260008011131718
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -986,7 +1057,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114286436438773036}
-        m_MethodName: DisplayQuizResults
+        m_MethodName: OnDisplayQuizResults
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1054,6 +1125,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcc52123893bd544815abc2acac5aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _DisplayResults:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114653143042800264}
+        m_MethodName: HandleDisplayResults
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: HandleLogQuizResult
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: CVRLabSJSU.MCQuizResultsEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   Source: {fileID: 11400000, guid: 740a5944b6da47c4c9507ef781c2f01f, type: 2}
   TensionObjects:
     Reference: {fileID: 1840686634824606}
@@ -1447,6 +1545,29 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: CVRLabSJSU.PointerMenuManager+PointerMenuEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114653143042800264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397751635048016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcb3e03b26c37943b1aacfb1c5fb323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TensionObjects:
+    Reference: {fileID: 1840686634824606}
+    Material01: {fileID: 1775275892466424}
+    Material02: {fileID: 1401815585406274}
+    Material03: {fileID: 1204171053252668}
+  CompressionObjects:
+    Reference: {fileID: 1554827501535324}
+    Material01: {fileID: 1516609008117058}
+    Material02: {fileID: 1084587377128350}
+    Material03: {fileID: 1638987252428632}
+  CorrectOutlineColorIndex: 1
+  IncorrectOutlineColorIndex: 2
 --- !u!114 &114676925747719494
 MonoBehaviour:
   m_ObjectHideFlags: 1
