@@ -6,6 +6,6 @@ namespace CVRLabSJSU
 {
     public interface IQuizLogger
     {
-        void LogQuizResult(string session_id, string quiz_id, IReadOnlyDictionary<string, MultipleChoiceQuizItem.Option> choices);
+        void LogQuizResult(string result_id, IReadOnlyDictionary<string, MultipleChoiceQuizItem.Option> choices);
     }
 }
