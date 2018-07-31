@@ -1,9 +1,11 @@
 ﻿using cakeslice;
 using CVRLabSJSU;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PointerOutlineConfigurator : MonoBehaviour
 {
+    private Dictionary<GameObject, Outline> ManagedOutlines = new Dictionary<GameObject, Outline>();
     private void Start()
     {
         var pointer_menu_manager = FindObjectOfType<PointerMenuManager>();
@@ -18,13 +20,16 @@ public class PointerOutlineConfigurator : MonoBehaviour
 
     private void HandleMenuAdded(object sender, PointerMenuManager.PointerMenuEventArgs args)
     {
-        args.RaycastHit.transform.gameObject.AddComponent<Outline>();
+        var game_object = args.RaycastHit.transform.gameObject;
+        var outline = game_object.AddComponent<Outline>();
+        ManagedOutlines[game_object] = outline;
     }
 
     private void HandleMenuRemoved(object sender, PointerMenuManager.PointerMenuEventArgs args)
     {
-        var outline = args.RaycastHit.transform.gameObject.GetComponent<Outline>();
-        if (outline)
+        var game_object = args.RaycastHit.transform.gameObject;
+        Outline outline;
+        if (ManagedOutlines.TryGetValue(game_object, out outline))
             Destroy(outline);
     }
 }
