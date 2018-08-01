@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: 56ffffeca5514154c9fbb752ffe60859
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Root
+    100004: Skin
+    100006: Taper.0
+    100008: Taper.1
+    100010: Taper.10
+    100012: Taper.11
+    100014: Taper.12
+    100016: Taper.13
+    100018: Taper.14
+    100020: Taper.15
+    100022: Taper.16
+    100024: Taper.17
+    100026: Taper.18
+    100028: Taper.19
+    100030: Taper.2
+    100032: Taper.20
+    100034: Taper.21
+    100036: Taper.22
+    100038: Taper.23
+    100040: Taper.24
+    100042: Taper.25
+    100044: Taper.26
+    100046: Taper.27
+    100048: Taper.28
+    100050: Taper.29
+    100052: Taper.3
+    100054: Taper.30
+    100056: Taper.31
+    100058: Taper.32
+    100060: Taper.4
+    100062: Taper.5
+    100064: Taper.6
+    100066: Taper.7
+    100068: Taper.8
+    100070: Taper.9
+    400000: //RootNode
+    400002: Root
+    400004: Skin
+    400006: Taper.0
+    400008: Taper.1
+    400010: Taper.10
+    400012: Taper.11
+    400014: Taper.12
+    400016: Taper.13
+    400018: Taper.14
+    400020: Taper.15
+    400022: Taper.16
+    400024: Taper.17
+    400026: Taper.18
+    400028: Taper.19
+    400030: Taper.2
+    400032: Taper.20
+    400034: Taper.21
+    400036: Taper.22
+    400038: Taper.23
+    400040: Taper.24
+    400042: Taper.25
+    400044: Taper.26
+    400046: Taper.27
+    400048: Taper.28
+    400050: Taper.29
+    400052: Taper.3
+    400054: Taper.30
+    400056: Taper.31
+    400058: Taper.32
+    400060: Taper.4
+    400062: Taper.5
+    400064: Taper.6
+    400066: Taper.7
+    400068: Taper.8
+    400070: Taper.9
+    2100000: No Name
+    4300000: ASTM_D638-10_Type_I
+    9500000: //RootNode
+    13700000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
