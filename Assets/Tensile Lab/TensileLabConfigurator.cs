@@ -65,12 +65,16 @@ public class TensileLabConfigurator : MonoBehaviour
         {
             if (lever)
             {
+                // Lever press handler
                 lever.Pressed.AddListener(() =>
                 {
+                    // If the tester's grabber is not busy
                     if (!tester.GrabberIsBusy)
                     {
+                        // If the tester's grabber is reset
                         if (tester.GrabberIsReset)
                         {
+                            // If there is a specimen being clamped
                             var clamped_specimen = tester.ClampedSpecimen;
                             if (clamped_specimen)
                             {
@@ -85,13 +89,13 @@ public class TensileLabConfigurator : MonoBehaviour
                                 // Only clear the single grapher
                                 single_grapher.ClearImmediately();
 
+                                // For both graphers/displays
                                 foreach (var grapher in new[] { single_grapher, multi_grapher })
                                 {
                                     // Skip missing graphers
                                     if (grapher == null)
                                         continue;
 
-                                    var tensile_graph_controller = grapher.GetComponentInChildren<TensileGraphController>();
                                     grapher.Curve = specimen_properties.NormalizedStressStrain;
 
                                     grapher.LineColor = specimen_properties.CurveColor;
@@ -99,29 +103,42 @@ public class TensileLabConfigurator : MonoBehaviour
                                     // Set the curve bounds for all graphers (necessary for drawing the curve correctly)
                                     grapher.CurveBounds = new Rect(0f, 0f, max_strain, max_stress);
 
-                                    if (tensile_graph_controller)
-                                    {
-                                        // TODO: struct for these properties???
-                                        tensile_graph_controller.YieldStrength = specimen_properties.YieldStrength;
-                                        tensile_graph_controller.UltimateTensileStrength = specimen_properties.UltimateTensileStrength;
-                                        tensile_graph_controller.FracturePoint = specimen_properties.FracturePoint;
-                                    }
-
                                     grapher.Period = 0.1f; // TODO
                                     grapher.Graph();
                                 }
+
+                                // For single grapher, assign labels for specific points on the curve
+                                var tensile_graph_controller = single_grapher.GetComponentInChildren<TensileGraphController>();
+                                if (tensile_graph_controller)
+                                {
+                                    // TODO: struct for these properties???
+                                    tensile_graph_controller.YieldStrength = specimen_properties.YieldStrength;
+                                    tensile_graph_controller.UltimateTensileStrength = specimen_properties.UltimateTensileStrength;
+                                    tensile_graph_controller.FracturePoint = specimen_properties.FracturePoint;
+                                }
+
+                                // For multi/comparison grapher, assign one label for the newly-added curve
+                                var tensile_graph_id_controller = multi_grapher.GetComponentInChildren<TensileGraphIdentificationController>();
+                                if (tensile_graph_controller)
+                                {
+                                    // Parse the material type
+                                    tensile_graph_id_controller.SetCurrentSpecimenType(specimen_properties.MaterialType);
+                                }
+
                                 tester.OnBeginTensileTest();
                             }
                             else
                                 Debug.LogWarning("Tester needs a clamped specimen to operate");
                         }
-                        else
+                        else // If the grabber is not reset
                         {
+                            // Reset just the single grapher
                             foreach (var grapher in new[] { single_grapher /*, multi_grapher */ })
                             {
                                 grapher.Period = 0.01f; // TODO
                                 grapher.Clear();
                             }
+                            // Reset the tester (grabber)
                             tester.OnResetTensileTest();
                         }
                     }
