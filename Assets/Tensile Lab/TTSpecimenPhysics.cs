@@ -74,12 +74,15 @@ namespace CVRLabSJSU
             set
             {
                 _Morph = Mathf.Clamp01(value);
-                var scale_curve = GetMorphCurve2(ScaleMorphs, value);
-                var displacement_curve = GetMorphCurve2(LateralDisplacementMorphs, value);
+                var mapped_value = Mathf.Clamp01(MorphCurve.Evaluate(value));
+                var scale_curve = GetMorphCurve2(ScaleMorphs, mapped_value);
+                var displacement_curve = GetMorphCurve2(LateralDisplacementMorphs, mapped_value);
                 ApplyScaleCurve(BoneTransforms, scale_curve.Evaluate);
                 ApplyLateralOffsetCurve(BoneTransforms, displacement_curve.Evaluate);
             }
         }
+
+        public AnimationCurve MorphCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
         public AnimationCurve[] ScaleMorphs = new[] { AnimationCurve.Linear(0f, 1f, 1f, 1f) };
         public AnimationCurve[] LateralDisplacementMorphs = new[] { AnimationCurve.Linear(0f, 0f, 1f, 0f) };
