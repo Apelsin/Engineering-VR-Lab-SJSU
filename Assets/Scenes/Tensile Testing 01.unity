@@ -950,6 +950,31 @@ PrefabInstance:
       propertyPath: FracturePoint
       value: 0.95
       objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 3}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].value
+      value: 0.46052247
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 3}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].value
+      value: 0.6253141
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 3}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].value
+      value: 0.79077667
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 3}
+      propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].value
+      value: 0.6154102
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483792877356122, guid: aa63e78255bb1c34199a0eea95fce279,
+        type: 3}
+      propertyPath: MaxStress
+      value: 625
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa63e78255bb1c34199a0eea95fce279, type: 3}
 --- !u!1001 &428972591
@@ -5770,7 +5795,7 @@ PrefabInstance:
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[1].value
-      value: 0.52661264
+      value: 0.46052247
       objectReference: {fileID: 0}
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
@@ -5790,7 +5815,7 @@ PrefabInstance:
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[2].value
-      value: 0.71505374
+      value: 0.6253141
       objectReference: {fileID: 0}
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
@@ -5810,7 +5835,7 @@ PrefabInstance:
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[3].value
-      value: 0.90426207
+      value: 0.79077667
       objectReference: {fileID: 0}
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
@@ -5830,7 +5855,7 @@ PrefabInstance:
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
       propertyPath: NormalizedStressStrain.m_Curve.Array.data[4].value
-      value: 0.70372856
+      value: 0.6154102
       objectReference: {fileID: 0}
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
@@ -5845,7 +5870,7 @@ PrefabInstance:
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
       propertyPath: MaxStress
-      value: 500
+      value: 625
       objectReference: {fileID: 0}
     - target: {fileID: 114668205929172886, guid: b44e6274a92895442b119117ca12e4b4,
         type: 3}
