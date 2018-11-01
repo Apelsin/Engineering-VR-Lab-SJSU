@@ -108,7 +108,8 @@ public class TensileLabConfigurator : MonoBehaviour
                                 }
 
                                 // For single grapher, assign labels for specific points on the curve
-                                var tensile_graph_controller = single_grapher.GetComponentInChildren<TensileGraphController>();
+                                // TODO: use tags or something more robust than GetComponentInParent
+                                var tensile_graph_controller = single_grapher.GetComponentInParent<TensileGraphController>();
                                 if (tensile_graph_controller)
                                 {
                                     // TODO: struct for these properties???
@@ -118,7 +119,8 @@ public class TensileLabConfigurator : MonoBehaviour
                                 }
 
                                 // For multi/comparison grapher, assign one label for the newly-added curve
-                                var tensile_graph_id_controller = multi_grapher.GetComponentInChildren<TensileGraphIdentificationController>();
+                                // TODO: use tags or something more robust than GetComponentInParent
+                                var tensile_graph_id_controller = multi_grapher.GetComponentInParent<TensileGraphIdentificationController>();
                                 if (tensile_graph_controller)
                                 {
                                     // Parse the material type
