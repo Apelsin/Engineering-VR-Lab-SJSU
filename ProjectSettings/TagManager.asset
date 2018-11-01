@@ -20,6 +20,7 @@ TagManager:
   - Single Test Tensile Graph
   - Multi Test Tensile Graph
   - Global Lighting
+  - Quiz Controller
   layers:
   - Default
   - TransparentFX
