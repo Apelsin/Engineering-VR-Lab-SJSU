@@ -108,8 +108,9 @@ public class TensileLabConfigurator : MonoBehaviour
                                 }
 
                                 // For single grapher, assign labels for specific points on the curve
-                                // TODO: use tags or something more robust than GetComponentInParent
-                                var tensile_graph_controller = single_grapher.GetComponentInParent<TensileGraphController>();
+                                // TODO: use tags or something more robust than GetComponentIn*
+                                var tensile_graph_controller = (single_grapher.transform.parent ?? single_grapher.transform)
+                                    .GetComponentInChildren<TensileGraphController>(); // Find the controller in siblings
                                 if (tensile_graph_controller)
                                 {
                                     // TODO: struct for these properties???
@@ -117,15 +118,20 @@ public class TensileLabConfigurator : MonoBehaviour
                                     tensile_graph_controller.UltimateTensileStrength = specimen_properties.UltimateTensileStrength;
                                     tensile_graph_controller.FracturePoint = specimen_properties.FracturePoint;
                                 }
+                                else
+                                    Debug.LogWarning("TensileGraphController is missing.");
 
                                 // For multi/comparison grapher, assign one label for the newly-added curve
-                                // TODO: use tags or something more robust than GetComponentInParent
-                                var tensile_graph_id_controller = multi_grapher.GetComponentInParent<TensileGraphIdentificationController>();
+                                // TODO: use tags or something more robust than GetComponentIn*
+                                var tensile_graph_id_controller = (multi_grapher.transform.parent ?? multi_grapher.transform)
+                                    .GetComponentInChildren<TensileGraphIdentificationController>(); // Find the controller in siblings
                                 if (tensile_graph_controller)
                                 {
                                     // Parse the material type
                                     tensile_graph_id_controller.SetCurrentSpecimenType(specimen_properties.MaterialType);
                                 }
+                                else
+                                    Debug.LogWarning("TensileGraphItendificationController is missing.");
 
                                 tester.OnBeginTensileTest();
                             }
