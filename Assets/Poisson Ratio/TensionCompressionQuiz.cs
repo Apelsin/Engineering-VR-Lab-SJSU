@@ -8,12 +8,9 @@ using UnityEngine.UI;
 
 namespace CVRLabSJSU
 {
-    public class TensionCompressionQuiz : MonoBehaviour, ISerializationCallbackReceiver
+    public class TensionCompressionQuiz : MonoBehaviour, ISerializationCallbackReceiver, IMCQuizController
     {
         [SerializeField]
-#if ODIN_INSPECTOR
-        [Sirenix.OdinInspector.DrawWithUnity]
-#endif
         private MCQuizResultsEvent _DisplayResults = new MCQuizResultsEvent();
 
         public event UnityAction<object, MCQuizResultsEventArgs> DisplayResults

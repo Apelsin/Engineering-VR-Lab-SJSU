@@ -11,9 +11,25 @@ namespace CVRLabSJSU
 {
     public abstract class GraphQuizControllerBase<TEnum, TEntry> :
         MonoBehaviour,
-        ISerializationCallbackReceiver
+        ISerializationCallbackReceiver,
+        IMCQuizController
         where TEntry : GraphQuizControllerBase<TEnum, TEntry>.BaseEntry, new()
     {
+        [SerializeField]
+        private MCQuizResultsEvent _DisplayResults = new MCQuizResultsEvent();
+
+        public event UnityAction<object, MCQuizResultsEventArgs> DisplayResults
+        {
+            add
+            {
+                _DisplayResults.AddListener(value);
+            }
+            remove
+            {
+                _DisplayResults.RemoveListener(value);
+            }
+        }
+
         public abstract class BaseEntry
         {
             public abstract TEnum Type { get; set; }
@@ -116,7 +132,7 @@ namespace CVRLabSJSU
 
                 // Add combo box items in a random order
                 var item_label_texts = Utility.GetEnumValues<TEnum>()
-                    .Except(new [] { NoneType })
+                    .Except(new[] { NoneType })
                     .Select(e => LabelTexts[e])
                     .OrderBy(x => Guid.NewGuid())
                     .ToArray();
@@ -193,12 +209,6 @@ namespace CVRLabSJSU
             }
         }
 
-        // Public for Unity editor
-        public void HandleClickedCheckAnswers()
-        {
-            OnCheckAnswers();
-        }
-
         private void ShowCorrectness(GraphLabel label, string correct_str)
         {
             if (label)
@@ -211,7 +221,13 @@ namespace CVRLabSJSU
             }
         }
 
-        private void OnCheckAnswers()
+        // Public for Unity editor
+        public void HandleClickedCheckAnswers()
+        {
+            OnDisplayQuizResults();
+        }
+
+        private void OnDisplayQuizResults()
         {
             foreach (var type in Utility.GetEnumValues<TEnum>())
                 ShowCorrectness(GraphLabels.GetValue(type), LabelTexts.GetValue(type));
