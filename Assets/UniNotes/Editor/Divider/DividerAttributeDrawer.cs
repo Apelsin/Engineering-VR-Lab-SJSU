@@ -75,7 +75,6 @@ namespace RotaryHeart.Lib.UniNotes
             //Draw the divider
             if (Event.current.type == EventType.Repaint)
             {
-                rect.x = 14.0f;
                 rect.height = 1.0f;
 
                 GUI.skin.box.Draw(rect, GUIContent.none, 0);

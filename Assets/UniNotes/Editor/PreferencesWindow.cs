@@ -1,12 +1,14 @@
-﻿using UnityEngine;
-using RotaryHeart.Lib.ProjectPreferences;
+using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 namespace RotaryHeart.Lib.UniNotes
 {
     public class PreferencesWindow
     {
         #region GUIContent
+        static GUIContent notesSaveContent = new GUIContent("Notes Save Location", "Path where all notes data will be saved.");
+
         static GUIContent previewContent = new GUIContent("View Notes on Selection", "Should the Notes be visible on the scene view when the object is highlighted");
 
         static GUIContent anchorContent = new GUIContent("Position", "Scene view Notes position");
@@ -18,11 +20,14 @@ namespace RotaryHeart.Lib.UniNotes
         static GUIContent btnSizeContent = new GUIContent("Size", "How big the button should be");
 
         static GUIContent anEnabledContent = new GUIContent("Enabled", "Enable or disable the advanced notes");
-        static GUIContent anWidthContent = new GUIContent("Width", "How big the notes will be drawn");
+        static GUIContent anWidthContent = new GUIContent("Width", "This is the width of the note area");
+        static GUIContent anProjectNoteSizeContent = new GUIContent("Size", "How big the notes will be drawn");
         #endregion
 
         // Have we loaded the prefs yet
         private static bool prefsLoaded = false;
+
+        private static string notesPath = "";
 
         private static bool viewOnSelection = false;
         private static EditorExtensions.Anchor anchor = EditorExtensions.Anchor.Bottom;
@@ -38,6 +43,7 @@ namespace RotaryHeart.Lib.UniNotes
 
         private static bool anProjectEnabled = true;
         private static float anProjectWidth = 90;
+        private static float anProjectNoteSize = 16;
 
         // Add preferences section named "My Preferences" to the Preferences Window
         [PreferenceItem("UniNotes")]
@@ -47,24 +53,48 @@ namespace RotaryHeart.Lib.UniNotes
             // Load the preferences
             if (!prefsLoaded)
             {
-                viewOnSelection = ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_ENABLED, false);
-                anchor = (EditorExtensions.Anchor)ProjectPrefs.GetInt(Constants.SECTION, Constants.SCENE_NOTES_ANCHOR, 4);
-                showChildren = ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_VIEW_CHILDREN, false);
-                size.x = ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_WIDTH, 400);
-                size.y = ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_HEIGHT, 100);
+                notesPath = Constants.NotesPath;
 
-                btnActive = ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_BTN_ENABLED, false);
-                btnAnchor = (EditorExtensions.Anchor)ProjectPrefs.GetInt(Constants.SECTION, Constants.SCENE_NOTES_BTN_ANCHOR, 5);
-                btnSize.x = ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_BTN_WIDTH, 30);
-                btnSize.y = ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_BTN_HEIGHT, 30);
+                viewOnSelection = Constants.SceneNotesEnabled;
+                anchor = Constants.SceneNotesAnchor;
+                showChildren = Constants.ShowChildren;
+                size = Constants.SceneNotesSize;
 
-                anHierarchyEnabled = ProjectPrefs.GetBool(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_ENABLED, true);
-                anHierarchyWidth = ProjectPrefs.GetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_WIDTH, 90);
+                btnActive = Constants.SceneNotesButtonEnabled;
+                btnAnchor = Constants.SceneNotesButtonAnchor;
+                btnSize = Constants.SceneNotesButtonSize;
 
-                anProjectEnabled = ProjectPrefs.GetBool(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_ENABLED, true);
-                anProjectWidth = ProjectPrefs.GetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_WIDTH, 90);
+                anHierarchyEnabled = Constants.HierarchyNotesEnabled;
+                anHierarchyWidth = Constants.HierarchyNotesWidth;
+
+                anProjectEnabled = Constants.ProjectNotesEnabled;
+                anProjectWidth = Constants.ProjectNotesWidth;
+                anProjectNoteSize = Constants.ProjectNotesSize;
+
                 prefsLoaded = true;
             }
+
+            Divider.EditorGUILayout.Divider(notesSaveContent);
+            EditorGUILayout.BeginHorizontal();
+            GUI.enabled = false;
+            EditorGUILayout.LabelField(new GUIContent(notesPath, notesPath), EditorStyles.textField);
+            GUI.enabled = true;
+            if (GUILayout.Button("...", GUILayout.Width(30)))
+            {
+                string path = EditorUtility.OpenFolderPanel("Select Path", Constants.NotesPath, "");
+
+                if (!string.IsNullOrEmpty(path))
+                {
+                    if (Directory.Exists(Constants.NotesPath))
+                    {
+                        DirectoryCopy(Constants.NotesPath, path, true);
+                        Directory.Delete(Constants.NotesPath, true);
+                    }
+
+                    Constants.NotesPath = notesPath = path;
+                }
+            }
+            EditorGUILayout.EndHorizontal();
 
             // Project Preferences GUI
             Divider.EditorGUILayout.Divider("Scene Notes");
@@ -100,27 +130,83 @@ namespace RotaryHeart.Lib.UniNotes
 
             GUI.enabled = anProjectEnabled;
             anProjectWidth = EditorGUILayout.FloatField(anWidthContent, anProjectWidth);
+            anProjectNoteSize = EditorGUILayout.FloatField(anProjectNoteSizeContent, anProjectNoteSize);
             GUI.enabled = true;
 
             // Save the preferences
             if (GUI.changed)
             {
-                ProjectPrefs.SetBool(Constants.SECTION, Constants.SCENE_NOTES_ENABLED, viewOnSelection);
-                ProjectPrefs.SetInt(Constants.SECTION, Constants.SCENE_NOTES_ANCHOR, (int)anchor);
-                ProjectPrefs.SetBool(Constants.SECTION, Constants.SCENE_NOTES_VIEW_CHILDREN, showChildren);
-                ProjectPrefs.SetFloat(Constants.SECTION, Constants.SCENE_NOTES_WIDTH, size.x);
-                ProjectPrefs.SetFloat(Constants.SECTION, Constants.SCENE_NOTES_HEIGHT, size.y);
+                Constants.NotesPath = notesPath;
+                Constants.SceneNotesEnabled = viewOnSelection;
+                Constants.SceneNotesAnchor = anchor;
+                Constants.ShowChildren = showChildren;
+                Constants.SceneNotesSize = size;
 
-                ProjectPrefs.SetBool(Constants.SECTION, Constants.SCENE_NOTES_BTN_ENABLED, btnActive);
-                ProjectPrefs.SetInt(Constants.SECTION, Constants.SCENE_NOTES_BTN_ANCHOR, (int)btnAnchor);
-                ProjectPrefs.SetFloat(Constants.SECTION, Constants.SCENE_NOTES_BTN_WIDTH, btnSize.x);
-                ProjectPrefs.SetFloat(Constants.SECTION, Constants.SCENE_NOTES_BTN_HEIGHT, btnSize.y);
+                Constants.SceneNotesButtonEnabled = btnActive;
+                Constants.SceneNotesButtonAnchor = btnAnchor;
+                Constants.SceneNotesButtonSize = btnSize;
 
-                ProjectPrefs.SetBool(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_ENABLED, anHierarchyEnabled);
-                ProjectPrefs.SetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_WIDTH, anHierarchyWidth);
+                Constants.HierarchyNotesEnabled = anHierarchyEnabled;
+                Constants.HierarchyNotesWidth = anHierarchyWidth;
 
-                ProjectPrefs.SetBool(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_ENABLED, anProjectEnabled);
-                ProjectPrefs.SetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_WIDTH, anProjectWidth);
+                Constants.ProjectNotesEnabled = anProjectEnabled;
+                Constants.ProjectNotesWidth = anProjectWidth;
+                Constants.ProjectNotesSize = anProjectNoteSize;
+            }
+
+            GUILayout.FlexibleSpace();
+
+            if (GUILayout.Button("Restore Default"))
+            {
+                Constants.RestoreDefaults();
+
+                prefsLoaded = false;
+            }
+        }
+        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // If the source directory does not exist, throw an exception.
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            // If the destination directory does not exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+
+            // Get the file contents of the directory to copy.
+            FileInfo[] files = dir.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                // Create the path to the new copy of the file.
+                string temppath = Path.Combine(destDirName, file.Name);
+
+                // Copy the file.
+                file.CopyTo(temppath, false);
+            }
+
+            // If copySubDirs is true, copy the subdirectories.
+            if (copySubDirs)
+            {
+
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    // Create the subdirectory.
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+
+                    // Copy the subdirectories.
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
             }
         }
     }

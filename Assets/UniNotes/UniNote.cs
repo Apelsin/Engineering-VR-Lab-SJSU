@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using UnityEngine;
 
 namespace RotaryHeart.Lib.UniNotes
 {
@@ -8,8 +9,11 @@ namespace RotaryHeart.Lib.UniNotes
     [Serializable]
     public class UniNote
     {
-        public string noteSettingId;
+        public string noteSettingId = "";
         public string note = "Your comment";
         public bool editable = false;
+
+        [SerializeField]
+        private Rect position;
     }
 }

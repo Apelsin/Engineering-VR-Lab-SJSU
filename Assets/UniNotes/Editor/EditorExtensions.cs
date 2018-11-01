@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEditor;
-using RotaryHeart.Lib.ProjectPreferences;
+﻿using System.IO;
 using System.Reflection;
+using UnityEngine;
+using UnityEditor;
 using UnityEditor.SceneManagement;
+using RotaryHeart.Lib.ProjectPreferences;
 
 namespace RotaryHeart.Lib.UniNotes
 {
@@ -57,17 +58,27 @@ namespace RotaryHeart.Lib.UniNotes
             if ((temp - lastMilliseconds) < 150)
                 return;
 
+            if (!Directory.Exists(Constants.NotesPath))
+            {
+                Debug.LogError("Path specified on project prefs not found. Be sure that the folder: '" + Constants.NotesPath + "' exists");
+                return;
+            }
+
             foreach (var obj in Selection.objects)
             {
                 GameObject go = obj as GameObject;
 
-                string id = GetFileId(obj).ToString();
+                if (go == null)
+                    continue;
+
+                string id = GetFileId(go).ToString();
 
                 if (id.Equals("0"))
                 {
                     if (EditorUtility.DisplayDialog("UniNotes Warning", "The scene needs to be saved before adding notes to a GameObject. Do you want to save it now?", "Yes", "No"))
                     {
                         EditorSceneManager.SaveScene(go.scene);
+                        EditorApplication.RepaintHierarchyWindow();
                         HierarchyUniNotes();
                         break;
                     }
@@ -79,22 +90,15 @@ namespace RotaryHeart.Lib.UniNotes
                 }
                 else if (!id.Equals("-1"))
                 {
-                    UniNotesSettings.UniNoteData data;
 
-                    if (ProjectPrefs.HasKey("UniNotes_Hierarchy:" + go.scene.path, id.ToString()))
-                    {
-                        data = JsonUtility.FromJson<UniNotesSettings.UniNoteData>(ProjectPrefs.GetString("UniNotes_Hierarchy:" + go.scene.path, id.ToString()));
-                    }
-                    else
-                    {
-                        data = new UniNotesSettings.UniNoteData();
-                        data.notes = new System.Collections.Generic.List<UniNotesSettings.UniNoteData.Note>();
-                    }
+                    //Get the scene path using the GUID
+                    string scenePath = Path.Combine(Path.Combine(Constants.NotesPath, "Hierarchy"), AssetDatabase.AssetPathToGUID(go.scene.path));
+                    //Create any missing directory
+                    Directory.CreateDirectory(scenePath);
+                    //Current note path
+                    string filePath = Path.Combine(scenePath, id + ".UniNote");
 
-                    data.expandedIndex = data.notes.Count;
-                    data.notes.Add(new UniNotesSettings.UniNoteData.Note() { id = "-1", text = "<- Select Note" });
-
-                    ProjectPrefs.SetString("UniNotes_Hierarchy:" + go.scene.path, id, JsonUtility.ToJson(data));
+                    SerializeData(filePath);
                 }
             }
 
@@ -107,24 +111,74 @@ namespace RotaryHeart.Lib.UniNotes
         [MenuItem("Assets/UniNotes/Add Note", false, 1)]
         static void ProjectUniNotes()
         {
+            if (!Directory.Exists(Constants.NotesPath))
+            {
+                Debug.LogError("Path specified on project prefs not found. Be sure that the folder: '" + Constants.NotesPath + "' exists");
+                return;
+            }
+
             foreach (var id in Selection.assetGUIDs)
             {
-                UniNotesSettings.UniNoteData data;
+                //Get the path using the GUID
+                string projectPath = Path.Combine(Constants.NotesPath, "Project");
+                //Create any missing directory
+                Directory.CreateDirectory(projectPath);
+                //Current note path
+                string filePath = Path.Combine(projectPath, id + ".UniNote");
 
-                if (ProjectPrefs.HasKey("UniNotes_Project", id.ToString()))
+                SerializeData(filePath);
+            }
+        }
+
+        /// <summary>
+        /// Function used to serialize a new note
+        /// </summary>
+        /// <param name="filePath">Path to save the note</param>
+        static void SerializeData(string filePath)
+        {
+            UniNotesSettings.UniNoteData data = null;
+
+            //If the file exists deserialize it
+            if (File.Exists(filePath))
+            {
+                //Deserialize the data
+                YamlDotNet.Serialization.Deserializer deserializer = new YamlDotNet.Serialization.Deserializer();
+                using (StreamReader reader = new StreamReader(filePath))
                 {
-                    data = JsonUtility.FromJson<UniNotesSettings.UniNoteData>(ProjectPrefs.GetString("UniNotes_Project", id.ToString()));
+                    data = deserializer.Deserialize<UniNotesSettings.UniNoteData>(reader);
                 }
-                else
+
+                //Add the new note
+                data.notes.Add(new UniNotesSettings.UniNoteData.Note()
                 {
-                    data = new UniNotesSettings.UniNoteData();
-                    data.notes = new System.Collections.Generic.List<UniNotesSettings.UniNoteData.Note>();
-                }
+                    id = "-1",
+                    text = "<- Select Note"
+                });
+            }
 
-                data.expandedIndex = data.notes.Count;
-                data.notes.Add(new UniNotesSettings.UniNoteData.Note() { id = "-1", text = "<- Select Note" });
+            //Be usre that data is not null
+            if (data == null)
+            {
+                data = new UniNotesSettings.UniNoteData()
+                {
+                    expandedIndex = 1,
+                    notes = new System.Collections.Generic.List<UniNotesSettings.UniNoteData.Note>()
+                    {
+                        new UniNotesSettings.UniNoteData.Note()
+                        {
+                            id = "-1",
+                            text = "<- Select Note"
+                        }
+                    }
+                };
+            }
 
-                ProjectPrefs.SetString("UniNotes_Project", id, JsonUtility.ToJson(data));
+            //Serialize the data
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                YamlDotNet.Serialization.Serializer serializer = new YamlDotNet.Serialization.Serializer();
+
+                serializer.Serialize(writer, data);
             }
         }
 

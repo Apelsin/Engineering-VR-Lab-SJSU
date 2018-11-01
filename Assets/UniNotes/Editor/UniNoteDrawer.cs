@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace RotaryHeart.Lib.UniNotes
@@ -10,28 +10,12 @@ namespace RotaryHeart.Lib.UniNotes
     [CustomPropertyDrawer(typeof(UniNote))]
     public class UniNoteDrawer : PropertyDrawer
     {
-        Rect inputRect;
-
         GUIStyle textStyle = new GUIStyle(EditorStyles.label);
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            SerializedProperty Note = property.FindPropertyRelative("note");
-            SerializedProperty Editable = property.FindPropertyRelative("editable");
-
-            label.text = string.IsNullOrEmpty(Note.stringValue) ? " " : Note.stringValue;
-
-            textStyle.richText = true;
-            textStyle.wordWrap = true;
-
-            if (Editable.boolValue)
-            {
-                textStyle.richText = false;
-            }
-
-            float height = textStyle.CalcHeight(label, inputRect.width);
-
-            return height;
+            SerializedProperty positionProp = property.FindPropertyRelative("position");
+            return positionProp.rectValue.height;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -39,19 +23,24 @@ namespace RotaryHeart.Lib.UniNotes
             SerializedProperty noteSettingId = property.FindPropertyRelative("noteSettingId");
             SerializedProperty Note = property.FindPropertyRelative("note");
             SerializedProperty Editable = property.FindPropertyRelative("editable");
+            SerializedProperty positionProp = property.FindPropertyRelative("position");
 
             string input = Note.stringValue;
             label.text = string.IsNullOrEmpty(input) ? " " : input;
 
-            inputRect = new Rect(position);
+            Rect inputRect = new Rect(position);
+
+            textStyle.richText = true;
+            textStyle.wordWrap = true;
+
+            var indentedRect = EditorGUI.IndentedRect(inputRect);
 
             //If we are hovering the icon show the window
-            if (inputRect.Contains(Event.current.mousePosition))
+            if (indentedRect.Contains(Event.current.mousePosition))
             {
                 //Icon click, show context menu
                 if (Event.current.type == EventType.ContextClick)
                 {
-                    HoverWindow.CloseMe();
                     GenericMenu menu = new GenericMenu();
 
                     menu.AddItem(Editable.boolValue ? new GUIContent("Disable Note Edit") : new GUIContent("Enable Note Edit"), false, () =>
@@ -83,16 +72,13 @@ namespace RotaryHeart.Lib.UniNotes
                 }
             }
 
-            textStyle.richText = true;
-            textStyle.wordWrap = true;
-
             //If the note is on edit mode
             if (Editable.boolValue)
             {
                 textStyle.richText = false;
 
                 //Dropdown for selecting icon type
-                inputRect.height = textStyle.CalcHeight(label, inputRect.width);
+                inputRect.height = textStyle.CalcHeight(label, indentedRect.width);
 
                 Note.stringValue = EditorGUI.TextArea(inputRect, input, EditorStyles.textArea);
             }
@@ -105,36 +91,36 @@ namespace RotaryHeart.Lib.UniNotes
                     //Found a value, remove the hint
                     AdvancedNoteDrawer.Settings.FindSetting(noteSettingId.stringValue, out setting);
 
-                    //Draw the icon
+                    GUIContent content;
+
+                    //Get the icon image
                     if (setting.icon != null)
                     {
-                        GUI.Label(inputRect, setting.icon);
+                        content = new GUIContent(setting.icon);
                     }
                     else
                     {
                         Debug.unityLogger.logEnabled = false;
-                        GUIContent content = EditorGUIUtility.IconContent(setting.unityIcon);
+                        content = EditorGUIUtility.IconContent(setting.unityIcon);
                         Debug.unityLogger.logEnabled = true;
-
-                        Vector2 iconSize = EditorGUIUtility.GetIconSize();
-                        EditorGUIUtility.SetIconSize(Vector2.one * 20);
-
-                        inputRect.y -= 2.5f;
-
-                        //Draw the icon
-                        EditorGUI.LabelField(inputRect, content);
-
-                        inputRect.y += 2.5f;
-
-                        //Restore icon size
-                        EditorGUIUtility.SetIconSize(iconSize);
                     }
 
-                    inputRect.x += 30;
-                    inputRect.width -= 30;
-                    EditorExtensions.DrawRect(inputRect, setting.backgroundColor);
+                    //Draw the icon
+                    Vector2 iconSize = EditorGUIUtility.GetIconSize();
+                    EditorGUIUtility.SetIconSize(Vector2.one * 20);
+
+                    //Draw the icon
+                    EditorGUI.LabelField(inputRect, content);
+
+                    //Restore icon size
+                    EditorGUIUtility.SetIconSize(iconSize);
+
+                    EditorExtensions.DrawRect(indentedRect, setting.backgroundColor);
 
                     textStyle.onActive.textColor = textStyle.normal.textColor = setting.textColor;
+
+                    inputRect.x += 24;
+                    inputRect.width -= 24;
                 }
                 else
                 {
@@ -143,10 +129,12 @@ namespace RotaryHeart.Lib.UniNotes
                 }
 
                 //Draw the note
-                inputRect.height = textStyle.CalcHeight(label, inputRect.width);
+                inputRect.height = textStyle.CalcHeight(label, indentedRect.width - indentedRect.x);
 
                 EditorGUI.SelectableLabel(inputRect, input, textStyle);
             }
+
+            positionProp.rectValue = inputRect;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace RotaryHeart.Lib.UniNotes
@@ -21,11 +21,18 @@ namespace RotaryHeart.Lib.UniNotes
         [MenuItem("Tools/Rotary Heart/UniNotes/About")]
         public static void ShowWindow()
         {
-            SupportWindow myWindow = ScriptableObject.CreateInstance<SupportWindow>();
+            SupportWindow myWindow = CreateInstance<SupportWindow>();
             myWindow.ShowUtility();
             myWindow.titleContent = new GUIContent("About");
 
-            myWindow.assetName = myWindow.IconContent("<size=20><b><color=#AAAAAA> UniNotes</color></b></size>", "", "");
+            string color = "#AAAAAA";
+
+            if (!EditorGUIUtility.isProSkin)
+            {
+                color = "#353535";
+            }
+
+            myWindow.assetName = myWindow.IconContent("<size=20><b><color=" + color + "> UniNotes</color></b></size>", "", "");
             myWindow.support = myWindow.IconContent("<size=12><b> Support</b></size>\n <size=9>Get help and talk \n with others.</size>", "_Help", "");
             myWindow.contact = myWindow.IconContent("<size=12><b> Contact</b></size>\n <size=9>Reach out and \n get help.</size>", "console.infoicon", "");
             myWindow.review = myWindow.IconContent("<size=11><color=white> Please consider leaving a review.</color></size>", "Favorite Icon", "");
@@ -99,7 +106,7 @@ namespace RotaryHeart.Lib.UniNotes
 
             GUILayout.FlexibleSpace();
             if (GUILayout.Button(review, ReviewBanner, GUILayout.Height(30)))
-                Application.OpenURL("https://www.assetstore.unity3d.com/en/#!/account/downloads/search=UniNotes");
+                Application.OpenURL("https://assetstore.unity.com/packages/tools/gui/uninotes-112824");
         }
 
         GUIContent IconContent(string text, string icon, string tooltip)

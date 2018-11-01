@@ -52,7 +52,7 @@ namespace RotaryHeart.Lib.ProjectPreferences
 
         List<Data> data = new List<Data>();
 
-        [MenuItem("Window/Project Prefs")]
+        [MenuItem("Window/Rotary Heart/Project Prefs")]
         static void Init()
         {
             // Get existing open window or if none, make a new one:

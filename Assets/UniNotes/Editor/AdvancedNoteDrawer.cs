@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
-using RotaryHeart.Lib.ProjectPreferences;
+using RotaryHeart.Lib.YamlDotNet.Serialization;
+using System.IO;
+using System.Collections.Generic;
 
 namespace RotaryHeart.Lib.UniNotes
 {
@@ -20,6 +22,8 @@ namespace RotaryHeart.Lib.UniNotes
         //List of all the available settings name, used for the dropdown
         static string[] m_elements;
 
+        static Dictionary<string, UniNotesSettings.UniNoteData> parsedNotes = new Dictionary<string, UniNotesSettings.UniNoteData>();
+
         //Finds and returns the reference to the settings SO
         public static UniNotesSettings Settings
         {
@@ -30,10 +34,25 @@ namespace RotaryHeart.Lib.UniNotes
                     // search for all UniNotesSettings type asset
                     string[] guids = AssetDatabase.FindAssets("t:UniNotesSettings");
 
-                    if (guids.Length > 0)
+                    foreach (var guid in guids)
                     {
-                        string settingsPath = AssetDatabase.GUIDToAssetPath(guids[0]);
-                        m_settings = AssetDatabase.LoadAssetAtPath<UniNotesSettings>(settingsPath);
+                        string path = AssetDatabase.GUIDToAssetPath(guid);
+                        string parentPath = System.IO.Path.GetDirectoryName(path);
+
+                        if (parentPath.EndsWith("Settings"))
+                        {
+                            parentPath = System.IO.Path.GetDirectoryName(parentPath);
+
+                            if (parentPath.EndsWith("UniNotes"))
+                            {
+                                m_settings = AssetDatabase.LoadAssetAtPath<UniNotesSettings>(path);
+                            }
+                        }
+                    }
+
+                    if (m_settings == null)
+                    {
+                        Debug.LogError("Couldn't find any UniNotesSettings asset.");
                     }
                 }
 
@@ -63,6 +82,12 @@ namespace RotaryHeart.Lib.UniNotes
 
         static AdvancedNoteDrawer()
         {
+            if (!Constants.NotifyAboutUpdate)
+            {
+                UniNoteImporter.CheckImport();
+                Constants.NotifyAboutUpdate = true;
+            }
+
             //Hierarchy GUI
             EditorApplication.hierarchyWindowItemOnGUI -= OnHierarchyGUI;
             EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyGUI;
@@ -70,12 +95,33 @@ namespace RotaryHeart.Lib.UniNotes
             //Project GUI
             EditorApplication.projectWindowItemOnGUI -= OnProjectGUI;
             EditorApplication.projectWindowItemOnGUI += OnProjectGUI;
+
+            //Used to detect if any note component is attached to this scene
+            UnityEditor.SceneManagement.EditorSceneManager.sceneOpened -= EditorSceneManager_sceneOpened;
+            UnityEditor.SceneManagement.EditorSceneManager.sceneOpened += EditorSceneManager_sceneOpened;
+        }
+
+        private static void EditorSceneManager_sceneOpened(UnityEngine.SceneManagement.Scene scene, UnityEditor.SceneManagement.OpenSceneMode mode)
+        {
+            //Get the scene path using the GUID
+            string scenePath = Path.Combine(Path.Combine(Constants.NotesPath, "Hierarchy"), AssetDatabase.AssetPathToGUID(scene.path));
+
+            //If a component is found on the scene add it to the ini file
+            if (GameObject.FindObjectOfType<UniNoteComponent>() != null)
+            {
+                Directory.CreateDirectory(scenePath);
+            }
+            //If no component is found and there are no hierarchy notes, remove it
+            else if (Directory.Exists(scenePath) && Directory.GetFiles(scenePath, "*.UniNote", SearchOption.TopDirectoryOnly).Length == 0)
+            {
+                Directory.Delete(scenePath);
+            }
         }
 
         static void OnHierarchyGUI(int instanceID, Rect selectionRect)
         {
             //If the setting file is not found or we don't want to draw the hierarchy notes
-            if (Settings == null || !ProjectPrefs.GetBool(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_ENABLED, true))
+            if (Settings == null || !Constants.HierarchyNotesEnabled)
             {
                 return;
             }
@@ -83,56 +129,59 @@ namespace RotaryHeart.Lib.UniNotes
             //Get the GO that is going to be drawn
             GameObject go = (GameObject)EditorUtility.InstanceIDToObject(instanceID);
 
-            //Get the width stored on the settings
-            float width = ProjectPrefs.GetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_WIDTH, 90);
-
-            //Added .x at the end to be sure that they are on the correct position even if they are indented, the +14 is for the scroll bar
-            selectionRect.x = selectionRect.width - (width - selectionRect.x + 14);
+            //Get the scene path using the GUID
+            string scenePath = Path.Combine(Path.Combine(Constants.NotesPath, "Hierarchy"), go == null ? "" : AssetDatabase.AssetPathToGUID(go.scene.path));
 
             //Calculate the file id of this object
             string settingId = EditorExtensions.GetFileId(go).ToString();
 
-            //Get the current object stored on the ProjectPrefs, default to -2 if it doesn't find any. If the GO is null the scene object is being drawn, default it to -2 too
-            string value = go == null ? "-2" : ProjectPrefs.GetString("UniNotes_Hierarchy:" + go.scene.path, settingId, "-2");
+            //Current note path
+            string filePath = Path.Combine(scenePath, settingId + ".UniNote");
+
+            //Get the width stored on the settings
+            float width = Constants.HierarchyNotesWidth;
+
+            //Added .x at the end to be sure that they are on the correct position even if they are indented, the +14 is for the scroll bar
+            selectionRect.x = selectionRect.width - (width - selectionRect.x + 14);
 
             //Only draw the dragger on the scene and on a gamobject with notes
-            if (go == null || !value.Equals("-2"))
+            if (go == null || File.Exists(filePath))
             {
                 width = DrawDragger(selectionRect, width, true);
             }
 
-            //This object doesn't have any note
-            if (value.Equals("-2"))
-            {
+            //Check if this GO note file exists
+            if (!File.Exists(filePath))
                 return;
-            }
 
             //Change the rect width to the correct width
             selectionRect.width = width;
 
             //Draw the note
-            DrawNote("UniNotes_Hierarchy:" + go.scene.path, settingId, selectionRect, value);
+            DrawNote("UniNotes_Hierarchy:" + go.scene.path, settingId, selectionRect, filePath);
         }
 
         static void OnProjectGUI(string guid, Rect selectionRect)
         {
             //If the setting file is not found or we don't want to draw the project notes
-            if (Settings == null || !ProjectPrefs.GetBool(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_ENABLED, true))
+            if (Settings == null || !Constants.ProjectNotesEnabled || string.IsNullOrEmpty(guid))
             {
                 return;
             }
 
-            //Get the current object stored on the ProjectPrefs, default to -2 if it doesn't find any
-            string value = ProjectPrefs.GetString("UniNotes_Project", guid, "-2");
+            //Get the path using the GUID
+            string projectPath = Path.Combine(Constants.NotesPath, "Project");
+            //Current note path
+            string filePath = Path.Combine(projectPath, guid + ".UniNote");
 
             //This object doesn't have any note
-            if (value.Equals("-2"))
+            if (!File.Exists(filePath))
             {
                 return;
             }
 
             //Get the width stored on the settings
-            float width = ProjectPrefs.GetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_WIDTH, 90);
+            float width = Constants.ProjectNotesWidth;
 
             //If the project window is on 2 column and the assets are not on list
             if (selectionRect.height > 16)
@@ -153,13 +202,13 @@ namespace RotaryHeart.Lib.UniNotes
             }
 
             //Be sure that the height is set to single line
-            selectionRect.height = EditorGUIUtility.singleLineHeight;
+            selectionRect.height = Constants.ProjectNotesSize;
 
             //Change the rect width to the correct width
             selectionRect.width = width;
 
             //Draw the note
-            DrawNote("UniNotes_Project", guid, selectionRect, value);
+            DrawNote("UniNotes_Project", guid, selectionRect, filePath);
         }
 
         /// <summary>
@@ -168,14 +217,24 @@ namespace RotaryHeart.Lib.UniNotes
         /// <param name="section">ProjectPrefs section that has the note data</param>
         /// <param name="id">Note id</param>
         /// <param name="rect">Note position</param>
-        /// <param name="value">Data saved on ProjectPrefs</param>
-        static void DrawNote(string section, string id, Rect rect, string value)
+        /// <param name="filePath">Path to the note</param>
+        static void DrawNote(string section, string id, Rect rect, string filePath)
         {
-            UniNotesSettings.UniNoteData data = JsonUtility.FromJson<UniNotesSettings.UniNoteData>(value);
+            UniNotesSettings.UniNoteData data = null;
+
+            if (!parsedNotes.TryGetValue(filePath, out data))
+            {
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    Deserializer deserializer = new Deserializer();
+                    data = deserializer.Deserialize<UniNotesSettings.UniNoteData>(reader);
+                }
+
+                parsedNotes.Add(filePath, data);
+            }
 
             if (data == null)
             {
-                Debug.LogError("Data not saved correctly for: " + id + " in section: " + section);
                 return;
             }
 
@@ -185,7 +244,7 @@ namespace RotaryHeart.Lib.UniNotes
                 int index = i;
 
                 //If a note is expanded skip all but the expanded one
-                if (data.expandedIndex != -1 && index != data.expandedIndex)
+                if (data.expandedIndex != -1 && index != (data.expandedIndex - 1))
                     continue;
 
                 //Get the current note added and the custom name
@@ -207,7 +266,23 @@ namespace RotaryHeart.Lib.UniNotes
                     //Fail safe, if the setting is not found, delete the note from this object
                     if (setting == null)
                     {
-                        ProjectPrefs.RemoveKey(section, id);
+                        if (data.notes.Count == 1)
+                        {
+                            File.Delete(filePath);
+
+                            return;
+                        }
+                        else
+                        {
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+                                data.notes.RemoveAt(index);
+
+                                Serializer serializer = new Serializer();
+                                serializer.Serialize(writer, data);
+                            }
+                        }
+
                         return;
                     }
                 }
@@ -219,33 +294,10 @@ namespace RotaryHeart.Lib.UniNotes
                 if (data.expandedIndex != -1)
                 {
                     //Draw the rectangle color
-                    EditorExtensions.DrawRect(new Rect(rect.x + 20, rect.y, rect.width - 10, rect.height), setting.backgroundColor);
+                    Rect bgRect = new Rect(rect.x + rect.height, rect.y, rect.width - rect.height / 2, EditorGUIUtility.singleLineHeight);
+                    EditorExtensions.DrawRect(bgRect, setting.backgroundColor);
 
-                    iconRect = new Rect(rect.x + 5, rect.y + 1, 16, rect.height);
-
-                    //Draw the icon
-                    if (setting.icon != null)
-                    {
-                        GUI.Label(iconRect, setting.icon);
-                    }
-                    else
-                    {
-                        Debug.unityLogger.logEnabled = false;
-                        Vector2 size = EditorGUIUtility.GetIconSize();
-                        EditorGUIUtility.SetIconSize(Vector2.one * 12);
-                        GUIContent content = EditorGUIUtility.IconContent(setting.unityIcon);
-                        Debug.unityLogger.logEnabled = true;
-
-                        //An icon is required, draw the default one
-                        if (content.image == null)
-                        {
-                            EditorGUIUtility.SetIconSize(Vector2.one * 16);
-                            content = EditorGUIUtility.IconContent("d_UnityEditor.ConsoleWindow");
-                        }
-
-                        GUI.Label(iconRect, content);
-                        EditorGUIUtility.SetIconSize(size);
-                    }
+                    iconRect = new Rect(rect.x, rect.y - (rect.height / 2) + (EditorGUIUtility.singleLineHeight / 2), rect.height, rect.height);
 
                     GUIStyle style = new GUIStyle(GUI.skin.label);
                     style.normal.textColor = setting.textColor;
@@ -253,45 +305,46 @@ namespace RotaryHeart.Lib.UniNotes
                     //Draw the text field
                     Color prevColor = GUI.color;
                     GUI.color = setting.textColor;
-                    EditorGUI.LabelField(new Rect(rect.x + 20, rect.y, rect.width - 10, rect.height), textFieldVal, style);
+                    EditorGUI.LabelField(bgRect, textFieldVal, style);
                     GUI.color = prevColor;
                 }
                 else
                 {
-                    iconRect = new Rect(rect.x + rect.width - 9 - (rect.height * index), rect.y + 1, rect.height, rect.height);
+                    iconRect = new Rect(rect.x + (rect.width + rect.height / 2) - (rect.height * (index + 1)), rect.y - (rect.height / 2) + (EditorGUIUtility.singleLineHeight / 2), rect.height, rect.height);
 
                     //If the drawer is above any icon, skip it
                     if (rect.x > iconRect.x)
                         continue;
-
-                    //Draw the icon
-                    if (setting.icon != null)
-                    {
-                        GUI.Label(iconRect, setting.icon);
-                    }
-                    else
-                    {
-                        Debug.unityLogger.logEnabled = false;
-                        Vector2 size = EditorGUIUtility.GetIconSize();
-                        EditorGUIUtility.SetIconSize(Vector2.one * 12);
-                        GUIContent content = EditorGUIUtility.IconContent(setting.unityIcon);
-                        Debug.unityLogger.logEnabled = true;
-
-                        //An icon is required, draw the default one
-                        if (content.image == null)
-                        {
-                            EditorGUIUtility.SetIconSize(Vector2.one * 16);
-                            content = EditorGUIUtility.IconContent("d_UnityEditor.ConsoleWindow");
-                        }
-
-                        GUI.Label(iconRect, content);
-                        EditorGUIUtility.SetIconSize(size);
-                    }
                 }
+
+                Vector2 size = EditorGUIUtility.GetIconSize();
+                EditorGUIUtility.SetIconSize(Vector2.one * (rect.height - 4));
+
+                //Draw the icon
+                if (setting.icon != null)
+                {
+                    GUI.Label(iconRect, setting.icon);
+                }
+                else
+                {
+                    Debug.unityLogger.logEnabled = false;
+                    GUIContent content = EditorGUIUtility.IconContent(setting.unityIcon);
+                    Debug.unityLogger.logEnabled = true;
+
+                    //An icon is required, draw the default one
+                    if (content.image == null)
+                    {
+                        EditorGUIUtility.SetIconSize(Vector2.one * 16);
+                        content = EditorGUIUtility.IconContent("d_UnityEditor.ConsoleWindow");
+                    }
+
+                    GUI.Label(iconRect, content);
+                }
+
+                EditorGUIUtility.SetIconSize(size);
 
                 #endregion
 
-                #region Icon context menu logic
                 EditorGUIUtility.AddCursorRect(iconRect, MouseCursor.Link);
 
                 //If we are hovering the icon show the window
@@ -300,56 +353,10 @@ namespace RotaryHeart.Lib.UniNotes
                     //Icon click, show context menu
                     if (Event.current.type == EventType.MouseDown)
                     {
-                        HoverWindow.CloseMe();
-                        GenericMenu menu = new GenericMenu();
-
-                        menu.AddItem(new GUIContent("Read Note"), false, () =>
-                        {
-                            HoverWindow.Initialize(setting, data.notes[index], data, section, id);
-                        });
-
-                        menu.AddSeparator("");
-
-                        menu.AddItem(new GUIContent(data.expandedIndex == -1 ? "Expand" : "Collapse"), false, () =>
-                        {
-                            data.expandedIndex = data.expandedIndex == -1 ? index : -1;
-                            ProjectPrefs.SetString(section, id, JsonUtility.ToJson(data));
-                        });
-                        menu.AddItem(new GUIContent("Delete"), false, () =>
-                        {
-                            if (data.notes.Count == 1)
-                            {
-                                ProjectPrefs.RemoveKey(section, id);
-                            }
-                            else
-                            {
-                                data.notes.RemoveAt(index);
-                                data.expandedIndex = -1;
-                                ProjectPrefs.SetString(section, id, JsonUtility.ToJson(data));
-                            }
-                        });
-
-                        menu.AddSeparator("");
-
-                        foreach (var note in Settings.notes)
-                        {
-                            menu.AddItem(new GUIContent("Change Note/" + note.noteName), data.notes.Exists(x => x.id.Equals(note.noteId)), () =>
-                            {
-                                data.notes[index].id = note.noteId;
-                                if (data.notes[index].text.Equals("<- Select Note"))
-                                {
-                                    data.notes[index].text = "";
-                                }
-                                ProjectPrefs.SetString(section, id, JsonUtility.ToJson(data));
-                            });
-                        }
-
-                        menu.ShowAsContext();
-
+                        HoverWindow.Initialize(filePath, index);
                         Event.current.Use();
                     }
                 }
-                #endregion
             }
         }
 
@@ -385,13 +392,13 @@ namespace RotaryHeart.Lib.UniNotes
             {
                 current.Use();
                 //Clamp used to prevent moving out of the window dimensions
-                width = Mathf.Clamp(width - current.delta.x, 10, rect.width - 20);
+                width = Mathf.Clamp(width - current.delta.x, Constants.ProjectNotesSize / 2, rect.width - 20);
 
                 //Save the data
                 if (isHierarchy)
-                    ProjectPrefs.SetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_HIERARCHY_WIDTH, width);
+                    Constants.HierarchyNotesWidth = width;
                 else
-                    ProjectPrefs.SetFloat(Constants.SECTION, Constants.ADVANCED_NOTES_PROJECT_WIDTH, width);
+                    Constants.ProjectNotesWidth = width;
             }
 
             //Start dragging
@@ -414,6 +421,11 @@ namespace RotaryHeart.Lib.UniNotes
         public static void ResetSettings()
         {
             m_elements = null;
+        }
+
+        public static void UpdateNote(string path, UniNotesSettings.UniNoteData data)
+        {
+            parsedNotes[path] = data;
         }
     }
 }

@@ -229,6 +229,16 @@ namespace RotaryHeart.Lib.ProjectPreferences
         }
 
         /// <summary>
+        /// Check if the file contains the specified section
+        /// </summary>
+        /// <param name="section">Section to search</param>
+        /// <returns>True if the section was found; otherwise, false</returns>
+        public static bool HasSection(string section)
+        {
+            return Parser.ContainsSubSection(section);
+        }
+
+        /// <summary>
         /// Check if the file contains a specific key
         /// </summary>
         /// <param name="section">Section where they key is stored</param>

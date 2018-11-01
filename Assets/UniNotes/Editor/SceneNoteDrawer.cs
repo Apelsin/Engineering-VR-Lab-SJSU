@@ -10,17 +10,51 @@ namespace RotaryHeart.Lib.UniNotes
     public abstract class SceneNoteDrawer
     {
         //Background color of the notes window
-        static Color mainBackground = Color.white * (41f / 255f);
+        static Color M_mainBackgroundColor = Color.clear;
         //Color of the GameObject owner of the note
-        static Color owner = Color.white * (82f / 255f);
+        static Color M_ownerColor = Color.clear;
         //Color of the note
-        static Color note = Color.white * (56f / 255f);
+        static Color M_noteColor = Color.clear;
 
         //Saves the scroll position
         static Vector2 scrollPosition = Vector2.zero;
 
-        //Are the ntoes visible?
-        static bool visible = true;
+        static Color MainBackgroundColor
+        {
+            get
+            {
+                if (M_mainBackgroundColor == Color.clear)
+                {
+                    M_mainBackgroundColor = EditorGUIUtility.isProSkin ? new Color32(41, 41, 41, 255) : new Color32(162, 162, 162, 255);
+                }
+
+                return M_mainBackgroundColor;
+            }
+        }
+        static Color OwnerColor
+        {
+            get
+            {
+                if (M_ownerColor == Color.clear)
+                {
+                    M_ownerColor = EditorGUIUtility.isProSkin ? new Color32(82, 82, 82, 255) : new Color32(228, 228, 228, 255);
+                }
+
+                return M_ownerColor;
+            }
+        }
+        static Color NoteColor
+        {
+            get
+            {
+                if (M_noteColor == Color.clear)
+                {
+                    M_noteColor = EditorGUIUtility.isProSkin ? new Color32(56, 56, 56, 255) : new Color32(194, 194, 194, 255);
+                }
+
+                return M_noteColor;
+            }
+        }
 
         /// <summary>
         /// Function that draws the UI for the notes
@@ -29,11 +63,11 @@ namespace RotaryHeart.Lib.UniNotes
         public static void DrawUI(UniNoteComponent[] goNotes)
         {
             //Check if we need to draw the hide/show button
-            if (ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_BTN_ENABLED, true))
+            if (Constants.SceneNotesButtonEnabled)
                 DrawButton();
 
             //If the notes are not visible ignore
-            if (!ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_HIDDEN, false))
+            if (!Constants.SceneNotesHidden)
             {
                 return;
             }
@@ -45,18 +79,12 @@ namespace RotaryHeart.Lib.UniNotes
                     return;
             }
 
-            //Adjust the alpha for the colors
-            mainBackground.a = 1;
-            owner.a = 1;
-            note.a = 1;
-
             //Gets the saved size of the rect, calculates the height depending on how many notes are added and calculates the anchored position
-            Rect areaRect = new Rect(0, 0, ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_WIDTH, 400),
-                ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_HEIGHT, 100));
+            Rect areaRect = new Rect(0, 0, Constants.SceneNotesSize.x, Constants.SceneNotesSize.y);
 
             areaRect.height = CalculateHeight(goNotes, areaRect);
 
-            switch ((EditorExtensions.Anchor)ProjectPrefs.GetInt(Constants.SECTION, Constants.SCENE_NOTES_ANCHOR, 4))
+            switch (Constants.SceneNotesAnchor)
             {
                 case EditorExtensions.Anchor.Top:
                     areaRect.x = Camera.current.pixelWidth / 2f - areaRect.width / 2f;
@@ -91,14 +119,14 @@ namespace RotaryHeart.Lib.UniNotes
             }
 
             //Draw background rect
-            EditorExtensions.DrawRect(areaRect, mainBackground);
+            EditorExtensions.DrawRect(areaRect, MainBackgroundColor);
             //Begin the actual UI data here
             GUILayout.BeginArea(areaRect);
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
             EditorGUILayout.BeginVertical();
 
             //Draw all, including children
-            if (ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_VIEW_CHILDREN, false))
+            if (Constants.ShowChildren)
             {
                 foreach (var goComment in goNotes)
                 {
@@ -122,10 +150,9 @@ namespace RotaryHeart.Lib.UniNotes
         private static void DrawButton()
         {
             //Gets the saved size of the rect and calculates the anchored position
-            Rect btnRect = new Rect(0, 0, ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_BTN_WIDTH, 30),
-                ProjectPrefs.GetFloat(Constants.SECTION, Constants.SCENE_NOTES_BTN_HEIGHT, 30));
+            Rect btnRect = new Rect(0, 0, Constants.SceneNotesButtonSize.x, Constants.SceneNotesButtonSize.y);
 
-            switch ((EditorExtensions.Anchor)ProjectPrefs.GetInt(Constants.SECTION, Constants.SCENE_NOTES_BTN_ANCHOR, 5))
+            switch (Constants.SceneNotesButtonAnchor)
             {
                 case EditorExtensions.Anchor.Top:
                     btnRect.x = Camera.current.pixelWidth / 2f - btnRect.width / 2f;
@@ -164,8 +191,7 @@ namespace RotaryHeart.Lib.UniNotes
             GUI.backgroundColor *= 0;
             if (GUI.Button(btnRect, new GUIContent("", "Show/Hide Notes")))
             {
-                visible = !visible;
-                ProjectPrefs.SetBool(Constants.SECTION, Constants.SCENE_NOTES_HIDDEN, visible);
+                Constants.SceneNotesHidden = !Constants.SceneNotesHidden;
             }
             GUI.backgroundColor = prevColor;
 
@@ -212,12 +238,12 @@ namespace RotaryHeart.Lib.UniNotes
 
             //Draw the name of the transfrom
             Rect nameRect = EditorGUILayout.GetControlRect();
-            EditorExtensions.DrawRect(nameRect, owner);
+            EditorExtensions.DrawRect(nameRect, OwnerColor);
             EditorGUI.LabelField(nameRect, transform.name);
 
             //Draw the actual note data
             Rect contentRect = EditorGUILayout.BeginVertical();
-            EditorExtensions.DrawRect(contentRect, note);
+            EditorExtensions.DrawRect(contentRect, NoteColor);
 
             GUIStyle style = EditorStyles.label;
             style.wordWrap = true;

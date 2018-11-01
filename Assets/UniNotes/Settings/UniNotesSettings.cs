@@ -35,15 +35,25 @@ namespace RotaryHeart.Lib.UniNotes
         public class UniNoteData
         {
             [SerializeField]
-            public int expandedIndex = -1;
+            public int expandedIndex;
             [SerializeField]
             public List<Note> notes;
+
+            //Properties used by the yaml serialization
+            public int ExpandedIndex { get { return expandedIndex; } set { expandedIndex = value; } }
+            public List<Note> Notes { get { return notes; } set { notes = value; } }
 
             [System.Serializable]
             public class Note
             {
                 public string id;
                 public string text;
+                public List<string> urls = new List<string>();
+
+                //Properties used by the yaml serialization
+                public string Id { get { return id; } set { id = value; } }
+                public string Text { get { return text; } set { text = value; } }
+                public List<string> Urls { get { return urls; } set { urls = value; } }
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using RotaryHeart.Lib.ProjectPreferences;
+using RotaryHeart.Lib.ProjectPreferences;
 using System;
 using System.Reflection;
 using UnityEditor;
@@ -28,18 +28,6 @@ namespace RotaryHeart.Lib.UniNotes
         GUIContent helpContent;
         GUIContent contextContent;
 
-        void OnSceneGUI()
-        {
-            //Check if we should draw the scene UI notes
-            if (!ProjectPrefs.GetBool(Constants.SECTION, Constants.SCENE_NOTES_ENABLED, false) || uniNotes == null || uniNotes.Length == 0)
-                return;
-
-            Handles.BeginGUI();
-            //Draw the UI for the scene
-            SceneNoteDrawer.DrawUI(childNotes);
-            Handles.EndGUI();
-        }
-
         void OnEnable()
         {
             //When this inspector is created, also create the built-in inspector
@@ -68,15 +56,28 @@ namespace RotaryHeart.Lib.UniNotes
         void OnDisable()
         {
             //Destroy the created editor to avoid memory leakage.
-            MethodInfo disableMethod = defaultEditorType.GetMethod("OnDisable", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            //MethodInfo disableMethod = defaultEditorType.GetMethod("OnDisable", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
             //Call OnDisable if it finds it
-            if (disableMethod != null)
-            {
-                disableMethod.Invoke(defaultEditor, null);
-            }
+            //if (disableMethod != null)
+            //{
+            //    disableMethod.Invoke(defaultEditor, null);
+            //}
 
+            // OnDisable happens to be called by destructor of defaultEditor
             DestroyImmediate(defaultEditor);
+        }
+
+        void OnSceneGUI()
+        {
+            //Check if we should draw the scene UI notes
+            if (!Constants.SceneNotesEnabled || childNotes == null || childNotes.Length == 0)
+                return;
+
+            Handles.BeginGUI();
+            //Draw the UI for the scene
+            SceneNoteDrawer.DrawUI(childNotes);
+            Handles.EndGUI();
         }
 
         protected override void OnHeaderGUI()
@@ -112,8 +113,14 @@ namespace RotaryHeart.Lib.UniNotes
 
                 //Draw a line to separate the component
                 Rect lineRect = EditorGUILayout.GetControlRect(true, 1);
-                lineRect.x -= 15;
-                lineRect.width += 16;
+
+                //Adjust the position only on 2018.2+ versions
+#if UNITY_2018_2_OR_NEWER
+                lineRect.y -= 7;
+#endif
+
+                lineRect.x = 0;
+                lineRect.width += 20;
                 EditorExtensions.DrawRect(lineRect, Color.white * 0.5f);
 
                 //Default icon size
@@ -123,6 +130,12 @@ namespace RotaryHeart.Lib.UniNotes
 
                 //Rect used to draw the fouldout
                 Rect foldoutRect = EditorGUILayout.GetControlRect();
+
+                //Adjust the position only on 2018.2+ versions
+#if UNITY_2018_2_OR_NEWER
+                foldoutRect.y -= 7;
+#endif
+
                 //Remove the extra space that the help and context buttons use
                 foldoutRect.width -= 38;
                 //We are using a serialized property to save the isExpanded value from the foldout
@@ -230,6 +243,7 @@ namespace RotaryHeart.Lib.UniNotes
                     else
                     {
                         Rect position = EditorGUILayout.BeginHorizontal();
+
                         //Special check to see if the message type is not none
                         if (!string.IsNullOrEmpty(uniNote.myNote.noteSettingId))
                         {
@@ -272,6 +286,11 @@ namespace RotaryHeart.Lib.UniNotes
                         EditorGUI.SelectableLabel(position, input, textStyle);
                         EditorGUILayout.EndHorizontal();
                     }
+
+#if UNITY_2018_2_OR_NEWER
+                    EditorGUILayout.GetControlRect(true, 7);
+#endif
+
                 }
             }
         }
