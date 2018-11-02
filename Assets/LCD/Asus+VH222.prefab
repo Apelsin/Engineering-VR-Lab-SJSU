@@ -1368,8 +1368,6 @@ GameObject:
   - component: {fileID: 223050629691432348}
   - component: {fileID: 114929901549888448}
   - component: {fileID: 114719674889695528}
-  - component: {fileID: 114003248247864242}
-  - component: {fileID: 114088794002564014}
   - component: {fileID: 114602691235609770}
   - component: {fileID: 114913118842064406}
   m_Layer: 0
@@ -1391,9 +1389,9 @@ RectTransform:
   m_LocalScale: {x: 0.00031200043, y: 0.00030400007, z: 0.0002200003}
   m_Children:
   - {fileID: 224382511745942778}
+  - {fileID: 4089960184817946127}
   - {fileID: 224956544689942928}
   - {fileID: 224833141476714906}
-  - {fileID: 224723465600619300}
   m_Father: {fileID: 4122318452830978}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1460,54 +1458,6 @@ MonoBehaviour:
   _Camera: {fileID: 0}
   RectTransform: {fileID: 224823793644049600}
   Cursor: {fileID: 114050389857358126}
---- !u!114 &114003248247864242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166005048020098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c920fffda18614bbd2edf2edd4f0a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _TraceUpdated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114088794002564014}
-        m_MethodName: HandleTraceUpdated
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: CVRLabSJSU.GraphTrace+TraceUpdateEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  Cursor: {fileID: 224833141476714906}
-  PlotArea: {fileID: 224318684163012290}
-  Readout: {fileID: 114700901720313684}
-  TraceLineX: {fileID: 114841294918057048}
-  TraceLineY: {fileID: 114117088107399934}
---- !u!114 &114088794002564014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166005048020098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaca9df0aaa13bb48963d8f4c8543b2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Grapher: {fileID: 0}
-  Readout: {fileID: 114700901720313684}
-  SlopeDt: 0.0001
 --- !u!114 &114602691235609770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2092,7 +2042,7 @@ RectTransform:
   - {fileID: 224230853507726888}
   - {fileID: 224278823368060760}
   m_Father: {fileID: 224956544689942928}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2288,13 +2238,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335049156378450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0001693312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224155253660372346}
-  m_Father: {fileID: 224823793644049600}
-  m_RootOrder: 3
+  m_Father: {fileID: 224956544689942928}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2708,35 +2658,13 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114719674889695528}
-          m_MethodName: HandlePointerEnter
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   - eventID: 1
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114719674889695528}
-          m_MethodName: HandlePointerEnter
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
@@ -3862,8 +3790,10 @@ GameObject:
   - component: {fileID: 224956544689942928}
   - component: {fileID: 222317262561220606}
   - component: {fileID: 114057316892144136}
+  - component: {fileID: 3612964030484589057}
+  - component: {fileID: 6553239731012188691}
   m_Layer: 5
-  m_Name: Tensile Test Graph
+  m_Name: Graph Figure
   m_TagString: Single Test Tensile Graph
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3881,10 +3811,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224241089235853468}
-  - {fileID: 4089960184817946127}
   - {fileID: 224541851658367770}
+  - {fileID: 224723465600619300}
   m_Father: {fileID: 224823793644049600}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3928,6 +3858,54 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3612964030484589057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727989648883356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c920fffda18614bbd2edf2edd4f0a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TraceUpdated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6553239731012188691}
+        m_MethodName: HandleTraceUpdated
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: CVRLabSJSU.GraphTrace+TraceUpdateEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  Cursor: {fileID: 224833141476714906}
+  PlotArea: {fileID: 224318684163012290}
+  Readout: {fileID: 114700901720313684}
+  TraceLineX: {fileID: 114841294918057048}
+  TraceLineY: {fileID: 114117088107399934}
+--- !u!114 &6553239731012188691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727989648883356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaca9df0aaa13bb48963d8f4c8543b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Grapher: {fileID: 2411404217408330728}
+  Readout: {fileID: 114700901720313684}
+  SlopeDt: 0.0001
 --- !u!1 &1728824343702132
 GameObject:
   m_ObjectHideFlags: 0
@@ -5150,7 +5128,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224823793644049600}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5219,7 +5197,7 @@ GameObject:
   - component: {fileID: 8438395803886285049}
   m_Layer: 5
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: Quiz Controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5231,11 +5209,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2450301623378140096}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.000098033954, z: -0.0001693312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 224956544689942928}
+  m_Father: {fileID: 224823793644049600}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8438395803886285049
@@ -5250,6 +5228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7a2ab1a5342b5489555e76abfce111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _DisplayResults:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CVRLabSJSU.MCQuizResultsEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   NoneType: 0
   UnknownLabelText: '?'
   CorrectSublabelText: CORRECT

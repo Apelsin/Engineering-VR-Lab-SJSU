@@ -16,7 +16,7 @@ namespace CVRLabSJSU
         where TEntry : GraphQuizControllerBase<TEnum, TEntry>.BaseEntry, new()
     {
         [SerializeField]
-        private MCQuizResultsEvent _DisplayResults = new MCQuizResultsEvent();
+        protected MCQuizResultsEvent _DisplayResults = new MCQuizResultsEvent();
 
         public event UnityAction<object, MCQuizResultsEventArgs> DisplayResults
         {
@@ -227,10 +227,14 @@ namespace CVRLabSJSU
             OnDisplayQuizResults();
         }
 
-        private void OnDisplayQuizResults()
+        protected void OnDisplayQuizResults()
         {
             foreach (var type in Utility.GetEnumValues<TEnum>())
                 ShowCorrectness(GraphLabels.GetValue(type), LabelTexts.GetValue(type));
+
+            // TODO
+            var dict = new Dictionary<string, MultipleChoiceQuizItem.Option>();
+            _DisplayResults.Invoke(this, new MCQuizResultsEventArgs(name, dict));
         }
 
         public virtual void OnBeforeSerialize()
