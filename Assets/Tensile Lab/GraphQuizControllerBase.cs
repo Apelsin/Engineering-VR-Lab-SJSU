@@ -228,13 +228,20 @@ namespace CVRLabSJSU
         }
 
         protected void OnDisplayQuizResults()
-        {
-            foreach (var type in Utility.GetEnumValues<TEnum>())
+        {  
+            var types = Utility.GetEnumValues<TEnum>();
+            foreach (var type in types)
                 ShowCorrectness(GraphLabels.GetValue(type), LabelTexts.GetValue(type));
-
-            // TODO
-            var dict = new Dictionary<string, MultipleChoiceQuizItem.Option>();
+            /*
+            var dict = types.ToDictionary(
+                t => t.ToString(),
+                t => new MultipleChoiceQuizItem.Option()
+                {
+                    Id = t.ToString(),
+                    Text = GraphLabels.GetValue(t).
+                });
             _DisplayResults.Invoke(this, new MCQuizResultsEventArgs(name, dict));
+            */
         }
 
         public virtual void OnBeforeSerialize()
