@@ -232,16 +232,19 @@ namespace CVRLabSJSU
             var types = Utility.GetEnumValues<TEnum>();
             foreach (var type in types)
                 ShowCorrectness(GraphLabels.GetValue(type), LabelTexts.GetValue(type));
-            /*
-            var dict = types.ToDictionary(
+
+            // Precondition: GraphLabels exist for each TEnum (GraphLabels.GetValue(t) != null)
+            var dict = types
+                .Where(t => GraphLabels.GetValue(t) != null)
+                .ToDictionary(
                 t => t.ToString(),
                 t => new MultipleChoiceQuizItem.Option()
                 {
                     Id = t.ToString(),
-                    Text = GraphLabels.GetValue(t).
+                    Text = GraphLabels.GetValue(t).Text.text,
+                    IsCorrect = GraphLabels.GetValue(t).Text.text == LabelTexts.GetValue(t),
                 });
             _DisplayResults.Invoke(this, new MCQuizResultsEventArgs(name, dict));
-            */
         }
 
         public virtual void OnBeforeSerialize()

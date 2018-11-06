@@ -14,9 +14,9 @@ namespace CVRLabSJSU
             using (var writer = new StreamWriter(log_file_path, true))
             {
                 // TODO: custom formatting
-                // Omit headers because it will make merging the result files for the
-                // same quizzes a lot easier (e.g. cat TCQuiz*.csv > TCQuizAll.csv)
-                //writer.WriteLine($"item,choice,text,is correct");
+                // Write headers
+                writer.WriteLine($"item,choice,text,is correct");
+                // Write rows
                 foreach (var choice in choices)
                     writer.WriteLine($"{choice.Key},{choice.Value.Id},{choice.Value.Text},{choice.Value.IsCorrect}");
             }
