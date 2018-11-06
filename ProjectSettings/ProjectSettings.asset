@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: SJSU Virtual Lab
+  companyName: SJSU MatE
+  productName: CVRLabSJSU
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -113,7 +113,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0
+  bundleVersion: 0.0.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -325,6 +325,9 @@ PlayerSettings:
     m_Devices: []
   - m_BuildTarget: tvOS
     m_Enabled: 0
+    m_Devices: []
+  - m_BuildTarget: 
+    m_Enabled: 1
     m_Devices: []
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
@@ -572,7 +575,7 @@ PlayerSettings:
     20: MOBILE_INPUT
   platformArchitecture: {}
   scriptingBackend:
-    Standalone: 1
+    Standalone: 0
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
