@@ -240,7 +240,7 @@ namespace CVRLabSJSU
                 t => t.ToString(),
                 t => new MultipleChoiceQuizItem.Option()
                 {
-                    Id = t.ToString(),
+                    Id = GraphLabels.GetValue(t).Text.text,
                     Text = GraphLabels.GetValue(t).Text.text,
                     IsCorrect = GraphLabels.GetValue(t).Text.text == LabelTexts.GetValue(t),
                 });
