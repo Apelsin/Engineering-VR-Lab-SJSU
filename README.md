@@ -19,6 +19,8 @@ CVRLabSJSU allows students to simulate tensile testing of specimen materials, in
 
 ### Acknowledgements
 
+CVRLabSJSU is brought to you by the [VR/AR/CV Lab at San José State University](https://www.sjsuvrlab.org).
+
 ##### Project Advisor
 Ozgur Keles, Ph.D
 
