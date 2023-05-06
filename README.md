@@ -1,23 +1,36 @@
 # CVRLabSJSU
-Chemistry VR lab
+
+Experiential Learning of Engineering Concepts in Virtual Learning Environments (VLEs)
+
 
 ## Introduction
 
-This VR project allows users to view molecular motion within a confined space, tensile testing, interactive experiments, and allow users to grab molecules to hold.
+CVRLabSJSU allows students to simulate tensile testing of specimen materials, interactive diagrams demonstrating Poisson's ratio, and provides a way to quiz them based on the lab experimentations.
 
-## Code Samples
-
-TODO
 
 ## Build and Run
 
 1. [Download Unity](https://store.unity.com/download)
 2. Clone this repository (i.e. `git clone https://github.com/Apelsin/CVRLabSJSU.git`)
-3. Open "Release Main.unity" or "Development Main.unity"
-4. Make sure the HTC Vive and Steam VR are set up
-5. Press the play button in the Unity Editor to build and run
+3. With the project open in unity, open either the "Release Main.unity" or the "Development Main.unity" scene file.
+4. Make sure the VR equipment (HMD, light boxes, controllers, etc.) and Steam VR are set up, turned on, and connected.
+5. Press the play button in the Unity Editor to build and run.
 
 
-## Acknowledgements
+### Acknowledgements
 
-This VR project is a fork of the [CVRLabSJSU](https://github.com/IantheFlyingHawaiian/CVRLabSJSU) project by Ian Hunter, which is in turn a fork of the [SBHacks](https://github.com/connor-a-smith/SBHacks) project by Connor Smith, Anish Kannan, and Kristin Agcaoili. 
+CVRLabSJSU is brought to you by the [VR/AR/CV Lab at San José State University](https://www.sjsuvrlab.org).
+
+##### Project Advisor
+Ozgur Keles, Ph.D
+
+##### Technical Lead
+Vincent Brubaker-Gianakos
+
+##### Title1
+FirstName1 M. LastName1
+
+##### Title2
+FirstName2 M. LastName2
+
+This project is a fork of the [CVRLabSJSU](https://github.com/IantheFlyingHawaiian/CVRLabSJSU) project by Ian Hunter, which is in turn a fork of the [SBHacks](https://github.com/connor-a-smith/SBHacks) project by Connor Smith, Anish Kannan, and Kristin Agcaoili.
