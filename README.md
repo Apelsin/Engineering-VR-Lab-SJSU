@@ -6,7 +6,7 @@ This VR project allows students to simulate tensile testing of specimen material
 
 ## Build and Run
 1. [Download Unity LTS Release 2018.3](https://unity.com/releases/editor/qa/lts-releases?version=2018.3)
-2. Clone this repository (i.e. `git clone https://github.com/Apelsin/CVRLabSJSU.git`)
+2. Clone this repository (i.e. `git clone https://github.com/Apelsin/Engineering-VR-Lab-SJSU.git`)
 3. With the project open in unity, open either the "Release Main.unity" or the "Development Main.unity" scene file.
 4. Make sure the VR equipment (HMD, light boxes, controllers, etc.) and Steam VR are set up, turned on, and connected.
 5. Press the play button in the Unity Editor to build and run.
